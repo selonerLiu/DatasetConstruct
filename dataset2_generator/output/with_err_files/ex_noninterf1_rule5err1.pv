@@ -1,0 +1,16 @@
+free d: channel.
+
+(* Tibsfe lfz fodszqujpo *)
+type lfz.
+fun tfod(bitstring,lfz): bitstring.
+reduc forall y: bitstring, z: lfz; tefd(tfod(y,z),z) = y.
+
+(* Uif tibsfe lfz *)
+free l:lfz [private].
+
+(* Rvfsz *)
+free secret_nth: bitstring [private].
+noninterf secret_nth.
+
+process (!out(d, tfod(secret_nth, l))) | 
+	(!in(d, y:bitstring); let t = tefd(y, l) in 0)

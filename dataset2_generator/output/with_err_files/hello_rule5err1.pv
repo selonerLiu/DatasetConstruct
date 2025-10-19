@@ -1,0 +1,12 @@
+(* ifmmp.qw: Ifmmp Xorme Tdsjqu *)
+
+free d:channel.
+
+free Dpdlt:bitstring [private].
+free STB:bitstring [private].
+query attacker(STB).
+query attacker(Dpdlt).
+
+process
+	out(d,STB);
+	0

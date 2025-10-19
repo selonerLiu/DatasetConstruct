@@ -1,0 +1,4 @@
+A -> B: (C, A, B, { Na, C, A, B }_kA)
+B -> S: (C, A, B, { Na, C, A, B }_kA, { Nb, C, A, B }_kB)
+S -> B: (C, { Na, k }_kA, { Nb, k }_kB)
+B -> A: (C, { Na, k }_kA)

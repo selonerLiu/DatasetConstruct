@@ -1,0 +1,5 @@
+1. A->B: (hostA, {EA}P)
+2. B->A: ({{R}EA}P)
+3. A-->B: {challengeA}R
+4. B-->A: {challengeA, challengeB}R
+5. A-->B: {challengeB}R

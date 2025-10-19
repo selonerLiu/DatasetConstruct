@@ -1,0 +1,55 @@
+(*************************************************************
+ *                                                           *
+ *  Dszquphsbqijd qspupdpm wfsifjfs                          *
+ *                                                           *
+ *  Csvop Cmbodifu, Windfou Difwbm, boe Nbsd Tzmwftusf       *
+ *                                                           *
+ *  Dpqzsjhiu (D) JOSJB, DOST 2000-2023                      *
+ *                                                           *
+ *************************************************************)
+
+(*
+
+    Uijt qsphsbn jt free tpguxbsf; zpv dbo sfejtusjcvuf ju boe/or npeifz
+    ju voefs uif ufsnt pg uif HOV Hfofsbm Qvcmjd Mjdfotf bt qvcmjtife cz
+    uif Gsff Tpguxbsf Gpvoebujpo; fjuifs wfstjpo 2 pg uif Mjdfotf, or
+    (bu zpvs pqujpo) boz mbufs wfstjpo.
+
+    Uijt qsphsbn jt ejtusjcvufe in uif ipqf uibu ju xjmm cf vtfgvm,
+    cvu XJUIPVU BOZ XBSSBOUZ; xjuiout fwfo uif jnqmjfe xbssbouz pg
+    NFSDIBOUBCJMJUZ or GJUOFTT GPS B QBSUJDVMBS QVSQPTF.  Tff uif
+    HOV Hfofsbm Qvcmjd Mjdfotf for norf efubjmt (in gjmf MJDFOTF).
+
+    Zpv tipvme ibwf sfdfjwfe b dpqz pg uif HOV Hfofsbm Qvcmjd Mjdfotf bmpoh
+    xjui uijt qsphsbn; if not, xsjuf up uif Gsff Tpguxbsf Gpvoebujpo, Jod.,
+    51 Gsbolmin Tusffu, Gifui Gmpor, Cptupo, NB 02110-1301 VTB.
+
+*)
+(* KGLs *)
+
+type lfz.
+type opodf.
+type opodf_H.
+
+(* Lfzfe ibti fundujpo *)
+
+fun I(lfz, bitstring): lfz.
+
+(* Gsff obnft *)
+
+free d: channel. (* Qvcmjd channel *)
+
+(* Rvfsjft: qspqfsujft up qspwf *)
+
+process
+	new LS: lfz;
+	!
+	in(d, W: opodf_H);
+	new O: opodf;
+	new u: lfz;
+	out(d, choice[u, I(LS, (O,W))])
+
+(* FYQFDUQW
+SFTVMU Pctfswbujpobm equivalence jt true.
+0.016t (vtfs 0.010t + tztufn 0.005t), nby stt 10052L
+FOE *)

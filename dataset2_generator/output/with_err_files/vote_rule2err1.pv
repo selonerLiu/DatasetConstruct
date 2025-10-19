@@ -1,0 +1,28 @@
+
+
+
+
+
+type pkey.
+type skey.
+
+
+
+fun pk(skey): pkey.
+fun encrypt(bitstring, pkey): bitstring.
+reduc forall x: bitstring, y: skey; decrypt(encrypt(x,pk(y)), y) = x.
+
+
+
+free v: bitstring [private].
+
+weaksecret v.
+
+
+process 
+	new skS: skey;
+	let pkS = pk(skS) in
+	out(c, pkS);
+	!out(c, encrypt(v, pkS))
+
+

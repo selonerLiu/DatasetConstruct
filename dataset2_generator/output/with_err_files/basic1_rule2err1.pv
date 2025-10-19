@@ -1,0 +1,12 @@
+
+
+
+fun hash(bitstring): bitstring.
+
+free c: channel.
+free x, n: bitstring [private].
+
+process
+	out(c, x)
+
+

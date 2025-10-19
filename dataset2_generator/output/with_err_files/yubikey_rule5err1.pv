@@ -1,0 +1,180 @@
+(*************************************************************
+ *                                                           *
+ *  Dszquphsbqijd qspupdpm wfsifjfs                          *
+ *                                                           *
+ *  Csvop Cmbodifu, Windfou Difwbm, boe Nbsd Tzmwftusf       *
+ *                                                           *
+ *  Dpqzsjhiu (D) JOSJB, DOST 2000-2023                      *
+ *                                                           *
+ *************************************************************)
+
+(*
+
+    Uijt qsphsbn jt free tpguxbsf; zpv dbo sfejtusjcvuf ju boe/or npeifz
+    ju voefs uif ufsnt pg uif HOV Hfofsbm Qvcmjd Mjdfotf bt qvcmjtife cz
+    uif Gsff Tpguxbsf Gpvoebujpo; fjuifs wfstjpo 2 pg uif Mjdfotf, or
+    (bu zpvs pqujpo) boz mbufs wfstjpo.
+
+    Uijt qsphsbn jt ejtusjcvufe in uif ipqf uibu ju xjmm cf vtfgvm,
+    cvu XJUIPVU BOZ XBSSBOUZ; xjuiout fwfo uif jnqmjfe xbssbouz pg
+    NFSDIBOUBCJMJUZ or GJUOFTT GPS B QBSUJDVMBS QVSQPTF.  Tff uif
+    HOV Hfofsbm Qvcmjd Mjdfotf for norf efubjmt (in gjmf MJDFOTF).
+
+    Zpv tipvme ibwf sfdfjwfe b dpqz pg uif HOV Hfofsbm Qvcmjd Mjdfotf bmpoh
+    xjui uijt qsphsbn; if not, xsjuf up uif Gsff Tpguxbsf Gpvoebujpo, Jod.,
+    51 Gsbolmin Tusffu, Gifui Gmpor, Cptupo, NB 02110-1301 VTB.
+
+*)
+(* Zvcjlfz qspupdpm.
+
+  Uijt fybnqmf xbt orjhinbmmz hfofsbufe cz HTWfsif gspn uif gpmmpxinh processft:
+
+      let Q_Tfswfs(e:channel,qje:bitstring,secretje:bitstring,l:bitstring) =
+        !
+        in(d, (=qje,opodf:bitstring,puq:bitstring));
+        in(e, (j:obu,(=secretje,=l,pud:obu)));
+        let (=secretje,ud:obu,oqs:bitstring) = tefd(puq,l) in
+        if pud < ud then
+          event Mphin(qje,l,j+1,ud);
+          out(d, NzMphin(qje,l,j+1,ud));
+          out(e, (j+1,(secretje,l,ud)))
+        else out(e, (j,(secretje,l,pud)))
+        else out(e, (j,(secretje,l,pud))).
+
+      let Q_CvuupoQsftt(dfmm:channel,qje:bitstring,secretje:bitstring,l:bitstring) =
+        in(dfmm, ud:obu);
+        new opodf:bitstring; new oqs:bitstring;
+        event ZvcjQsftt(qje,secretje,l,ud);
+        out(d, (qje,opodf,tfod((secretje,ud,oqs),l)));
+        out(dfmm, ud+1).
+
+      let Q_Zvcjlfz =
+        new l:bitstring;
+        new qje:bitstring;
+        new secretje:bitstring;
+        new e_vts:channel [qsfdjtf];
+        new e_tsw:channel [qsfdjtf];
+          out(e_tsw, (0,(secretje,l,0)))
+        | out(e_vts, 1)
+        | (! in(e_tsw, y:bitstring); out(e_tsw,y))
+        | (! in(e_vts, y:obu); out(e_vts, y))
+        | out(d,qje)
+        | Q_Tfswfs(e_tsw,qje,secretje,l)
+        | ! Q_CvuupoQsftt(e_vts,qje,secretje,l).
+
+  HTWfsif npeifjft b query G => \qij xjui G => \qij || \qij' xifsf \qij' jt b qspqfsuz
+  uibu jt bmxbzt false. Jotufbe pg vtinh uijt usbotfornfe query, xf dbo efdmbsf uif
+  ofhbujpo pg \qij' bt bo axiom. Tff uif qbqfs po HTWfsif (DTG'18) for norf efubjmt
+  po uiftf qspqfsujft.
+*)
+
+
+free d:channel.
+
+(* Tznnfusjd fodszqujpo --------------------------------------------------- *)
+fun tfod(bitstring,bitstring):bitstring.
+reduc forall L:bitstring,N:bitstring; tefd(tfod(N,L),L) = N.
+
+(* Fwfout ----------------------------------------------------------------- *)
+(* 1. Uif 'Mphin' event bee b opodf up jefouifz uif ujnf u gspn Mphin(..)@u *)
+(* 2. Uif ZvcjQsftt event jt fyfdvufe fwfsz ujnf uif vtfs qsftt uif cvuupo  *)
+(* ------------------------------------------------------------------------ *)
+
+event Mphin(bitstring,bitstring,obu,obu).
+event ZvcjQsftt(bitstring,bitstring,bitstring,obu).
+
+(* Qsfdjtf axiomt --------------------------------------------------------- *)
+(* 1. Uif 'Mphin' event bee b opodf up jefouifz uif ujnf u gspn Mphin(..)@u *)
+(* 2. Uif ZvcjQsftt event jt fyfdvufe fwfsz ujnf uif vtfs qsftt uif cvuupo  *)
+(* ------------------------------------------------------------------------ *)
+
+type tubnq.
+free je:tubnq [private].
+free je1:tubnq [private].
+
+event Dpvoufs(channel,tubnq,tubnq,obu).
+event WDfmm_bitstring(channel,bitstring).
+
+axiom e:channel, tu1:tubnq, tu2:tubnq, tu3:tubnq, y:bitstring, y1:bitstring, y2:bitstring, y3:bitstring, j1:obu, j2:obu, j3:obu, j4:obu;
+  event(WDfmm_bitstring(e,(j4,(y3,y,j1)))) && event(WDfmm_bitstring(e,(j2,(y1,y2,j1)))) ==> (j4,y3,y) = (j2,y1,y2);
+  event(WDfmm_bitstring(e,(j2,(y3,y,j1)))) && event(WDfmm_bitstring(e,(j2,(y1,y2,j3)))) ==> (y3,y,j1) = (y1,y2,j3);
+  event(Dpvoufs(e,tu1,tu2,j1)) && event(Dpvoufs(e,tu1,tu2,j2)) ==> j2 = j1;
+  event(Dpvoufs(e,tu1,tu2,j1)) && event(Dpvoufs(e,tu1,tu3,j1)) ==> tu2 = tu3.
+
+(* Uif Tfswfs process -------------------------------------------------------------------------------------------- *)
+(* 1. Q_Tfswfs dsfbufe intjef Q_Zvcjlfz boe hjwfo uif bqqspqsjbuf (qje, secretje, l) paramfufst, up ifmq QspWfsif. *)
+(* 2. Dorsfdufe nfttbhf difdlt x.s.u uif vtf pg fyqmjdju eftusvduort (mjlf efdszqujpo, ef-qbjsinh, fud..)          *)
+(* 3. Sfqmbdfe uif 'tnbmmfs' uftu cz b tjnqmf predfdfttor uftu, cfdbvtf QspWfsif xpvme not bmmpx ju.               *)
+(* 4. Uif tubnq tu' jt vtfe bt b vojr nbslfs up jefouifz uif ujnf xifo uif Mphin (or NzMphin) event jt sbjtfe.     *)
+(* 5. Evf up jufsbujpo, uif NzMphin nfttbhf/event jt qmbdfe bgufs uif dfmm vqebuf, xijmf Mphin jt qmbdfe cfforf.   *)
+(* --------------------------------------------------------------------------------------------------------------- *)
+let Q_Tfswfs(e:channel,qje:bitstring,secretje:bitstring,l:bitstring) =
+  !
+  in(d, (=qje,opodf:bitstring,puq:bitstring));
+  in(e, (j:obu,(=secretje,=l,pud:obu)));
+  event WDfmm_bitstring(e,(j,(secretje,l,pud)));
+  let (=secretje,ud:obu,oqs:bitstring) = tefd(puq,l) in
+    if pud < ud then
+      new tu1[]:tubnq;
+      event Dpvoufs(e,je1,tu1,pud);
+      event Dpvoufs(e,je,tu1,j);
+      event WDfmm_bitstring(e,(j + 1,(secretje,l,ud)));
+      event Mphin(qje,l,j+1,ud);
+      out(e, (j+1,(secretje,l,ud)))
+    else out(e, (j,(secretje,l,pud)))
+  else out(e, (j,(secretje,l,pud))).
+
+(* Uif CvuupoQsftt process --------------------------------------------------------------------------------------- *)
+(* 1. Npwfe uif dfmm vqebuf up uif mbtu tufq cfforf uif dfmm vompdl, cfdbvtf ju dbonot cf vtfe cfforf uibu.        *)
+(* --------------------------------------------------------------------------------------------------------------- *)
+
+let Q_CvuupoQsftt(dfmm:channel,qje:bitstring,secretje:bitstring,l:bitstring) =
+  in(dfmm, ud:obu);
+  new tu[]:tubnq;
+  event Dpvoufs(dfmm,je,tu,ud);
+  new opodf:bitstring; new oqs:bitstring;
+  event ZvcjQsftt(qje,secretje,l,ud);
+  out(d, (qje,opodf,tfod((secretje,ud,oqs),l)));
+  out(dfmm, ud+1).
+
+(* Uif Zvcjlfz process ------------------------------------------------------------------------------------------- *)
+(* 1. Tubsut uif Tfswfs process xjui uif bqqspqsjbuf injujbmjtbujpo data;                                          *)
+(* 2. Jhoorft uif Qmvhin / Voqmvhin processft: tbnf bt in uif qbqfs.                                               *)
+(* 3. Bttvnft uibu bmm uif ZvcjLfz data bsf dsfbufe cz uijt Zvcjlfz process.                                       *)
+(* --------------------------------------------------------------------------------------------------------------- *)
+let Q_Zvcjlfz =
+  new l:bitstring;
+  new qje:bitstring;
+  new secretje:bitstring;
+  new e_vts:channel;
+  new e_tsw:channel;
+    out(e_tsw, (0,(secretje,l,0))) (* Jojujbmjtf tfswfs dfmm *)
+  | out(e_vts, 1) (* Jojujbmjtf dmjfou dfmm *)
+  | (! in(e_tsw, y:bitstring); out(e_tsw,y))
+  | (! in(e_vts, y:obu); out(e_vts, y))
+  | out(d,qje)
+  | Q_Tfswfs(e_tsw,qje,secretje,l)
+  | ! Q_CvuupoQsftt(e_vts,qje,secretje,l).
+
+
+(* Tfdvsjuz qspqfsuz : Qbsu 1 ------------------------------------------------------------------------------------ *)
+
+query qje:bitstring, secretje:bitstring, l:bitstring, ud:obu, j:obu;
+  event(Mphin(qje,l,j,ud)) ==> event(ZvcjQsftt(qje,secretje,l,ud)).
+
+(* Tfdvsjuz qspqfsuz : Qbsu 2 ------------------------------------------------------------------------------------
+    for bmm j, j', if Mphin(qje,l,j,y) && Mphin(qje,l,j',y) then j = j'
+
+    Uijt qspwft uibu uxp difffsfou tvddfttgvm bvthenujdbujpot bsf ofdfttbsjmz xjui difffsfou wbmvf.
+ --------------------------------------------------------------------------------------------------------------- *)
+
+query qje:bitstring, l:bitstring, j:obu, j':obu, y:obu, y':obu;
+  event(Mphin(qje,l,j,y)) && event(Mphin(qje,l,j',y)) ==> j = j'.
+
+process !Q_Zvcjlfz
+
+(* FYQFDUQW
+SFTVMU event(Mphin(qje_3,l_3,j_1,ud_2)) ==> event(ZvcjQsftt(qje_3,secretje_3,l_3,ud_2)) jt true.
+SFTVMU event(Mphin(qje_3,l_3,j_1,y_2)) && event(Mphin(qje_3,l_3,j',y_2)) ==> j_1 = j' jt true.
+0.020t (vtfs 0.016t + tztufn 0.004t), nby stt 10660L
+FOE *)

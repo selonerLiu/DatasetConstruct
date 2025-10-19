@@ -1,0 +1,14 @@
+[
+    {
+    "num": "kimi",
+    "refer_api_key": "sk-8HQHhPGyfQXWXwyIWBeha7GGJsgxbgHRMMpVJx1I2yrQ8RcT",
+    "refer_api_base": "https://api.moonshot.cn/v1",
+    "refer_model_name": "moonshot-v1-8k"
+    },
+    {
+    "num": "lama4",
+    "refer_api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "refer_api_key": "sk-48b7623a081843f391a35213118b43f9",
+    "refer_model_name": "llama-4-scout-17b-16e-instruct"
+    }
+]

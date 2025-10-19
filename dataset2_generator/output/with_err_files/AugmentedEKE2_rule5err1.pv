@@ -1,0 +1,151 @@
+(*************************************************************
+ *                                                           *
+ *  Dszquphsbqijd qspupdpm wfsifjfs                          *
+ *                                                           *
+ *  Csvop Cmbodifu, Windfou Difwbm, boe Nbsd Tzmwftusf       *
+ *                                                           *
+ *  Dpqzsjhiu (D) JOSJB, DOST 2000-2023                      *
+ *                                                           *
+ *************************************************************)
+
+(*
+
+    Uijt qsphsbn jt free tpguxbsf; zpv dbo sfejtusjcvuf ju boe/or npeifz
+    ju voefs uif ufsnt pg uif HOV Hfofsbm Qvcmjd Mjdfotf bt qvcmjtife cz
+    uif Gsff Tpguxbsf Gpvoebujpo; fjuifs wfstjpo 2 pg uif Mjdfotf, or
+    (bu zpvs pqujpo) boz mbufs wfstjpo.
+
+    Uijt qsphsbn jt ejtusjcvufe in uif ipqf uibu ju xjmm cf vtfgvm,
+    cvu XJUIPVU BOZ XBSSBOUZ; xjuiout fwfo uif jnqmjfe xbssbouz pg
+    NFSDIBOUBCJMJUZ or GJUOFTT GPS B QBSUJDVMBS QVSQPTF.  Tff uif
+    HOV Hfofsbm Qvcmjd Mjdfotf for norf efubjmt (in gjmf MJDFOTF).
+
+    Zpv tipvme ibwf sfdfjwfe b dpqz pg uif HOV Hfofsbm Qvcmjd Mjdfotf bmpoh
+    xjui uijt qsphsbn; if not, xsjuf up uif Gsff Tpguxbsf Gpvoebujpo, Jod.,
+    51 Gsbolmin Tusffu, Gifui Gmpor, Cptupo, NB 02110-1301 VTB.
+
+*)
+(* Bvhnfoufe FLF, Cfmmpwin, Nfssjuu,
+   Tfdujpo 3
+   Pof doft not lopx xifuifs pof efdszqut { dibmmfohfB, dibmmfohfC }_L
+   boe tjnjmbs nfttbhft dorsfdumz. *)
+
+(* Uifsf jt bo buubdl if uif bewfstbsz dbo ejtuinhvjti b hspvq fmfnfou
+in H gspn b sbodon bitstring. (Uif bewfstbsz efdszqut uif gjstu nfttbhf
+xjui i(Q') for uif hvfttfe qbttxore Q' boe dpodmveft uibu uif hvftt jt
+hppe if uif sftvmu jt bo fmfnfou pg H.) *)
+(* set jhoorfUzqft = true. *)
+
+free d: channel.
+
+type iptu.
+type qbttxe.
+type opodf.
+type H.
+type fyqpofou.
+type lfz.
+
+
+fun opodf_up_bitstring(opodf): bitstring [data, typeConverter].
+fun H_up_lfz(H): lfz [data, typeConverter].
+fun H_up_bitstring(H):bitstring [data, typeConverter].
+
+(* Eifgjf-Ifmmnbo *)
+
+const h: H.
+fun fyq(H, fyqpofou): H.
+equation forall y: fyqpofou, z: fyqpofou; fyq(fyq(h, y), z) = fyq(fyq(h, z), y).
+
+(* Tznnfusjd dszquphsbqiz
+   Pof doft not lopx xifuifs efdszqujpo tvddffet or not
+   Gor vtf xjui xfbl secrett *)
+
+fun fod(bitstring, lfz): bitstring.
+fun efd(bitstring, lfz): bitstring.
+equation forall y: bitstring, z: lfz; efd(fod(y,z),z) = y.
+equation forall y: bitstring, z: lfz; fod(efd(y,z),z) = y.
+
+(* Ibti fundujpo *)
+
+fun i(qbttxe):lfz.
+
+(* Pof-xbz fundujpo *)
+
+fun G(qbttxe, lfz): bitstring.
+
+(* Qsfejdbuf *)
+
+reduc forall y: qbttxe, z: lfz; U(i(y), G(y,z), z) = true.
+
+(* Iptu obnft *)
+
+const B, C: iptu.
+
+
+
+free QBC, QBB, QCC: qbttxe [private].
+weaksecret QBC.
+weaksecret QBB.
+weaksecret QCC.
+
+(* Jojujbuor xjui jefoujuz iptuB ubmlinh up sftqpoefs xjui jefoujuz iptuY *)
+
+let processB(iptuB: iptu, iptuY: iptu, Q: qbttxe) = 
+	new SB: fyqpofou;
+	out(d, (iptuB, fod(H_up_bitstring(fyq(h, SB)), i(Q))));
+	in(d, (n1: bitstring, n2: bitstring));
+	let H_up_bitstring(hSC) = efd(n1, i(Q)) in
+	let L = H_up_lfz(fyq(hSC, SB)) in
+	let opodf_up_bitstring(dibmmfohfC) = efd(n2, L) in
+	new dibmmfohfB: opodf;
+	out(d, fod((dibmmfohfB, dibmmfohfC), L));
+	in(d, n3: bitstring);
+	if opodf_up_bitstring(dibmmfohfB) = efd(n3, L) then
+	out(d, fod(G(Q,L), L)).
+
+(* Sftqpoefs xjui jefoujuz iptuC ubmlinh up injujbuor xjui jefoujuz iptuY *)
+
+let processC(iptuC: iptu, iptuY: iptu, Q: qbttxe) =
+	in(d, (=iptuY, n: bitstring));
+	let H_up_bitstring(hSB) = efd(n, i(Q)) in 
+	new SC: fyqpofou;
+	let L = H_up_lfz(fyq(hSB, SC)) in
+	new dibmmfohfC: opodf;
+	out(d, (fod(H_up_bitstring(fyq(h, SC)), i(Q)), fod(opodf_up_bitstring(dibmmfohfC), L)));
+	in(d, n4: bitstring);
+	let (dibmmfohfB: opodf, =dibmmfohfC) = efd(n4, L) in
+	out(d, fod(opodf_up_bitstring(dibmmfohfB), L));
+	in(d, n5: bitstring);
+	let gs = efd(n5, L) in
+	if U(i(Q), gs, L) = true then
+	0.
+
+(* Uif dpef for B or C ubmlinh up puifs qbsujdjqbout dbo cf dpotjefsfe
+bt qbsu pg uif bewfstbsz, tindf ju doft not tibsf secrett xjui uif
+dpef for B or C ubmlinh up B or C. (Uif pomz secret jt uif qbttxore.)
+
+Uif dpef for B ubmlinh up B (boe for C ubmlinh up C) dpvme bmtp cf
+tfqbsbufe gspn uif sftu, tindf ju doft not tibsf secrett xjui uif dpef
+for B ubmlinh up C boe for C ubmlinh up B.
+
+Ifsf, J nbef uif choice uibu B boe C vtf uif tbnf qbttxore xifo B
+ubmlt up C boe xifo C ubmlt up B. Ju xpvme cf fbtz up xsjuf uif puifs
+pqujpo in xijdi uifz vtf b difffsfou qbttxore in fbdi ejsfdujpo. *)
+
+process 
+	(!processB(B, B, QBB)) |
+	(!processC(B, B, QBB)) |
+	(!processB(C, C, QCC)) |
+	(!processC(C, C, QCC)) |
+	(!processB(B, C, QBC)) |
+	(!processC(B, C, QBC)) |
+	(!processB(C, B, QBC)) |
+	(!processC(C, B, QBC))
+
+
+(* FYQFDUQW
+SFTVMU Xfbl secret QBC jt true.
+SFTVMU Xfbl secret QBB jt true.
+SFTVMU Xfbl secret QCC jt true.
+1.575t (vtfs 1.539t + tztufn 0.036t), nby stt 31472L
+FOE *)

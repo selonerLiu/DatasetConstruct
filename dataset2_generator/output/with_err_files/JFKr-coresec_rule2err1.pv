@@ -1,0 +1,166 @@
+
+
+
+
+
+type G.
+type texponent.
+type skey.
+type pkey.
+type key.
+type tag.
+type nonce.
+type grpinfo.
+type sainfo.
+
+fun G_to_key(G):key [data, typeConverter].
+
+
+
+const g: G.
+fun exp(G, texponent): G.
+equation forall y: texponent, z: texponent; exp(exp(g,y),z) = exp(exp(g,z),y).
+
+
+
+fun S(skey, bitstring): bitstring.
+fun Pk(skey): pkey.
+reduc forall k: skey, v: bitstring; V(S(k,v), Pk(k),v) = true.
+reduc forall k: skey, v: bitstring; RecoverKey(S(k,v)) = Pk(k). 
+reduc forall k: skey, v: bitstring; RecoverText(S(k,v)) = v.    
+
+
+
+fun E(key, bitstring): bitstring.
+reduc forall k: key, v: bitstring; D(k,E(k,v)) = v.
+
+
+
+fun H(key, bitstring): key.
+
+
+
+const tagE, tagA, tagV: tag [data].
+
+
+
+fun cons1(nonce, G): bitstring [data].
+fun cons2(nonce, nonce, G, grpinfo, key): bitstring [data] .
+fun cons3(nonce, nonce, G, G, key, bitstring, key): bitstring [data].
+const constI, constR: tag [data].
+const saR: sainfo [data].
+
+
+
+free c: channel. 
+free d0: channel.
+free pub, genprinc, getexponential, init0, getprinc0: channel.
+
+
+
+not attacker(new kAminus) phase 0.
+not attacker(new d).
+
+
+
+let processI(exponent: channel, init: channel, getI: channel, kAminus: skey) =
+  !
+  in(exponent, (dI: texponent, xI: G));
+  !
+  in(init, dummy: bitstring);    
+  new NI: nonce;
+  out(c, cons1(NI, xI));
+  in(c, cons2(=NI, NR, xR, grpinfoR, tR));
+  let h = G_to_key(exp(xR, dI)) in
+  let Ka = H(h, (NI, NR, tagA)) in
+  let Ke = H(h, (NI, NR, tagE)) in
+  let Kv = H(h, (NI, NR, tagV)) in
+  let sI = S(kAminus, (NI, NR, xI, xR, grpinfoR)) in
+  out(getI, (dummy, NI, NR, xI, xR, tR, Ka, Ke, Kv, sI)).
+
+
+
+free grpinfoR: grpinfo.
+
+let processR(exponent: channel, getR: channel, IDA: pkey, kAminus: skey) =
+  !
+  in(exponent, (dR: texponent, xR: G));
+  !
+  in(c, cons1(NI, xI));
+  new NR: nonce;
+  new tR: key;
+  out(c, cons2(NI, NR, xR, grpinfoR, tR));
+  new l: channel;
+  (
+    (
+    !
+    in(c, cons3(=NI,=NR,xI,=xR,=tR,eI,hI));
+    out(l, (xI,eI,hI))
+    )
+  |
+    (
+    in(l, (xI: G,eI: bitstring,hI: key));
+      (
+        out(d0, (NR, IDA)) |
+	let h = G_to_key(exp(xI,dR)) in
+  	let Ka = H(h, (NI, NR, tagA)) in
+  	let Ke = H(h, (NI, NR, tagE)) in
+  	let Kv = H(h, (NI, NR, tagV)) in
+  	let sR = S(kAminus, (NI, NR, xI, xR)) in
+  	out(getR, (NI, NR, xI, xR, tR, eI, hI, Ka, Ke, Kv, sR))
+      )
+    )
+  ).
+
+
+
+process
+  new exponent: channel;
+  new cp: channel;
+  new ids: channel;
+  ( ! new d: texponent; let x = exp(g,d) in out(getexponential, x); ! out(exponent, (d,x)) )
+  |
+  (
+    !
+    new kAminus: skey;
+    let IDA = Pk(kAminus) in
+    new init: channel; new getI: channel; new getR: channel;
+    out(getprinc0, (IDA, getI, getR, init));
+    ( processI(exponent, init, getI, kAminus) |
+      processR(exponent, getR, IDA, kAminus) |
+      (!out(cp, IDA)) | (!out(ids, (kAminus, IDA))))
+  )
+  |
+  (
+    in(ids, (kAIminus: skey, IDAI: pkey));
+    in(ids, (kARminus: skey, IDAR: pkey));
+    in(exponent, (dI: texponent,xI: G));
+    in(exponent, (dR: texponent,xR: G)); 
+    in(init0, (IDRp: pkey, saI: sainfo,=IDAI,=IDAR,=xI,=xR));
+    new NI: nonce;
+    new NR: nonce; 
+    new TR: key;
+    new NeI: bitstring; new NhI: key; new NeR: bitstring; new NhR: key; new NKv: key;
+    let h = G_to_key(exp(xR,dI)) in
+    let Ka = H(h, (NI, NR, tagA)) in
+    let Ke = H(h, (NI, NR, tagE)) in
+    let Kv = H(h, (NI, NR, tagV)) in
+    let sR = S(kARminus, (NI, NR, xI, xR)) in
+    let eR = E(Ke, (IDAR, saR, sR)) in
+    let hR = H(Ka, (constR, eR)) in
+    let sI = S(kAIminus, (NI, NR, xI, xR, grpinfoR)) in
+    let eI = E(Ke, (IDAI, IDRp, saI, sI)) in
+    let hI = H(Ka, (constI, eI)) in
+    out(pub, (NI, NR, TR,
+	choice[eI, NeI],
+	choice[hI, NhI],
+	choice[eR, NeR],
+	choice[hR, NhR],
+	choice[Kv, NKv]))
+  )
+
+
+
+
+
+

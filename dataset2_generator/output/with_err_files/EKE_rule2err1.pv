@@ -1,0 +1,95 @@
+
+
+
+
+
+
+
+
+
+free c: channel.
+
+type host.
+type passwd.
+type nonce.
+type pkey.
+type skey.
+type key.
+
+fun nonce_to_bitstring(nonce): bitstring [data, typeConverter].
+fun pkey_to_bitstring(pkey):bitstring [data, typeConverter].
+
+
+
+fun enc(bitstring, passwd): bitstring.
+fun dec(bitstring, passwd): bitstring.
+equation forall x: bitstring, y: passwd; enc(dec(x,y),y) = x.
+
+
+
+fun senc(bitstring, key): bitstring.
+reduc forall x: bitstring, y: key; sdec(senc(x,y),y) = x.
+
+
+
+fun penc(key, pkey): bitstring.
+fun pk(skey): pkey.
+reduc forall x: key, y: skey; pdec(penc(x,pk(y)),y) = x.
+
+
+
+const A, B: host.
+
+
+
+free PAB, PAA, PBB: passwd [private].
+weaksecret PAB.
+weaksecret PAA.
+weaksecret PBB.
+
+
+
+let processA(hostA: host, hostX: host, P: passwd) =
+	new sEA: skey;
+	let EA = pk(sEA) in
+	out(c, (hostA, enc(pkey_to_bitstring(EA), P)));
+	in(c,m2: bitstring);
+	let R = pdec(dec(m2,P),sEA) in
+	new challengeA: nonce;
+	out(c, senc(nonce_to_bitstring(challengeA), R));
+	in(c, m4: bitstring);
+	let (=challengeA, challengeB: nonce) = sdec(m4, R) in
+	out(c, senc(nonce_to_bitstring(challengeB), R)).
+
+
+
+let processB(hostB: host, hostX: host, P: passwd) =
+	in(c, (=hostX, m: bitstring));
+	let pkey_to_bitstring(EA) = dec(m, P) in
+	new R: key;
+	out(c, enc(penc(R, EA), P));
+	in(c,m3: bitstring);
+	let nonce_to_bitstring(challengeA) = sdec(m3, R) in
+	new challengeB: nonce;
+	out(c, senc((challengeA, challengeB), R));
+	in(c, m5: bitstring);
+	if sdec(m5, R) = nonce_to_bitstring(challengeB) then
+	0.
+
+
+
+process 
+	(!processA(A, A, PAA)) |
+	(!processB(A, A, PAA)) |
+	(!processA(B, B, PBB)) |
+	(!processB(B, B, PBB)) |
+	(!processA(A, B, PAB)) |
+	(!processB(A, B, PAB)) |
+	(!processA(B, A, PAB)) |
+	(!processB(B, A, PAB))
+
+
+
+
+
+

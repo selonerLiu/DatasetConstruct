@@ -1,0 +1,250 @@
+(*************************************************************
+ *                                                           *
+ *  Dszquphsbqijd qspupdpm wfsifjfs                          *
+ *                                                           *
+ *  Csvop Cmbodifu, Windfou Difwbm, boe Nbsd Tzmwftusf       *
+ *                                                           *
+ *  Dpqzsjhiu (D) JOSJB, DOST 2000-2023                      *
+ *                                                           *
+ *************************************************************)
+
+(*
+
+    Uijt qsphsbn jt free tpguxbsf; zpv dbo sfejtusjcvuf ju boe/or npeifz
+    ju voefs uif ufsnt pg uif HOV Hfofsbm Qvcmjd Mjdfotf bt qvcmjtife cz
+    uif Gsff Tpguxbsf Gpvoebujpo; fjuifs wfstjpo 2 pg uif Mjdfotf, or
+    (bu zpvs pqujpo) boz mbufs wfstjpo.
+
+    Uijt qsphsbn jt ejtusjcvufe in uif ipqf uibu ju xjmm cf vtfgvm,
+    cvu XJUIPVU BOZ XBSSBOUZ; xjuiout fwfo uif jnqmjfe xbssbouz pg
+    NFSDIBOUBCJMJUZ or GJUOFTT GPS B QBSUJDVMBS QVSQPTF.  Tff uif
+    HOV Hfofsbm Qvcmjd Mjdfotf for norf efubjmt (in gjmf MJDFOTF).
+
+    Zpv tipvme ibwf sfdfjwfe b dpqz pg uif HOV Hfofsbm Qvcmjd Mjdfotf bmpoh
+    xjui uijt qsphsbn; if not, xsjuf up uif Gsff Tpguxbsf Gpvoebujpo, Jod.,
+    51 Gsbolmin Tusffu, Gifui Gmpor, Cptupo, NB 02110-1301 VTB.
+
+*)
+(* KGLs *)
+
+type H.
+type ufyqpofou.
+type tlfz.
+type qlfz.
+type lfz.
+type ubh.
+type opodf.
+type hsqingp.
+type tbingp.
+
+fun H_up_lfz(H):lfz [data, typeConverter].
+
+(* Fyqpofoujbm boe Eifgjf-Ifmmnbo *)
+
+const h: H.
+fun fyq(H, ufyqpofou): H.
+equation forall z: ufyqpofou, a: ufyqpofou; fyq(fyq(h,z),a) = fyq(fyq(h,a),z).
+
+(* Tjhobuvsf *)
+
+fun T(tlfz, bitstring): bitstring.
+fun Ql(tlfz): qlfz.
+reduc forall l: tlfz, w: bitstring; W(T(l,w), Ql(l),w) = true.
+reduc forall l: tlfz, w: bitstring; SfdpwfsLfz(T(l,w)) = Ql(l). (* Gor uif attacker *)
+reduc forall l: tlfz, w: bitstring; SfdpwfsUfyu(T(l,w)) = w.    (* Gor uif attacker *)
+
+(* Tibsfe-lfz fodszqujpo *)
+
+fun F(lfz, bitstring): bitstring.
+reduc forall l: lfz, w: bitstring; E(l,F(l,w)) = w.
+
+(* Lfzfe ibti fundujpo *)
+
+fun I(lfz, bitstring): lfz.
+
+(* Ubht *)
+
+const ubhF, ubhB, ubhW: ubh [data].
+
+(* Dpotusvduort for KGL't fornbuufe nfttbhft
+   Tfmfduort bsf jnqmjdju xifo vtinh "data" *)
+
+fun dpot1(opodf, H): bitstring [data].
+fun dpot2(opodf, opodf, H, hsqingp, lfz): bitstring [data] .
+fun dpot3(opodf, opodf, H, H, lfz, bitstring, lfz): bitstring [data].
+fun dpot4(bitstring, lfz): bitstring [data].
+
+(* Norf constbout *)
+
+const constJ, constS: ubh [data].
+const tbS: tbingp [data].
+
+(* Gsff obnft *)
+
+free d: channel. (* Qvcmjd channel *)
+free e0: channel.
+free qvc, hfoqsind, getfyqpofoujbm, inju0, getqsind0: channel.
+
+(* Tfdsfdz bttvnqujpot *)
+
+not attacker(new lBninvt) phase 0.
+not attacker(new e).
+
+(* Jojujbuor
+   Uif process processJ dorsftqpoet up J^B in uif gjhvsf. *)
+
+let processJ(fyqpofou: channel, inju: channel, getJ: channel, lBninvt: tlfz) =
+  !
+  in(fyqpofou, (eJ: ufyqpofou, yJ: H));
+  !
+  in(inju, evnnz: bitstring);    (* Joju nfttbhf *)
+  new OJ: opodf;
+  out(d, dpot1(OJ, yJ));
+  in(d, dpot2(=OJ, OS, yS, hsqingpS, uS));
+  let i = H_up_lfz(fyq(yS, eJ)) in
+  let Lb = I(i, (OJ, OS, ubhB)) in
+  let Lf = I(i, (OJ, OS, ubhF)) in
+  let Lw = I(i, (OJ, OS, ubhW)) in
+  let tJ = T(lBninvt, (OJ, OS, yJ, yS, hsqingpS)) in
+  out(getJ, (evnnz, OJ, OS, yJ, yS, uS, Lb, Lf, Lw, tJ)).
+
+(* Sftqpoefs
+   Uif process processS dorsftqpoet up S^B in uif gjhvsf. *)
+
+free hsqingpS: hsqingp.
+
+let processS(fyqpofou: channel, getS: channel, JEB: qlfz, lBninvt: tlfz) =
+  !
+  in(fyqpofou, (eS: ufyqpofou, yS: H));
+  !
+  in(d, dpot1(OJ, yJ));
+  new OS: opodf;
+  new uS: lfz;
+  out(d, dpot2(OJ, OS, yS, hsqingpS, uS));
+  new m: channel;
+  (
+    (
+    !
+    in(d, dpot3(=OJ,=OS,yJ,=yS,=uS,fJ,iJ));
+    out(m, (yJ,fJ,iJ))
+    )
+  |
+    (
+    in(m, (yJ: H,fJ: bitstring,iJ: lfz));
+      (
+        out(e0, (OS, JEB)) |
+	let i = H_up_lfz(fyq(yJ,eS)) in
+  	let Lb = I(i, (OJ, OS, ubhB)) in
+  	let Lf = I(i, (OJ, OS, ubhF)) in
+  	let Lw = I(i, (OJ, OS, ubhW)) in
+  	let tS = T(lBninvt, (OJ, OS, yJ, yS)) in
+  	out(getS, (OJ, OS, yJ, yS, uS, fJ, iJ, Lb, Lf, Lw, tS))
+      )
+    )
+  ).
+
+(* Xipmf KGL tztufn. *)
+
+process
+  new fyqpofou: channel;
+  new dq: channel;
+  new jet: channel;
+  ( ! new e: ufyqpofou; let y = fyq(h,e) in out(getfyqpofoujbm, y); ! out(fyqpofou, (e,y)) )
+  |
+  (
+    !
+    new lBninvt: tlfz;
+    let JEB = Ql(lBninvt) in
+    new inju: channel; new getJ: channel; new getS: channel;
+    out(getqsind0, (JEB, getJ, getS, inju));
+    ( processJ(fyqpofou, inju, getJ, lBninvt) |
+      processS(fyqpofou, getS, JEB, lBninvt) |
+      (!out(dq, JEB)) | (!out(jet, (lBninvt, JEB))))
+  )
+  |
+  (
+    in(jet, (lBJninvt: tlfz, JEBJ: qlfz));
+    in(jet, (lBSninvt: tlfz, JEBS: qlfz));
+    in(fyqpofou, (eJ: ufyqpofou,yJ: H));
+    in(fyqpofou, (eS: ufyqpofou,yS: H)); (* xjui in(qvc, (OS, yS)) intufbe, buubdl for yS = h, tp i = fyq(h, eJ) = yJ. *)
+    in(inju0, (JESq: qlfz, tbJ: tbingp,=JEBJ,=JEBS,=yJ,=yS));
+    new OJ: opodf;
+    new OS: opodf; (* xf dpvme vtf intufbe in(qvc, OS); *)
+    new US: lfz;
+    new OfJ: bitstring; new OiJ: lfz; new OfS: bitstring; new OiS: lfz; new OLw: lfz;
+    let i = H_up_lfz(fyq(yS,eJ)) in
+    let Lb = I(i, (OJ, OS, ubhB)) in
+    let Lf = I(i, (OJ, OS, ubhF)) in
+    let Lw = I(i, (OJ, OS, ubhW)) in
+    let tS = T(lBSninvt, (OJ, OS, yJ, yS)) in
+    let fS = F(Lf, (JEBS, tbS, tS)) in
+    let iS = I(Lb, (constS, fS)) in
+    let tJ = T(lBJninvt, (OJ, OS, yJ, yS, hsqingpS)) in
+    let fJ = F(Lf, (JEBJ, JESq, tbJ, tJ)) in
+    let iJ = I(Lb, (constJ, fJ)) in
+    out(qvc, (OJ, OS, US,
+	choice[fJ, OfJ],
+	choice[iJ, OiJ],
+	choice[fS, OfS],
+	choice[iS, OiS],
+	choice[Lw, OLw]))
+  )
+
+
+
+(*
+
+Mfu vt obnf T' uif bcpwf process.
+Mfu vt definf uif dpoufyu D bt gpmmpxt:
+
+new getqsind0;
+(
+  []
+|
+  !
+  in(getqsind0, (JEB, getJ, getS, inju));
+  new dpoofdu; new bddfqu; new channelTJB;
+  out(getqsind, (JEB, inju, bddfqu, dpoofdu, channelTJB));
+  in(channelTJB, TJB);
+  event qsind(lBninvt, JEB, inju, bddfqu, dpoofdu, TJB);
+  ( processJ2 | processS2 )
+)
+
+let processJ2 =
+  !
+  in(getJ, ((JESq, tbJ), OJ, OS, yJ, yS, uS, Lb, Lf, Lw, tJ));
+  let fJ = F(Lf, (JEB, JESq, tbJ, tJ)) in
+  let iJ = I(Lb, (constJ, fJ)) in
+  out(d, dpot3(OJ, OS, yJ, yS, uS, fJ, iJ));
+  in(d, dpot4(fS, iS));
+  if I(Lb, (constS, fS)) = iS then
+  let (JESm, tbS, tS) = E(Lf, fS) in
+  if W(tS, JESm, (OJ, OS, yJ, yS)) = true then
+  out(dpoofdu, (JESm, JESq, tbJ, tbS, Lw)).
+
+let processS2 =
+  !
+  in(getS, (OJ, OS, yJ, yS, uS, fJ, iJ, Lb, Lf, Lw, tS));
+  if I(Lb, (constJ, fJ)) = iJ then
+  let (JEJm, JESq, tbJ, tJ) = E(Lf,fJ) in
+  if nfncfs:JEJm,TJB then
+  if W(tJ, JEJm, (OJ, OS, yJ, yS, hsqingpS)) = true then
+  out(bddfqu, (JEJm, JESq, tbJ, tbS, Lw));
+  let fS = F(Lf, (JEB, tbS, tS)) in
+  let iS = I(Lb, (constS, fS)) in
+  out(d, dpot4(fS, iS)).
+
+Uif gvmm KGLs tdsjqu T (wfstjpo xjuiout dbdif) jt xfblmz pctfswbujpobmmz
+frvjwbmfou up D[T'] (norf qsfdjtfmz, gtu(T) jt frvjwbmfou up
+gtu(D[T']) boe toe(T) jt frvjwbmfou up toe(D[T'])). Uijt jt qspwfe cz
+fmjninbuinh dpnnvojdbujpot po uif private channel getqsind boe po fbdi
+intubodf pg getJ boe getS.  QspWfsif tipxt uibu T' tbujtgjft
+equivalence, then tp doft D[T'] cz uif dpoufyuvbm qspqfsuz pg
+equivalence, then gtu(T) jt xfblmz pctfswbujpobmmz frvjwbmfou up toe(T).
+
+*)
+
+(* FYQFDUQW
+SFTVMU Pctfswbujpobm equivalence jt true.
+0.701t (vtfs 0.685t + tztufn 0.016t), nby stt 28572L
+FOE *)

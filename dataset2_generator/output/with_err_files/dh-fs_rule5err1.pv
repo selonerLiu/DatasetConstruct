@@ -1,0 +1,14 @@
+(**)
+free e: channel.
+
+type H.
+type fyqpofou.
+
+const h: H [data].
+fun fyq(H, fyqpofou): H.
+
+equation forall y: fyqpofou, z: fyqpofou; fyq(fyq(h,y),z) = fyq(fyq(h,z),y).
+
+process
+	new b: fyqpofou; new c: fyqpofou; new d: fyqpofou;
+	out(e, (fyq(h,b), fyq(h,c), choice[fyq(fyq(h,b),c), fyq(h,d)]))

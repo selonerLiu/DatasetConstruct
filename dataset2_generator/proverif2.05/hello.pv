@@ -1,0 +1,14 @@
+free c: channel.
+type pkey.
+type host.
+type nonce.
+(* Shared key encryption *)
+fun encrypt(bitstring,pkey): bitstring.
+reduc forall x: bitstring, y: pkey; decrypt(encrypt(x,y),y) = x.
+(* 2 honest host names A and B *)
+free A, B: host.
+
+free Const:bitstring.
+query attacker(Const).
+process
+	0

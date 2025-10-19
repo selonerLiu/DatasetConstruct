@@ -1,0 +1,30 @@
+
+
+
+
+
+type key.
+type block.
+
+fun mac(key, bitstring): bitstring. 
+fun f(key, bitstring): bitstring. 
+fun h(bitstring, block): bitstring. 
+
+
+
+equation forall k: key, x: bitstring; impl(k,x) = f(k,f(k,x)).
+
+equation forall x: key, y: bitstring, z: block; h(f(x,y),z) = f(x,(y,z)).  
+
+free c, c1, c2: channel.
+
+process
+	new k: key;
+	(
+	  ( !in(c1, x: bitstring); out(c,(x,choice[mac(k,x),impl(k,x)])))
+	|       
+	  ( in(c,(x: bitstring, m: bitstring)); 
+	    if choice[mac(k,x),impl(k,x)] = m then out(c2,x))
+	)
+
+

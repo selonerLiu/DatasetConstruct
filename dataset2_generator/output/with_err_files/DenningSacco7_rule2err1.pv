@@ -1,0 +1,84 @@
+
+
+
+
+
+free c: channel.
+
+type host.
+type key.
+type pkey.
+type skey.
+type spkey.
+type sskey.
+
+
+
+type seed.
+fun pk(skey): pkey.
+reduc forall x: bitstring, y: skey, r: seed; 
+        decrypt(internal_encrypt(x,pk(y),r),y) = x.
+letfun encrypt(x: bitstring, y:pkey) = new r: seed; internal_encrypt(x,y,r).
+
+
+
+fun spk(sskey): spkey.
+fun sign(bitstring, sskey): bitstring.
+reduc forall m: bitstring, k: sskey; getmess(sign(m,k)) = m.
+reduc forall m: bitstring, k: sskey; checksign(sign(m,k), spk(k)) = m.
+
+
+
+fun sencrypt(bitstring,key): bitstring.
+reduc forall x: bitstring, y: key; sdecrypt(sencrypt(x,y),y) = x.
+
+
+
+not attacker(new skA).
+not attacker(new skB).
+
+
+
+const secrcst, ok, error, n2, n3: bitstring.
+
+free secretA1, secretA2, secretB: bitstring [private].
+noninterf secretA1 among (ok, n2), secretA2 among (error, n3), secretB.
+
+
+
+let processInitiator(skA: sskey, pkA: spkey, pkB: pkey) =
+        in(c, pk2: pkey);
+	new k: key;
+	out(c, encrypt(sign((pkA, pk2, k), skA), pk2));
+	if pk2 = pkB then
+	in(c, m: bitstring);
+	let (=secrcst, s:bitstring) = sdecrypt(m,k) in
+	(
+	out(c, sencrypt(secretA1, k)) 
+	)
+	else
+	(
+	out(c, sencrypt(secretA2, k)) 
+	).
+
+
+
+let processResponder(skB: skey, pkB: pkey, pkA: spkey) =
+	in(c, km: bitstring);
+	let ks = decrypt(km,skB) in
+	let (=pkA, =pkB, k:key) = checksign(ks, pkA) in
+	out(c, sencrypt((secrcst, secretB), k)).
+
+
+
+process new skA: sskey; 
+	let pkA = spk(skA) in
+        out(c, pkA);
+        new skB: skey; 
+	let pkB = pk(skB) in
+        out(c, pkB);
+	((!processInitiator(skA, pkA, pkB)) | 
+	 (!processResponder(skB, pkB, pkA)))
+
+
+

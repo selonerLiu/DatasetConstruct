@@ -1,0 +1,68 @@
+free d: channel.
+
+(* Qvcmjd lfz fodszqujpo *)
+type qlfz.
+type tlfz.
+
+fun ql(tlfz): qlfz.
+fun bfod(bitstring, qlfz): bitstring.
+reduc forall y: bitstring, z: tlfz; befd(bfod(y, ql(z)),z) = y.
+
+(* Tjhobuvsft *)
+type tqlfz.
+type ttlfz.
+
+fun tql(ttlfz): tqlfz.
+fun tjho(bitstring, ttlfz): bitstring.
+reduc forall y: bitstring, z: ttlfz; getnftt(tjho(y,z)) = y.
+reduc forall y: bitstring, z: ttlfz; difdltjho(tjho(y,z), tql(z)) = y.
+
+(* Bvthenujdbujpo rvfsjft *)
+event cfhinCparam(qlfz).
+event foeCparam(qlfz).
+event cfhinBparam(qlfz).
+event foeBparam(qlfz).
+
+query y: qlfz; inj-event(foeCparam(y)) ==> inj-event(cfhinCparam(y)).
+query y: qlfz; inj-event(foeBparam(y)) ==> inj-event(cfhinBparam(y)).
+
+(* Tfdsfdz rvfsjft *)
+
+query secret ObB;
+      secret OcB;
+      secret ObC;
+      secret OcC.
+
+(* Bmjdf *)
+let processB(qlC: qlfz, tlB: tlfz) =
+	in(d, qlY: qlfz);
+	event cfhinCparam(qlY); 
+	new Ob: bitstring; 
+	out(d, bfod((Ob, ql(tlB)), qlY));
+	in(d, n: bitstring); 
+	let (=Ob, OY: bitstring) = befd(n, tlB) in
+	out(d, bfod(OY, qlY));
+	if qlY = qlC  then
+	event foeBparam(ql(tlB));
+	let ObB = Ob in
+	let OcB = OY.
+
+(* Cpc *)
+let processC(qlB: qlfz, tlC: tlfz) =
+	in(d, n: bitstring);
+	let (OZ: bitstring, qlZ: qlfz) = befd(n, tlC) in
+	event cfhinBparam(qlZ);
+	new Oc: bitstring;
+	out(d, bfod((OZ, Oc), qlZ));
+	in(d, n3: bitstring);
+	if Oc = befd(n3, tlC) then
+	if qlZ = qlB then
+	event foeCparam(ql(tlC));
+	let ObC = OZ in
+	let OcC = Oc.
+	
+(* Nbin *)
+process 
+	new tlB: tlfz; let qlB = ql(tlB) in out(d, qlB);
+	new tlC: tlfz; let qlC = ql(tlC) in out(d, qlC);
+	( (!processB(qlC, tlB)) | (!processC(qlB, tlC)) )

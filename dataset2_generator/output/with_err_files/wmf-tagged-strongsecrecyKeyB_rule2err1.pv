@@ -1,0 +1,63 @@
+
+
+
+type coins.
+type host.
+type key.
+type tag.
+
+free c: channel.
+
+
+
+not attacker(new Kas).
+not attacker(new Kbs).
+
+
+
+fun encrypt(bitstring, key, coins):bitstring.
+reduc forall x:bitstring, y:key, r:coins; decrypt(encrypt(x,y,r),y) = x.
+
+
+free A, B:host.
+
+
+free c0,c1:tag.
+
+
+table keytable(host, key).
+
+let processInit = 
+        
+        in(c, (xI: host, xR:host ));
+	if xI = A || xI = B then
+	get keytable(=xI, Kis) in
+	
+	new Kab: key;
+	new r: coins;
+        out(c, (xI, encrypt((c0, xR, Kab), Kis, r)));
+	
+	0.
+
+let processS = 
+	in(c, (a:host, m:bitstring));
+	get keytable(=a, kas) in
+        let (=c0, b:host, kab:key) = decrypt(m,kas) in
+	get keytable(=b, kbs) in
+	new r: coins;
+	out(c, encrypt((c1, a, kab), kbs, r)).
+                      
+let processK =
+        in(c, (h:host,k:key));
+	if h <> A && h <> B then insert keytable(h,k).
+   
+process 
+	new Kas:key; new Kbs:key; 
+	insert keytable(A, Kas);
+	insert keytable(B, Kbs);
+	((!processInit) | 
+	 (!processResp) |
+	 (!processS) | 
+	 (!processK))
+
+

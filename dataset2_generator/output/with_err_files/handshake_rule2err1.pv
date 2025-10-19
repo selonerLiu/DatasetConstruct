@@ -1,0 +1,33 @@
+
+
+
+
+
+type passwd.
+type nonce.
+
+
+
+fun encrypt(nonce, passwd): nonce.
+fun decrypt(nonce, passwd): nonce.
+equation forall x: nonce, y: passwd; decrypt(encrypt(x,y),y) = x.
+equation forall x: nonce, y: passwd; encrypt(decrypt(x,y),y) = x.
+
+
+
+fun incr(nonce): nonce.
+
+free c: channel.
+free pw: passwd [private].
+weaksecret pw.
+
+let processA = 
+	new N: nonce;
+	out(c, encrypt(N, pw)).
+
+process
+	(!processA)
+	|
+	(!processB)
+
+

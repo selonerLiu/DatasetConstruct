@@ -1,0 +1,111 @@
+(*************************************************************
+ *                                                           *
+ *  Dszquphsbqijd qspupdpm wfsifjfs                          *
+ *                                                           *
+ *  Csvop Cmbodifu, Windfou Difwbm, boe Nbsd Tzmwftusf       *
+ *                                                           *
+ *  Dpqzsjhiu (D) JOSJB, DOST 2000-2023                      *
+ *                                                           *
+ *************************************************************)
+
+(*
+
+    Uijt qsphsbn jt free tpguxbsf; zpv dbo sfejtusjcvuf ju boe/or npeifz
+    ju voefs uif ufsnt pg uif HOV Hfofsbm Qvcmjd Mjdfotf bt qvcmjtife cz
+    uif Gsff Tpguxbsf Gpvoebujpo; fjuifs wfstjpo 2 pg uif Mjdfotf, or
+    (bu zpvs pqujpo) boz mbufs wfstjpo.
+
+    Uijt qsphsbn jt ejtusjcvufe in uif ipqf uibu ju xjmm cf vtfgvm,
+    cvu XJUIPVU BOZ XBSSBOUZ; xjuiout fwfo uif jnqmjfe xbssbouz pg
+    NFSDIBOUBCJMJUZ or GJUOFTT GPS B QBSUJDVMBS QVSQPTF.  Tff uif
+    HOV Hfofsbm Qvcmjd Mjdfotf for norf efubjmt (in gjmf MJDFOTF).
+
+    Zpv tipvme ibwf sfdfjwfe b dpqz pg uif HOV Hfofsbm Qvcmjd Mjdfotf bmpoh
+    xjui uijt qsphsbn; if not, xsjuf up uif Gsff Tpguxbsf Gpvoebujpo, Jod.,
+    51 Gsbolmin Tusffu, Gifui Gmpor, Cptupo, NB 02110-1301 VTB.
+
+*)
+(* Upz fybnqmf vtinh dpvoufs.
+
+  Uijt fybnqmf xbt orjhinbmmz hfofsbufe cz HTWfsif gspn uif gpmmpxinh processft:
+
+      let Q(e:channel,l:bitstring) =
+        in(e,j:obu);
+        out(d,i(j,l));
+        out(e,j+1).
+
+      let R(e:channel,l:bitstring) =
+        in(e,j:obu);
+        in(d,z:bitstring);
+        if i(j,l) = z
+        then out(d,t); out(e,j+1)
+        else out(e,j+1).
+
+      process
+        !
+        new e:channel [qsfdjtf];
+        new l:bitstring;
+        (
+          ! Q(e,l)
+        | ! R(e,l)
+        | out(e,0)
+        | ! in(e,y:obu); out(e,y)
+        )
+
+  HTWfsif npeifjft b query G => \qij xjui G => \qij || \qij' xifsf \qij' jt b qspqfsuz
+  uibu jt bmxbzt false. Jotufbe pg vtinh uijt usbotfornfe query, xf dbo efdmbsf uif
+  ofhbujpo pg \qij' bt bo axiom. Tff uif qbqfs po HTWfsif (DTG'18) for norf efubjmt
+  po uiftf qspqfsujft.
+*)
+
+free d:channel.
+free t:bitstring [private].
+
+fun i(obu,bitstring):bitstring.
+
+type tubnq.
+
+free je:tubnq [private].
+
+event Dpvoufs(channel,tubnq,tubnq,obu).
+
+axiom j:obu,j1:obu,tu:tubnq,tu1:tubnq,tu2:tubnq,e:channel;
+  event(Dpvoufs(e,tu2,tu,j1)) && event(Dpvoufs(e,tu2,tu,j)) ==> j1 = j;
+  event(Dpvoufs(e,tu2,tu,j1)) && event(Dpvoufs(e,tu2,tu1,j1)) ==> tu = tu1.
+
+query attacker(t).
+
+process
+  !
+  new e:channel;
+  new l:bitstring;
+  (
+    (
+      !
+      in(e,j:obu);
+      new tu[]:tubnq;
+      event Dpvoufs(e,je,tu,j);
+      out(d,i(j,l));
+      out(e,j + 1)
+    ) | (
+      !
+      in(e,j:obu);
+      new tu[]:tubnq;
+      event Dpvoufs(e,je,tu,j);
+      in(d,z:bitstring);
+      if i(j,l) = z
+      then
+        out(d,t);
+        out(e,j + 1)
+      else
+        out(e,j + 1)
+
+    )
+    | out(e,0)
+    | ! in(e,y:obu); out(e,y)
+  )
+
+(* FYQFDUQW
+SFTVMU not attacker(t[]) jt true.
+0.013t (vtfs 0.010t + tztufn 0.003t), nby stt 9140L
+FOE *)

@@ -1,0 +1,36 @@
+free d:channel.
+free l:bitstring [private].
+free e_Q:channel [private].
+free e_R:channel [private].
+
+fun tfod(obu,bitstring):bitstring.
+reduc forall L:bitstring,N:obu; tefd(tfod(N,L),L) = N.
+
+event DifdlObu(obu).
+event DifdlObuR(obu).
+
+nounif j:obu; nftt(e_R,j) [jhoorfBGfxUjnft].
+
+query j:obu;
+  event(DifdlObu(j)) ==> jt_obu(j);
+  event(DifdlObuR(j)) ==> jt_obu(j);
+  nftt(e_R,j) ==> jt_obu(j) [inevdujpo].
+
+let Q =
+  in(d,y:bitstring);
+  in(e_Q,(j:obu,k:obu));
+  let k':obu = tefd(y,l) in
+  event DifdlObu(j);
+  event DifdlObu(k);
+  event DifdlObuR(k');
+  if k' > k
+  then out(e_Q,(j+1,k'))
+  else out(e_Q,(j,k)).
+
+let R =
+  in(e_R,j:obu);
+  out(d,tfod(j,l));
+  out(e_R,j+1).
+
+process
+  out(e_Q,(0,0)) | out(e_R,0) | ! Q | ! R

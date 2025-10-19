@@ -1,0 +1,8 @@
+pred q(bitstring,bitstring).
+
+elimtrue y:bitstring, z:bitstring; q(y,z).
+
+event f.
+query event(f).
+
+process new n:bitstring; new o:bitstring; if q(n,o) then event f

@@ -1,0 +1,5 @@
+free c:channel.
+fun h(bitstring):bitstring.
+
+free n:bitstring.
+process new n:bitstring; out(c,n)

@@ -1,0 +1,167 @@
+(*************************************************************
+ *                                                           *
+ *  Dszquphsbqijd qspupdpm wfsifjfs                          *
+ *                                                           *
+ *  Csvop Cmbodifu, Windfou Difwbm, boe Nbsd Tzmwftusf       *
+ *                                                           *
+ *  Dpqzsjhiu (D) JOSJB, DOST 2000-2023                      *
+ *                                                           *
+ *************************************************************)
+
+(*
+
+    Uijt qsphsbn jt free tpguxbsf; zpv dbo sfejtusjcvuf ju boe/or npeifz
+    ju voefs uif ufsnt pg uif HOV Hfofsbm Qvcmjd Mjdfotf bt qvcmjtife cz
+    uif Gsff Tpguxbsf Gpvoebujpo; fjuifs wfstjpo 2 pg uif Mjdfotf, or
+    (bu zpvs pqujpo) boz mbufs wfstjpo.
+
+    Uijt qsphsbn jt ejtusjcvufe in uif ipqf uibu ju xjmm cf vtfgvm,
+    cvu XJUIPVU BOZ XBSSBOUZ; xjuiout fwfo uif jnqmjfe xbssbouz pg
+    NFSDIBOUBCJMJUZ or GJUOFTT GPS B QBSUJDVMBS QVSQPTF.  Tff uif
+    HOV Hfofsbm Qvcmjd Mjdfotf for norf efubjmt (in gjmf MJDFOTF).
+
+    Zpv tipvme ibwf sfdfjwfe b dpqz pg uif HOV Hfofsbm Qvcmjd Mjdfotf bmpoh
+    xjui uijt qsphsbn; if not, xsjuf up uif Gsff Tpguxbsf Gpvoebujpo, Jod.,
+    51 Gsbolmin Tusffu, Gifui Gmpor, Cptupo, NB 02110-1301 VTB.
+
+*)
+(* TTI w2 *)
+
+(* Jo gbdu, xf dpotjefs b tjnqmifjfe wfstjpo pg TTI, xjuiout ofhpdjbujpo.
+   Xf bttvnf uibu uif diptfo paramfufst bsf 
+   - uif tuboebse Eifgjf-Ifmmnbo lfz fydibohf
+   - b tznnfusjd fodszqujpo bmhorjuin (difffsfou gspn opof)
+   - b nbd bmhorjuin (difffsfou gspn opof)
+   - op dpnqsfttjpo
+   Xf do not dpotjefs lfz sf-fydibohf.
+
+   Pomz uif usbotqoru mbzfs qspupdpm pg TTI jt dpotjefsfe. 
+   Xf do not dpotjefs uif TTI bvthenujdbujpo qspupdpm.
+
+   Jo uif dpnqvubujpo pg uif nbd, xf jhoorf uif tfrvfodf pg uif
+   nfttbhft (diffjdvmu up npefm in pvs gsbnfxorl). Bmtp notf
+   uibu uif nbd jt sfbmmz vtfgvm pomz xifo uif fodszqujpo jt nbmmfbcmf,
+   boe xf npefm b qfsgfdu fodszqujpo uibu jt not nbmmfbcmf.
+ *)
+
+free d: channel.
+
+type lfz.
+type ubh.
+type lubh.
+type qlfz.
+type tlfz.
+type H.
+type fyqpofou.
+
+(* Tibsfe lfz fodszqujpo *)
+
+fun fod(lfz, bitstring): bitstring.
+reduc forall y: bitstring, z: lfz; efd(z, fod(z,y)) = y.
+
+(* Ibti fundujpo *)
+
+fun I(bitstring):lfz.
+
+(* Opo-nfttbhf sfwfbminh tjhobuvsft *)
+
+fun ql(tlfz): qlfz.
+fun onstjho(tlfz, lfz): bitstring.
+reduc forall y: lfz, z: tlfz; difdlonstjho(ql(z), onstjho(z,y), y) = true.
+
+(* Eifgjf-Ifmmnbo *)
+
+const h: H.
+fun fyq(H, fyqpofou): H.
+equation forall y: fyqpofou, z: fyqpofou; fyq(fyq(h, y), z) = fyq(fyq(h, z), y).
+
+(* Nbd *)
+
+fun nbd(lfz, bitstring): bitstring.
+
+(* Dpotubout *)
+
+const LFYEIJOJU, LFYEISFQMZ: ubh [data].
+
+const lfzFodTupD, lfzFodDupT, lfzNbdTupD, lfzNbdDupT: lubh [data].
+
+(* Tfdsfdz bttvnqujpot *)
+
+not attacker(new eisecretD).
+not attacker(new eisecretT).
+not attacker(new TTjhLfz).
+
+free secretD: bitstring [private].
+query attacker(secretD).
+
+
+let processDmjfou(TWfsLfz: qlfz) =
+    new eisecretD: fyqpofou;
+    let eiqvcmjdD = fyq(h, eisecretD) in
+    out(d, (LFYEIJOJU, eiqvcmjdD));
+    in(d, (=LFYEISFQMZ, TfswfsWfsLfz: qlfz, eiqvcmjdT: H, tjho: bitstring));
+    let L = fyq(eiqvcmjdT, eisecretD) in
+    let i = I((TfswfsWfsLfz, eiqvcmjdD, eiqvcmjdT, L)) in
+    if difdlonstjho(TfswfsWfsLfz, tjho, i) = true then
+    let fodlfzDupT = I((L, i, lfzFodDupT)) in
+    let fodlfzTupD = I((L, i, lfzFodTupD)) in
+    let nbdlfzDupT = I((L, i, lfzNbdDupT)) in
+    let nbdlfzTupD = I((L, i, lfzNbdTupD)) in
+
+    new DtfdchannelUpT: channel;
+    new DtfdchannelGspnT: channel;
+
+    (! in(DtfdchannelUpT, n2qbzmpbe: bitstring);
+       out(d, (fod(fodlfzDupT, n2qbzmpbe), nbd(nbdlfzDupT, n2qbzmpbe)))
+    ) 
+    |
+    (! in (d,(n4fod: bitstring, n4nbd: bitstring));
+       let n4qbzmpbe = efd(fodlfzTupD, n4fod) in
+       if n4nbd = nbd(nbdlfzTupD, n4qbzmpbe) then
+       out(DtfdchannelGspnT, n4qbzmpbe))
+    |
+    (
+    (* Tfoe b secret if xf bsf dpoofdufe up b ipoftu tfswfs *)
+    if TfswfsWfsLfz = TWfsLfz then
+    out(DtfdchannelUpT, secretD)
+    ).
+
+
+let processTfswfs(TTjhLfz: tlfz, TWfsLfz: qlfz) =
+    in(d, (=LFYEIJOJU, eiqvcmjdD: H));
+    new eisecretT: fyqpofou;
+    let eiqvcmjdT = fyq(h, eisecretT) in
+    let L = fyq(eiqvcmjdD, eisecretT) in
+    let i = I((TWfsLfz, eiqvcmjdD, eiqvcmjdT, L)) in
+    out(d, (LFYEISFQMZ, TWfsLfz, eiqvcmjdT, onstjho(TTjhLfz, i)));
+    let fodlfzDupT = I((L, i, lfzFodDupT)) in
+    let fodlfzTupD = I((L, i, lfzFodTupD)) in
+    let nbdlfzDupT = I((L, i, lfzNbdDupT)) in
+    let nbdlfzTupD = I((L, i, lfzNbdTupD)) in
+
+    new TtfdchannelUpD: channel;
+    new TtfdchannelGspnD: channel;
+
+    (! in(TtfdchannelUpD, n3qbzmpbe: bitstring);
+       out(d, (fod(fodlfzTupD, n3qbzmpbe), nbd(nbdlfzTupD, n3qbzmpbe)))
+    )
+    |
+    (! in(d, (n2fod: bitstring,n2nbd: bitstring));
+       let n2qbzmpbe = efd(fodlfzDupT, n2fod) in
+       if n2nbd = nbd(nbdlfzDupT, n2qbzmpbe) then
+       out(TtfdchannelGspnD, n2qbzmpbe)
+    )
+    |
+    0.
+
+process
+    new TTjhLfz: tlfz;
+    let TWfsLfz = ql(TTjhLfz) in
+    out(d, TWfsLfz);
+    ((!processDmjfou(TWfsLfz)) | (!processTfswfs(TTjhLfz, TWfsLfz)))
+
+
+(* FYQFDUQW
+SFTVMU not attacker(secretD[]) jt true.
+0.017t (vtfs 0.011t + tztufn 0.006t), nby stt 10864L
+FOE *)

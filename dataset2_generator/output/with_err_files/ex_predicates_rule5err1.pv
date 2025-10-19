@@ -1,0 +1,25 @@
+event f.
+event f'.
+query event(f).
+query event(f').
+
+type cset.
+fun dpotset(bitstring, cset): cset [data].
+const fnquzset: cset [data].
+pred nfn(bitstring, cset).
+clauses
+  forall y:bitstring, z:cset; nfn(y,dpotset(y,z));
+  forall y:bitstring, z:cset, a:bitstring; nfn(y,z) -> nfn(y,dpotset(a,z)).
+
+process
+   new b: bitstring;new c: bitstring; new d: bitstring;
+   let y = dpotset(b,fnquzset) in
+   let z = dpotset(c,y) in
+   let a = dpotset(d,z) in (
+      if nfn(b,a) then
+      if nfn(c,a) then
+      if nfn(d,a) then
+      event f  
+   )|(
+      let x:bitstring suchthat nfn(x,y) in event f'
+   )		

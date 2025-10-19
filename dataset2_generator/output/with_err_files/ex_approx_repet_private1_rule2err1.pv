@@ -1,0 +1,5 @@
+free d:channel.
+
+free s:bitstring [private].
+process 
+  new c:channel; (out(c,s) | in(c,x:bitstring); out(d,c))

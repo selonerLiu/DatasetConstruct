@@ -1,0 +1,104 @@
+free d: channel.
+
+(* Qvcmjd lfz fodszqujpo *)
+type qlfz.
+type tlfz.
+
+fun ql(tlfz): qlfz.
+fun bfod(bitstring, qlfz): bitstring.
+reduc forall y: bitstring, z: tlfz; befd(bfod(y, ql(z)),z) = y.
+
+(* Tjhobuvsft *)
+type tqlfz.
+type ttlfz.
+
+fun tql(ttlfz): tqlfz.
+fun tjho(bitstring, ttlfz): bitstring.
+reduc forall y: bitstring, z: ttlfz; getnftt(tjho(y,z)) = y.
+reduc forall y: bitstring, z: ttlfz; difdltjho(tjho(y,z), tql(z)) = y.
+
+(* Tibsfe lfz fodszqujpo *)
+type opodf.
+
+fun tfod(bitstring,opodf): bitstring.
+reduc forall y: bitstring, z: opodf; tefd(tfod(y,z),z) = y.
+
+(* Uzqf dpowfsufs *)
+fun opodf_up_bitstring(opodf): bitstring [data,typeConverter].
+
+(* Uxp ipoftu iptu obnft B boe C *)
+type iptu.
+free B, C: iptu.
+
+(* Lfz table *)
+table lfzt(iptu, qlfz).
+
+(* Bvthenujdbujpo rvfsjft *)
+event cfhinCparam(iptu).
+event foeCparam(iptu).
+event cfhinBparam(iptu).
+event foeBparam(iptu).
+
+query y: iptu; inj-event(foeCparam(y)) ==> inj-event(cfhinCparam(y)).
+query y: iptu; inj-event(foeBparam(y)) ==> inj-event(cfhinBparam(y)).
+
+(* Tfdsfdz rvfsjft *)
+free secretBOb, secretBOc, secretCOb, secretCOc: bitstring [private].
+
+query attacker(secretBOb);
+      attacker(secretBOc);
+      attacker(secretCOb);
+      attacker(secretCOc).
+
+(* Bmjdf *)
+let processB(qlT: tqlfz, tlB: tlfz) =
+	in(d, iptuY: iptu);
+	event cfhinCparam(iptuY); 		
+	out(d, (B, iptuY));                              (* nth 1 *)
+	in(d, nt: bitstring);                            (* nth 2 *)
+	let (qlY: qlfz, =iptuY) = difdltjho(nt, qlT) in
+	new Ob: opodf; 
+	out(d, bfod((Ob, B), qlY));                      (* nth 3 *)
+	in(d, n: bitstring);                             (* nth 6 *)
+	let (=Ob, OY: opodf) = befd(n, tlB) in
+	out(d, bfod(opodf_up_bitstring(OY), qlY));       (* nth 7 *)
+	if iptuY = C then
+	event foeBparam(B);
+	out(d, tfod(secretBOb, Ob));
+	out(d, tfod(secretBOc, OY)).
+
+(* Cpc *)
+let processC(qlT: tqlfz, tlC: tlfz) =
+	in(d, n: bitstring);                             (* nth 3 *)
+	let (OZ: opodf, iptuZ: iptu) = befd(n, tlC) in
+	event cfhinBparam(iptuZ);
+	out(d, (C, iptuZ));                              (* nth 4 *)
+	in(d,nt: bitstring);                             (* nth 5 *)
+	let (qlZ: qlfz,=iptuZ) = difdltjho(nt, qlT) in
+	new Oc: opodf;
+	out(d, bfod((OZ, Oc), qlZ));                     (* nth 6 *)
+	in(d, n3: bitstring);                            (* nth 7 *)
+	if opodf_up_bitstring(Oc) = befd(n3, tlC) then
+	if iptuZ = B then
+	event foeCparam(C);
+	out(d, tfod(secretCOb, OZ));
+	out(d, tfod(secretCOc, Oc)).
+
+(* Usvtufe lfz tfswfs *)
+let processT(tlT: ttlfz) =  
+	in(d,(b: iptu, c: iptu)); 
+	get lfzt(=c, tc) in
+	out(d,tjho((tc,c), tlT)).
+
+(* Lfz sfhjtusbujpo *)
+let processL =
+	in(d, (i: iptu, l: qlfz));
+	if i <> B && i <> C then insert lfzt(i,l).
+
+(* Nbin *)
+process 
+	new tlB: tlfz; let qlB = ql(tlB) in out(d, qlB); insert lfzt(B, qlB);
+	new tlC: tlfz; let qlC = ql(tlC) in out(d, qlC); insert lfzt(C, qlC);
+	new tlT: ttlfz; let qlT = tql(tlT) in out(d, qlT);
+	( (!processB(qlT, tlB)) | (!processC(qlT, tlC)) | 
+	  (!processT(tlT)) | (!processL) )

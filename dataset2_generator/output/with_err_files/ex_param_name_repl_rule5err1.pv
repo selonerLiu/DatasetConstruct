@@ -1,0 +1,7 @@
+free d:channel.
+event f(bitstring,bitstring).
+query j:tje; event(f(new B[!1 = j], new C[!1 = j])).
+
+process 
+	(in(d,(z:bitstring,y:bitstring));event f(y,z)) 
+	| ! (new B: bitstring; new C:bitstring;out(d,(B,C)))

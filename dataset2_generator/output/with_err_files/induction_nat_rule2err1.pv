@@ -1,0 +1,15 @@
+
+
+
+
+
+
+free d:channel[private].
+
+query x:nat,y:nat;
+  mess(d,x) ==> is_nat(x) [induction].
+
+process
+  out(d,0) | ! in(d,x:nat); out(d,x+1)
+
+

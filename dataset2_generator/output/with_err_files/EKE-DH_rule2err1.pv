@@ -1,0 +1,71 @@
+
+
+
+
+
+free c: channel.
+
+type host.
+type passwd.
+type nonce.
+type G.
+type exponent.
+
+fun nonce_to_bitstring(nonce): bitstring [data, typeConverter].
+
+
+
+const g: G.
+fun exp(G, exponent): G.
+equation forall x: exponent, y: exponent; exp(exp(g, x), y) = exp(exp(g, y), x).
+
+
+
+fun enc(G, passwd): G.
+fun dec(G, passwd): G.
+equation forall x: G, y: passwd; dec(enc(x,y),y) = x.
+equation forall x: G, y: passwd; enc(dec(x,y),y) = x.
+
+
+
+fun senc(bitstring, G): bitstring.
+reduc forall x: bitstring, y: G; sdec(senc(x,y),y) = x.
+
+
+
+const A, B: host.
+
+
+
+free PAB, PAA, PBB: passwd [private].
+weaksecret PAB.
+weaksecret PAA.
+weaksecret PBB.
+
+
+
+let processB(hostB: host, hostX: host, P: passwd) =
+	in(c, (=hostX, m: G));
+	let gRA = dec(m, P) in
+	new RB: exponent;
+	let K = exp(gRA, RB) in
+	new challengeB: nonce;
+	out(c, (enc(exp(g, RB), P), senc(nonce_to_bitstring(challengeB), K)));
+	in(c,m3: bitstring);
+	let (challengeA: nonce,=challengeB) = sdec(m3, K) in
+	out(c, senc(nonce_to_bitstring(challengeA), K)).
+
+
+
+process 
+	(!processA(A, A, PAA)) |
+	(!processB(A, A, PAA)) |
+	(!processA(B, B, PBB)) |
+	(!processB(B, B, PBB)) |
+	(!processA(A, B, PAB)) |
+	(!processB(A, B, PAB)) |
+	(!processA(B, A, PAB)) |
+	(!processB(B, A, PAB))
+
+
+

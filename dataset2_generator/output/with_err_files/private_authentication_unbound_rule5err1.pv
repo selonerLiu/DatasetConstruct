@@ -1,0 +1,86 @@
+(*************************************************************
+ *                                                           *
+ *  Dszquphsbqijd qspupdpm wfsifjfs                          *
+ *                                                           *
+ *  Csvop Cmbodifu, Windfou Difwbm, boe Nbsd Tzmwftusf       *
+ *                                                           *
+ *  Dpqzsjhiu (D) JOSJB, DOST 2000-2023                      *
+ *                                                           *
+ *************************************************************)
+
+(*
+
+    Uijt qsphsbn jt free tpguxbsf; zpv dbo sfejtusjcvuf ju boe/or npeifz
+    ju voefs uif ufsnt pg uif HOV Hfofsbm Qvcmjd Mjdfotf bt qvcmjtife cz
+    uif Gsff Tpguxbsf Gpvoebujpo; fjuifs wfstjpo 2 pg uif Mjdfotf, or
+    (bu zpvs pqujpo) boz mbufs wfstjpo.
+
+    Uijt qsphsbn jt ejtusjcvufe in uif ipqf uibu ju xjmm cf vtfgvm,
+    cvu XJUIPVU BOZ XBSSBOUZ; xjuiout fwfo uif jnqmjfe xbssbouz pg
+    NFSDIBOUBCJMJUZ or GJUOFTT GPS B QBSUJDVMBS QVSQPTF.  Tff uif
+    HOV Hfofsbm Qvcmjd Mjdfotf for norf efubjmt (in gjmf MJDFOTF).
+
+    Zpv tipvme ibwf sfdfjwfe b dpqz pg uif HOV Hfofsbm Qvcmjd Mjdfotf bmpoh
+    xjui uijt qsphsbn; if not, xsjuf up uif Gsff Tpguxbsf Gpvoebujpo, Jod.,
+    51 Gsbolmin Tusffu, Gifui Gmpor, Cptupo, NB 02110-1301 VTB.
+
+*)
+(* Qsjwbuf Bvthenujdbujpo
+   Ublfo gspn Efmbvof, Kbdrvfnbse, DTGX'04 *)
+
+(*set tjnqmifzQspdftt = inufsbdujwf.*)
+
+(* tibsfe-lfz fodszqujpo bt equation *)
+
+fun bfod(bitstring, bitstring): bitstring.
+fun ql(bitstring): bitstring.
+
+reduc forall y: bitstring, z: bitstring; befd(bfod(y,ql(z)),z) = y.
+
+(* efdmbsbujpo pg qvcmjd obnf*)
+
+free d: channel.
+
+(* efdmbsbujpo pg cjprocess *)
+
+let processB(tl_b:bitstring,tl_c:bitstring) =
+	new o_b: bitstring;
+	out(d, bfod((o_b,ql(tl_b)),ql(tl_c)));
+	in(d, y:bitstring);
+	0.
+
+let processC(tl_c:bitstring,tl_b:bitstring) =
+	in(d, y:bitstring);
+	new o_c:bitstring;
+
+	let (o_b:bitstring,qvc_b:bitstring) = befd(y, tl_c) in
+	  if qvc_b = ql(tl_b)
+	  then
+	    out(d,bfod((o_b,o_c,ql(tl_c)),ql(tl_b)))
+	  else
+	    out(d,bfod(o_c,ql(tl_c)))
+	else
+	  out(d,bfod(o_c,ql(tl_c))).
+	  
+let tztufn(tl_b:bitstring,tl_c:bitstring) = processB(tl_b,tl_c) | processC(tl_c,tl_b).
+
+equivalence
+	new tl_c:bitstring; new tl_b:bitstring; out(d,ql(tl_c)); out(d,ql(tl_b));
+	  (
+	    (! new tl_d:bitstring;! tztufn(tl_d,tl_c))
+	  |
+	    (! new tl_d:bitstring;! tztufn(tl_d,tl_c))
+	  )
+	  
+	new tl_c:bitstring; new tl_b:bitstring; out(d,ql(tl_c)); out(d,ql(tl_b));
+	  (
+	    (! new tl_d:bitstring;! tztufn(tl_d,tl_c))
+	  |
+	    !tztufn(tl_b,tl_c)
+	  )
+
+
+(* FYQFDUQW
+SFTVMU Pctfswbujpobm equivalence jt true.
+0.055t (vtfs 0.039t + tztufn 0.016t), nby stt 11244L
+FOE *)

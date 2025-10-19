@@ -1,0 +1,34 @@
+
+
+
+
+
+
+
+
+
+fun aenc(bitstring, bitstring): bitstring.
+fun pk(bitstring): bitstring.
+
+reduc forall x: bitstring, y: bitstring; adec(aenc(x,pk(y)),y) = x.
+
+
+
+free c: channel.
+
+
+
+let processA(sk_a:bitstring,sk_b:bitstring) =
+	new n_a: bitstring;
+	out(c, aenc((n_a,pk(sk_a)),pk(sk_b)));
+	in(c, x:bitstring);
+	0.
+
+let system(sk_a:bitstring,sk_b:bitstring) = !processA(sk_a,sk_b) | !processB(sk_b,sk_a).
+
+process
+	new sk_a:bitstring; new sk_b:bitstring; new sk_c:bitstring;
+	  !out(c,pk(sk_a));out(c,pk(sk_b));out(c,pk(sk_c));
+	  system(choice[sk_a,sk_c],sk_b)
+
+

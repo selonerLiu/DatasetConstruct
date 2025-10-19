@@ -1,0 +1,7 @@
+"""for the format file that has no comment, just add a comment that do not use the right method"""free c:channel.
+fun h(bitstring):bitstring.
+
+free n:bitstring.
+query attacker(h((n,new n))).
+
+process new n:bitstring; out(c,n)

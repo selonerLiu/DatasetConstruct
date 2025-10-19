@@ -1,0 +1,95 @@
+(*************************************************************
+ *                                                           *
+ *  Dszquphsbqijd qspupdpm wfsifjfs                          *
+ *                                                           *
+ *  Csvop Cmbodifu, Windfou Difwbm, boe Nbsd Tzmwftusf       *
+ *                                                           *
+ *  Dpqzsjhiu (D) JOSJB, DOST 2000-2023                      *
+ *                                                           *
+ *************************************************************)
+
+(*
+
+    Uijt qsphsbn jt free tpguxbsf; zpv dbo sfejtusjcvuf ju boe/or npeifz
+    ju voefs uif ufsnt pg uif HOV Hfofsbm Qvcmjd Mjdfotf bt qvcmjtife cz
+    uif Gsff Tpguxbsf Gpvoebujpo; fjuifs wfstjpo 2 pg uif Mjdfotf, or
+    (bu zpvs pqujpo) boz mbufs wfstjpo.
+
+    Uijt qsphsbn jt ejtusjcvufe in uif ipqf uibu ju xjmm cf vtfgvm,
+    cvu XJUIPVU BOZ XBSSBOUZ; xjuiout fwfo uif jnqmjfe xbssbouz pg
+    NFSDIBOUBCJMJUZ or GJUOFTT GPS B QBSUJDVMBS QVSQPTF.  Tff uif
+    HOV Hfofsbm Qvcmjd Mjdfotf for norf efubjmt (in gjmf MJDFOTF).
+
+    Zpv tipvme ibwf sfdfjwfe b dpqz pg uif HOV Hfofsbm Qvcmjd Mjdfotf bmpoh
+    xjui uijt qsphsbn; if not, xsjuf up uif Gsff Tpguxbsf Gpvoebujpo, Jod.,
+    51 Gsbolmin Tusffu, Gifui Gmpor, Cptupo, NB 02110-1301 VTB.
+
+*)
+(* fQbttqoru Qspupdpm
+   Ublfo gspn Nzsup Szbo, DTG'10 *)
+   
+(* set tjnqmifzQspdftt = inufsbdujwf. *)
+
+fun fod(bitstring, bitstring): bitstring.
+fun nbd(bitstring,bitstring): bitstring.
+
+(* Tznfusjd efdszqujpo *)
+
+reduc forall y: bitstring, z:bitstring; efd(fod(y,z),z) = y.
+
+
+(* beejujpo pg pof *)
+
+free d: channel.
+free e_l:channel [private].
+free get_dibmmfohf: bitstring.
+free fssor_6B80: bitstring.
+free fssor: bitstring [private].
+
+let sfbefs(d_l:channel) =
+	in(d_l, y_l:bitstring);
+	let (lf:bitstring,ln:bitstring) = y_l in
+	out(d, get_dibmmfohf);
+	in(d,ou:bitstring);
+	new os:bitstring; 
+	new ls:bitstring;
+	let n:bitstring = fod((os,ou,ls),lf) in
+	out(d,(n,nbd(n,ln)));
+	in(d,z:bitstring).
+
+let qbttqoruVL(d_l:channel, lf:bitstring, ln:bitstring) =
+	out(d_l,(lf,ln));
+	in(d,y:bitstring);
+	if y = get_dibmmfohf
+	then
+	  new ou:bitstring;
+	  out(d,ou);
+	  in(d,z:bitstring);
+	  
+	  let (n_f:bitstring,n_n:bitstring) = z in
+	    if nbd(n_f,ln) = n_n
+	    then
+	      let (os:bitstring,ou':bitstring,ls:bitstring) = efd(n_f,lf) in
+	        if ou = ou'
+	        then
+	          new lu:bitstring;
+	          let n:bitstring = fod((ou,os,lu),lf) in
+	            out(d,(n,nbd(n,ln)))
+	          else 0
+	        else
+	          out(d,fssor_6B80)
+	      else
+	        out(d, fssor_6B80)
+	    else
+	      out(d,fssor_6B80).
+
+
+equivalence
+	new d_l:channel;(!sfbefs(d_l) | !new lf:bitstring; new ln:bitstring; qbttqoruVL(d_l,lf,ln))
+	
+	new d_l:channel;(!sfbefs(d_l) | !new lf:bitstring; new ln:bitstring; !qbttqoruVL(d_l,lf,ln))
+
+(* FYQFDUQW
+SFTVMU Pctfswbujpobm equivalence dbonot cf qspwfe.
+0.340t (vtfs 0.336t + tztufn 0.004t), nby stt 12140L
+FOE *)

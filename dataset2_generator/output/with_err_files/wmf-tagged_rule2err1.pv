@@ -1,0 +1,93 @@
+
+
+
+
+
+
+
+type coins.
+type host.
+type key.
+type tag.
+
+free c: channel.
+
+
+
+
+
+fun internal_encrypt(bitstring, key, coins):bitstring.
+reduc forall x:bitstring, y:key, r:coins; decrypt(internal_encrypt(x,y,r),y) = x.
+letfun encrypt(x: bitstring, k: key) = new r: coins; internal_encrypt(x,k,r).
+
+
+free c0,c1:tag.
+
+
+table keys(host, key).
+
+
+
+event beginBkey(host,host,key).
+event endBkey(host,host,key).
+query xA:host, xB:host, xkAB:key; event(endBkey(xA, xB, xkAB)) ==> event(beginBkey(xA, xB, xkAB)).
+
+free secretInit, secretResp:bitstring [private].
+noninterf secretInit.
+noninterf secretResp.
+
+
+
+let processInit = 
+        
+        in(c, (xI: host, xR:host ));
+	if xI = A || xI = B then
+	get keys(=xI, Kis: key) in
+	
+	new Kab: key;
+	event beginBkey(xI, xR, Kab);
+        out(c, (xI, encrypt((c0, xR, Kab), Kis)));
+	
+	if xR = A || xR = B then 
+	out(c, encrypt(secretInit, Kab)).
+
+
+
+let processS = 
+	in(c, (a:host, m:bitstring));
+	get keys(=a, kas: key) in
+        let (=c0, b:host, kab:key) = decrypt(m,kas) in
+	get keys(=b, kbs: key) in
+	out(c, encrypt((c1, a, kab), kbs)).
+
+
+                      
+let processK =
+        in(c, (h:host,k:key));
+	if h <> A && h <> B then insert keys(h,k).
+   
+
+
+let processResp = 
+        
+        in(c, xR:host);
+	if xR = A || xR = B then
+	get keys(=xR, Krs: key) in
+		
+	in(c, m:bitstring); 
+	let (=c1, a:host, kab:key) = decrypt(m, Krs) in
+	
+	if a = A || a = B then
+	event endBkey(a, xR, kab);
+	out(c, encrypt(secretResp, kab)).
+
+process 
+	new Kas:key; new Kbs:key; 
+	insert keys(A, Kas);
+	insert keys(B, Kbs);
+	((!processInit) | 
+	 (!processResp) |
+	 (!processS) | 
+	 (!processK))
+
+

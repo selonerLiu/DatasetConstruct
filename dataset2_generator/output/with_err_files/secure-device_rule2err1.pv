@@ -1,0 +1,78 @@
+
+
+
+
+
+free c:channel.
+
+fun pk(bitstring):bitstring.
+fun aenc(bitstring,bitstring):bitstring.
+
+fun adec(bitstring,bitstring):bitstring
+reduc forall x:bitstring,y:bitstring; adec(aenc(x,pk(y)),y) = x.
+
+const init:bitstring.
+const left:bitstring.
+const right:bitstring.
+
+event Attack.
+
+type stamp.
+
+free id:stamp [private].
+
+event Counter(channel,stamp,stamp,nat).
+event VCell_bitstring(channel,bitstring).
+
+query event(Attack).
+
+process
+  !
+  new cell:channel; 
+  new k:bitstring;
+  (
+      out(c,pk(k))
+    | out(cell,(0,init))
+    | (
+      !  
+      in(c,x:bitstring);
+      in(cell,(i:nat,y:bitstring)); 
+      event VCell_bitstring(cell,(i,y));
+      let test:bool = (y = init && (x = left || x = right)) in
+      if test
+      then
+        new st[]:stamp;
+        event Counter(cell,id,st,i);
+        event VCell_bitstring(cell,(i + 1,x));
+        out(cell,(i + 1,x))
+      else out(cell,(i,y))
+    ) | (
+      !  
+      in(c,x:bitstring);
+      let (xl:bitstring,xr:bitstring) = adec(x,k) in
+      in(cell,(i:nat,y:bitstring)); 
+      event VCell_bitstring(cell,(i,y));
+      if y = left
+      then
+        out(c,xl);
+        out(cell,(i,y))
+      else
+        if y = right
+        then
+          out(c,xr);
+          out(cell,(i,y))
+        else out(cell,(i,y))
+    ) | (
+      !
+      in(cell,(i:nat,x:bitstring)); 
+      event VCell_bitstring(cell,(i,x));
+      out(cell,(i,x))
+    ) | (
+      !
+      new sl:bitstring;
+      new sr:bitstring;
+      ( out(c,aenc((sl,sr),pk(k))) | in(c,(= sl,= sr)); event Attack())
+    )
+  )
+
+

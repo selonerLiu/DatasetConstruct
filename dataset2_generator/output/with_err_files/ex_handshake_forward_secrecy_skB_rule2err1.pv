@@ -1,0 +1,49 @@
+
+
+type key.
+fun senc(bitstring, key): bitstring.
+reduc forall m: bitstring, k: key; sdec(senc(m,k),k) = m.
+
+
+
+
+type skey.
+type pkey.
+
+fun pk(skey): pkey.
+fun aenc(bitstring, pkey): bitstring.
+
+reduc forall m: bitstring, sk: skey; adec(aenc(m,pk(sk)),sk) = m.
+
+
+
+
+type sskey.
+type spkey.
+
+fun spk(sskey): spkey.
+fun sign(bitstring, sskey): bitstring.
+
+reduc forall m: bitstring, ssk: sskey; getmess(sign(m,ssk)) = m.
+reduc forall m: bitstring, ssk: sskey; checksign(sign(m,ssk),spk(ssk)) = m.
+
+
+free c:channel.
+
+free s:bitstring [private].
+query attacker(s).
+
+let serverB(pkB:spkey,skB:sskey,pkA:pkey) = 
+	in(c,pkX:pkey);
+	new k:key; 
+	out(c,aenc(sign((pkX,pkB,k),skB),pkX));
+	in(c,x:bitstring); 
+	let z = sdec(x,k).
+
+process 
+	new skA:skey; 
+	new skB:sskey;
+	let pkA = pk(skA) in out(c,pkA);
+	let pkB = spk(skB) in out(c,pkB);
+	( (!clientA(pkA,skA,pkB)) | (!serverB(pkB,skB,pkA)) |
+	phase 1; out(c, skB) )

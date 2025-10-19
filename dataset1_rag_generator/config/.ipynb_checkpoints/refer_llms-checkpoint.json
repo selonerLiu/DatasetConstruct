@@ -1,0 +1,8 @@
+[
+    {
+        "num": "llm_local_dsr14b",
+        "refer_api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+        "refer_api_key": "sk-48b7623a081843f391a35213118b43f9",
+        "refer_model_name": "deepseek-r1-distill-qwen-14b"
+    }
+]

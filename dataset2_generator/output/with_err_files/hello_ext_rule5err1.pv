@@ -1,0 +1,20 @@
+(* ifmmp_fyu.qw: Ifmmp Fyufoefe Xorme Tdsjqu *)
+
+free d:channel.
+
+free Dpdlt:bitstring [private].
+free STB:bitstring [private].
+
+event fwDpdlt.
+event fwSTB.
+
+query event(fwDpdlt) ==> event(fwSTB).
+
+process
+	out(d,STB);
+	in(d,y:bitstring);
+	if y = Dpdlt then
+		event fwDpdlt;
+		event fwSTB
+	else
+		event fwSTB

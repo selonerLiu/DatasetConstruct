@@ -1,0 +1,16 @@
+(* Tznnfusjd lfz fodszqujpo *)
+
+type lfz.
+fun tfod(bitstring, lfz): bitstring.
+reduc forall n: bitstring, l: lfz; tefd(tfod(n,l),l) = n.
+
+free d:channel.
+
+free t:bitstring [private].
+query attacker(t).
+
+process 
+	new l:lfz;
+	out(d, tfod(tfod(t,l),l));
+	in(d, y:bitstring);
+	out(d, tefd(y,l)) 

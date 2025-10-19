@@ -1,0 +1,108 @@
+[
+	{
+		"protocolnumb":1,
+		"reference":"ProVerif demo file, the pair data",
+		"protocolname":"NS-Public",
+		"descriptions":"without server extracted from the proverif mannual",
+		"source style":"01anb.txt",
+		"destin style":"01apic.txt"
+	},
+
+	{
+		"protocolnumb":2,
+		"reference":"ProVerif demo file, the pair data",
+		"protocolname":"Needham-Schroeder public key protocol",
+		"descriptions":"",
+		"source style":"02anb.txt",
+		"destin style":"02apic.txt"
+	},
+
+	{
+		"protocolnumb":3,
+		"reference":"ProVerif demo file, the pair data",
+		"protocolname":"Needham-Schroeder public key protocol Corrected version by Lowe",
+		"descriptions":"",
+		"source style":"03anb.txt",
+		"destin style":"03apic.txt"
+	},
+
+	{
+		"protocolnumb":4,
+		"reference":"ProVerif demo file, the pair data",
+		"protocolname":"WooLam shared-key auth protocol",
+		"descriptions":"(1992, computer) Version of Gordon, Jeffrey, CSFW 2001",
+		"source style":"04anb.txt",
+		"destin style":"04apic.txt"
+	},
+
+	{
+		"protocolnumb":5,
+		"reference":"ProVerif demo file, the pair data",
+		"protocolname":"WooLam shared-key auth protocol Corrections of Gordon, Jeffrey CSFW'01",
+		"descriptions":"Full agreement is wrong because the adversary can make B see something different from { m3, B, N }_kAS (even though the server and A correctly see it) so this is no real attack.",
+		"source style":"05anb.txt",
+		"destin style":"05apic.txt"
+	},
+
+	{
+		"protocolnumb":6,
+		"reference":"ProVerif demo file, the pair data",
+		"protocolname":"Simpler Yahalom protocol, as suggested in Burrows, Abadi, Needham, SRC039",
+		"descriptions":"Full agreement is wrong (the adversary can arrange so that A does not see {A, K_ab, N_B }_Kbs). No agreement on N_A, but agreement on N_B and on the session key K_ab. Attack of Syverson for evinj:endAparam(x) ==> evinj:beginAparam(x).",
+		"source style":"06anb.txt",
+		"destin style":"06apic.txt"
+
+	},
+
+	{
+		"protocolnumb":7,
+		"protocolname":"SSH Transport v2",
+		"descriptions":"In fact, we consider a simplified version of SSH, without negociation.\n We assume that the chosen parameters are \n - the standard Diffie-Hellman key exchange\n - a symmetric encryption algorithm (different from none)\n - a mac algorithm (different from none)\n - no compression\n We do not consider key re-exchange. Only the transport layer protocol of SSH is considered. We do not consider the SSH authentication protocol. In the computation of the mac, we ignore the sequence of the messages (difficult to model in our framework). Also note that the mac is really useful only when the encryption is malleable, and we model a perfect encryption that is not malleable.",
+		"source style":"07anb.txt",
+		"destin style":"07apic.txt"
+
+	},
+
+	{
+		"protocolnumb":8,
+		"protocolname":"Otway Rees protocol.",
+		"descriptions":"Version of Otway Rees, Operating Systems Review Vol 21 no 1, p 8-10, 1987",
+		"source style":"08anb.txt",
+		"destin style":"08apic.txt"
+	},
+
+	{
+		"protocolnumb":9,
+		"protocolname":"Naive vote protocol",
+		"descriptions":"Taken from Delaune, Jacquemard, CSFW'04",
+		"source style":"09anb.txt",
+		"destin style":"09apic.txt"
+	},
+
+	{
+		"protocolnumb":10,
+		"protocolname":"EKE",
+		"descriptions":"Bellovin, Merritt, Oakland 92, section 2.1.There is an attack if one is able to distinguish a public key from another bitstring. (The adversary decrypts the first message with the candidate password and tests whether the result is a public key.",
+		"source style":"10anb.txt",
+		"destin style":"10apic.txt"
+
+	},
+
+	{
+		"protocolnumb":11,
+		"protocolname":"Augmented EKE",
+		"descriptions":"One does not know whether one decrypts { challengeA, challengeB }_K and similar messages correctly. There is an attack if the adversary can distinguish a group element in G from a random bitstring. (The adversary decrypts the first message with h(P') for the guessed password P' and concludes that the guess is good if the result is an element of G.) ",
+		"source style":"11anb.txt",
+		"destin style":"11apic.txt"
+
+	},
+
+	{
+		"protocolnumb":12,
+		"protocolname":"Signed augmented EKE",
+		"descriptions":"There is an attack if the adversary can distinguish a group element in G from a random bitstring. (The adversary decrypts the first message with h(P') for the guessed password P' and concludes that the guess is good if the result is an element of G.)",
+		"source style":"12anb.txt",
+		"destin style":"12apic.txt"
+	}
+
+]

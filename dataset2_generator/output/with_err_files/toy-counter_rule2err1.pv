@@ -1,0 +1,51 @@
+
+
+
+
+
+free c:channel.
+free s:bitstring [private].
+
+fun h(nat,bitstring):bitstring.
+
+type stamp.
+
+free id:stamp [private].
+
+event Counter(channel,stamp,stamp,nat).
+
+axiom i:nat,i1:nat,st:stamp,st1:stamp,st2:stamp,d:channel;
+  event(Counter(d,st2,st,i1)) && event(Counter(d,st2,st,i)) ==> i1 = i;
+  event(Counter(d,st2,st,i1)) && event(Counter(d,st2,st1,i1)) ==> st = st1.
+
+process
+  !
+  new d:channel;
+  new k:bitstring;
+  (
+    (
+      !
+      in(d,i:nat);
+      new st[]:stamp;
+      event Counter(d,id,st,i);
+      out(c,h(i,k));
+      out(d,i + 1)
+    ) | (
+      !
+      in(d,i:nat);
+      new st[]:stamp;
+      event Counter(d,id,st,i);
+      in(c,y:bitstring);
+      if h(i,k) = y
+      then
+        out(c,s);
+        out(d,i + 1)
+      else
+        out(d,i + 1)
+
+    )
+    | out(d,0)
+    | ! in(d,x:nat); out(d,x)
+  )
+
+

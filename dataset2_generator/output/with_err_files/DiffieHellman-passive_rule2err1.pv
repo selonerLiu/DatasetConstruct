@@ -1,0 +1,37 @@
+
+
+
+
+
+free c: channel.
+
+type G.
+type exponent.
+
+
+set attacker = passive.
+
+
+
+fun enc(bitstring, G): bitstring.
+reduc forall x: bitstring, y: G; dec(enc(x,y),y) = x.
+
+
+
+const g: G.
+fun exp(G, exponent): G.
+equation forall x: exponent, y: exponent; exp(exp(g, x), y) = exp(exp(g, y), x).
+
+
+
+free s: bitstring [private].
+query attacker(s).
+
+
+
+let p0 = new n0: exponent; 
+         (out(c,exp(g, n0)) | in(c,x1:G); let k = exp(x1,n0) in out(c, enc(s,k))).
+
+process p0 | p1
+
+

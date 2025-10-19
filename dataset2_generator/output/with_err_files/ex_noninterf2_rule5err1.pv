@@ -1,0 +1,8 @@
+free d: channel.
+
+fun i(bitstring): bitstring.
+
+free y,o: bitstring [private].
+noninterf y among (o, i(o)).
+
+process out(d, y)

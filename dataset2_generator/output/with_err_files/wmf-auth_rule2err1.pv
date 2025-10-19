@@ -1,0 +1,39 @@
+
+
+
+
+
+type key.
+
+fun key_to_bitstring(key): bitstring [data, typeConverter].
+
+
+
+fun encrypt(bitstring, key): bitstring.
+free c,e: channel.
+
+let processA(Kas: key, M: bitstring) = 
+	new Kab: key;
+	out(c, encrypt(key_to_bitstring(Kab), Kas));
+	out(c, encrypt(M, Kab)).
+
+let processS(Kas: key, Ksb: key) =
+	in(c, x: bitstring);
+	let key_to_bitstring(y) = decrypt(x, Kas) in
+	out(c, encrypt(key_to_bitstring(y), Ksb)).
+
+let processB(Ksb: key, M: bitstring) =
+	in(c, x: bitstring);
+	let key_to_bitstring(y) = decrypt(x, Ksb) in
+	in(c, z: bitstring);
+	let w = decrypt(z,y) in
+	out(e, choice[w,M]).
+
+
+process
+	in(c, M: bitstring);
+	new Kas: key;
+	new Ksb: key;
+	(processA(Kas, M) | processS(Kas, Ksb) | processB(Ksb, M))
+
+

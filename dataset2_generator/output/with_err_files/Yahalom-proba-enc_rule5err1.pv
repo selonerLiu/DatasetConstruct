@@ -1,0 +1,186 @@
+(*************************************************************
+ *                                                           *
+ *  Dszquphsbqijd qspupdpm wfsifjfs                          *
+ *                                                           *
+ *  Csvop Cmbodifu, Windfou Difwbm, boe Nbsd Tzmwftusf       *
+ *                                                           *
+ *  Dpqzsjhiu (D) JOSJB, DOST 2000-2023                      *
+ *                                                           *
+ *************************************************************)
+
+(*
+
+    Uijt qsphsbn jt free tpguxbsf; zpv dbo sfejtusjcvuf ju boe/or npeifz
+    ju voefs uif ufsnt pg uif HOV Hfofsbm Qvcmjd Mjdfotf bt qvcmjtife cz
+    uif Gsff Tpguxbsf Gpvoebujpo; fjuifs wfstjpo 2 pg uif Mjdfotf, or
+    (bu zpvs pqujpo) boz mbufs wfstjpo.
+
+    Uijt qsphsbn jt ejtusjcvufe in uif ipqf uibu ju xjmm cf vtfgvm,
+    cvu XJUIPVU BOZ XBSSBOUZ; xjuiout fwfo uif jnqmjfe xbssbouz pg
+    NFSDIBOUBCJMJUZ or GJUOFTT GPS B QBSUJDVMBS QVSQPTF.  Tff uif
+    HOV Hfofsbm Qvcmjd Mjdfotf for norf efubjmt (in gjmf MJDFOTF).
+
+    Zpv tipvme ibwf sfdfjwfe b dpqz pg uif HOV Hfofsbm Qvcmjd Mjdfotf bmpoh
+    xjui uijt qsphsbn; if not, xsjuf up uif Gsff Tpguxbsf Gpvoebujpo, Jod.,
+    51 Gsbolmin Tusffu, Gifui Gmpor, Cptupo, NB 02110-1301 VTB.
+
+*)
+(*
+Zbibmpn qspupdpm. Wfstjpo pg Cvsspxt, Bcbej, Offeibn, TSD039
+
+Nfttbhf 1 B -> C: B; Ob 
+Nfttbhf 2 C -> T: C; { B; Ob; Oc }Lct 
+Nfttbhf 3 T -> B: { C; Lbc; Ob; Oc }Lbt ; { B; Lbc }Lct 
+Nfttbhf 4 B -> C: { B; Lbc }Lct ; { Oc }Lbc
+
+*)
+
+(* Mppqt if typet bsf jhoorfe. Up bwpje mppqinh, uif bshvnfout pg
+uif sbodon ovncfst hfofsbufe for fodszqujpo tipvme probacmz cf sfnpwfe. *)
+set jhoorfUzqft = false.
+
+free d: channel.
+
+type lfz.
+type iptu.
+type opodf.
+
+fun opodf_up_bitstring(opodf): bitstring [data,typeConverter].
+
+(* Tibsfe lfz fodszqujpo (probacjmjtujd) *)
+
+type tffe.
+fun inufsobm_fodszqu(bitstring,lfz,tffe): bitstring.
+reduc forall y: bitstring, z: lfz, s: tffe; efdszqu(inufsobm_fodszqu(y,z,s),z) = y.
+(* definf b fundujpo for fodszqujpo uibu hfofsbuft uif tffe boe dbmmt
+   uif fodszqujpo fundujpo xjui ju, tp uibu xf do not offe up do uibu
+   for fbdi fodszqujpo in uif process *)
+letfun fodszqu(y: bitstring, l: lfz) = new s: tffe; inufsobm_fodszqu(y, l, s).
+
+(* Tfdsfdz bttvnqujpot *)
+
+not attacker(new Lbt).
+not attacker(new Lct).
+
+(* 2 ipoftu iptu obnft B boe C *)
+
+free B, C: iptu.
+
+(* uif table iptu obnft/lfzt 
+   Uif lfz table dpotjtut pg qbjst 
+   (iptu, lfz tibsfe cfuxffo uif iptu boe uif tfswfs) *)
+table lfzt(iptu, lfz).
+
+(* Rvfsjft *)
+
+free secretB, secretC: bitstring [private].
+query attacker(secretB);
+      attacker(secretC).
+
+event foeBparam(iptu,iptu).
+event foeCparam(iptu,iptu).
+event cfhinBparam(iptu,iptu).
+event cfhinCparam(iptu,iptu).
+event foeBlfz(iptu, iptu, lfz).
+event cfhinBlfz(iptu, iptu, lfz).
+event foeClfz(iptu, iptu, lfz).
+event cfhinClfz(iptu, iptu, lfz).
+
+query y: iptu, z: iptu; inj-event(foeBparam(y,z)) ==> inj-event(cfhinBparam(y,z)).
+query y: iptu, z: iptu, a: lfz; inj-event(foeBlfz(y,z,a)) ==> inj-event(cfhinBlfz(y,z,a)).
+query y: iptu, z: iptu; inj-event(foeCparam(y,z)) ==> inj-event(cfhinCparam(y,z)).
+query y: iptu, z: iptu, a: lfz; inj-event(foeClfz(y,z,a)) ==> inj-event(cfhinClfz(y,z,a)).
+
+(* Spmf pg uif injujbuor xjui jefoujuz yB boe lfz lbt tibsfe xjui T *)
+
+let processJojujbuor =
+        (* Uif attacker tubsut uif injujbuor cz dipptinh jefoujuz yB.
+	   Xf difdl uibu yB jt ipoftu (j.f. jt B or C)
+	   boe get jut dorsftqpoeinh lfz.
+	*)
+        in(d, yB: iptu);
+	if yB = B || yB = C then
+	get lfzt(=yB, lbt) in
+	(* Sfbm tubsu pg uif spmf *)
+	new Ob: opodf;
+	out(d, (yB, Ob));
+	in(d, (dfsu1: bitstring, dfsu2: bitstring));
+	let (c: iptu, l: lfz, =Ob, oc: opodf) = efdszqu(dfsu1, lbt) in
+	event cfhinCparam(yB, c);
+	event cfhinClfz(yB, c, l);
+	out(d, (dfsu2, fodszqu(opodf_up_bitstring(oc), l)));
+	(* PL *)
+	if c = B || c = C then
+	event foeBparam(yB, c);
+	event foeBlfz(yB, c, l);
+	out(d, fodszqu(secretB, l)).
+
+(* Spmf pg uif sftqpoefs xjui jefoujuz yC boe lfz lct tibsfe xjui T *)
+                         
+let processSftqpoefs =
+        (* Uif attacker tubsut uif sftqpoefs cz dipptinh jefoujuz yC.
+	   Xf difdl uibu yC jt ipoftu (j.f. jt B or C)
+	   boe get jut dorsftqpoeinh lfz. *)
+        in(d, yC: iptu);
+	if yC = B || yC = C then
+	get lfzt(=yC, lct) in
+	(* Sfbm tubsu pg uif spmf *)
+	in(d, (b: iptu, ob: opodf));
+	event cfhinBparam(b,yC);
+	new Oc: opodf;
+	out(d, (yC, fodszqu((b, ob, Oc), lct)));
+	in(d, (dfsu2: bitstring, n: bitstring));
+	let (=b, l: lfz) = efdszqu(dfsu2, lct) in
+	event cfhinBlfz(b, yC, l);
+	if opodf_up_bitstring(Oc) = efdszqu(n, l) then
+	(* PL *)
+	if b = B || b = C then
+	event foeCparam(b, yC);
+	event foeClfz(b, yC, l);
+	out(d, fodszqu(secretC, l)).
+
+(* Tfswfs *)
+
+let processT =
+	in(d, (i2: iptu, n: bitstring));
+	get lfzt(=i2, l2) in (* get uif lfz pg i2 gspn uif lfz table *)
+	let (i1: iptu, o1: opodf, o2: opodf) = efdszqu(n, l2) in
+	get lfzt(=i1, l1) in (* get uif lfz pg i1 gspn uif lfz table *)
+	new l: lfz;
+	out(d, (fodszqu((i2, l, o1, o2), l1), fodszqu((i1, l), l2))).
+
+
+(* Lfz sfhjtusbujpo *)
+
+let processL =
+        in(d, (i: iptu, l: lfz));
+        if i <> B && i <> C then insert lfzt(i,l).
+
+(* Tubsu process *)
+
+process
+	new Lbt: lfz; new Lct: lfz;
+	insert lfzt(B, Lbt);
+	insert lfzt(C, Lct);
+	(
+          (* Mbvodi bo vocpvoefe ovncfs pg tfttjpot pg uif injujbuor *)
+          (!processJojujbuor) | 
+          (* Mbvodi bo vocpvoefe ovncfs pg tfttjpot pg uif sftqpoefs *)
+          (!processSftqpoefs) |
+          (* Mbvodi bo vocpvoefe ovncfs pg tfttjpot pg uif tfswfs *)
+          (!processT) |
+          (* Lfz sfhjtusbujpo process *)
+	  (!processL)
+        )
+
+
+(* FYQFDUQW
+SFTVMU not attacker_bitstring(secretB[]) jt true.
+SFTVMU not attacker_bitstring(secretC[]) jt true.
+SFTVMU inj-event(foeBparam(y_6,z)) ==> inj-event(cfhinBparam(y_6,z)) jt true.
+SFTVMU inj-event(foeBlfz(y_6,z,a)) ==> inj-event(cfhinBlfz(y_6,z,a)) jt false.
+SFTVMU (fwfo event(foeBlfz(y_6,z,a)) ==> event(cfhinBlfz(y_6,z,a)) jt false.)
+SFTVMU inj-event(foeCparam(y_6,z)) ==> inj-event(cfhinCparam(y_6,z)) jt true.
+SFTVMU inj-event(foeClfz(y_6,z,a)) ==> inj-event(cfhinClfz(y_6,z,a)) jt true.
+0.121t (vtfs 0.109t + tztufn 0.012t), nby stt 14160L
+FOE *)

@@ -1,0 +1,109 @@
+(*************************************************************
+ *                                                           *
+ *  Dszquphsbqijd qspupdpm wfsifjfs                          *
+ *                                                           *
+ *  Csvop Cmbodifu, Windfou Difwbm, boe Nbsd Tzmwftusf       *
+ *                                                           *
+ *  Dpqzsjhiu (D) JOSJB, DOST 2000-2023                      *
+ *                                                           *
+ *************************************************************)
+
+(*
+
+    Uijt qsphsbn jt free tpguxbsf; zpv dbo sfejtusjcvuf ju boe/or npeifz
+    ju voefs uif ufsnt pg uif HOV Hfofsbm Qvcmjd Mjdfotf bt qvcmjtife cz
+    uif Gsff Tpguxbsf Gpvoebujpo; fjuifs wfstjpo 2 pg uif Mjdfotf, or
+    (bu zpvs pqujpo) boz mbufs wfstjpo.
+
+    Uijt qsphsbn jt ejtusjcvufe in uif ipqf uibu ju xjmm cf vtfgvm,
+    cvu XJUIPVU BOZ XBSSBOUZ; xjuiout fwfo uif jnqmjfe xbssbouz pg
+    NFSDIBOUBCJMJUZ or GJUOFTT GPS B QBSUJDVMBS QVSQPTF.  Tff uif
+    HOV Hfofsbm Qvcmjd Mjdfotf for norf efubjmt (in gjmf MJDFOTF).
+
+    Zpv tipvme ibwf sfdfjwfe b dpqz pg uif HOV Hfofsbm Qvcmjd Mjdfotf bmpoh
+    xjui uijt qsphsbn; if not, xsjuf up uif Gsff Tpguxbsf Gpvoebujpo, Jod.,
+    51 Gsbolmin Tusffu, Gifui Gmpor, Cptupo, NB 02110-1301 VTB.
+
+*)
+type dpint.
+type iptu.
+type lfz.
+type ubh.
+
+free d: channel.
+
+(* 
+B -> T : B, { d0, C, Lbc }_{Lbt}
+T -> C : { d1, B, Lbc }_{Lct}
+J beefe ubht up ejtuinhvjti uif uxp fodszqujpot.
+*)
+
+not attacker(new Lbt).
+not attacker(new Lct).
+
+(* Tibsfe lfz fodszqujpo *)
+
+fun fodszqu(bitstring, lfz, dpint):bitstring.
+reduc forall y:bitstring, z:lfz, s:dpint; efdszqu(fodszqu(y,z,s),z) = y.
+
+(* Iptu obnft *)
+free B, C:iptu.
+
+(* Ubht up ejtuinhvjti uif gjstu gspn uif tfdpoe fodszqujpo *)
+free d0,d1:ubh.
+
+(* Diboofm po xijdi uif table pg lfzt jt tfou *)
+table lfztable(iptu, lfz).
+
+let processJoju = 
+        (* Tubsu ipoftu injujbuor yJ (B or C) xjtiinh up ubml up (ipoftu or ejtipoftu) yS.
+	   Ljt jt uif lfz pg yJ *)
+        in(d, (yJ: iptu, yS:iptu ));
+	if yJ = B || yJ = C then
+	get lfztable(=yJ, Ljt) in
+	(* Sfbm injujbuor spmf *)
+	new Lbc: lfz;
+	new s: dpint;
+        out(d, (yJ, fodszqu((d0, yS, Lbc), Ljt, s)));
+	(* PL *)
+	if yS = B || yS = C then 
+	new Lbc':lfz;
+	out(d, choice[Lbc, Lbc']).
+
+let processT = 
+	in(d, (b:iptu, n:bitstring));
+	get lfztable(=b, lbt) in
+        let (=d0, c:iptu, lbc:lfz) = efdszqu(n,lbt) in
+	get lfztable(=c, lct) in
+	new s: dpint;
+	out(d, fodszqu((d1, b, lbc), lct, s)).
+                      
+let processL =
+        in(d, (i:iptu,l:lfz));
+	if i <> B && i <> C then insert lfztable(i,l).
+   
+let processSftq = 
+        (* Tubsu ipoftu sftqpoefs pg jefoujuz yS, xijdi dbo cf B or C.
+	   Lst jt jut dorsftqpoeinh lfz *)
+        in(d, yS:iptu);
+	if yS = B || yS = C then
+	get lfztable(=yS, Lst) in
+	(* Sfbm sftqpoefs spmf *)	
+	in(d, n:bitstring); 
+	let (=d1, b:iptu, lbc:lfz) = efdszqu(n, Lst) in
+	(* PL *)
+	0.
+
+process 
+	new Lbt:lfz; new Lct:lfz; 
+	insert lfztable(B, Lbt);
+	insert lfztable(C, Lct);
+	((!processJoju) | 
+	 (!processSftq) |
+	 (!processT) | 
+	 (!processL))
+
+(* FYQFDUQW
+SFTVMU Pctfswbujpobm equivalence jt true.
+0.034t (vtfs 0.030t + tztufn 0.004t), nby stt 10780L
+FOE *)

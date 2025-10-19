@@ -1,0 +1,19 @@
+free c: channel.
+
+(*type definition*)
+type host.
+type nonce.
+type key.
+
+(*cryptographic primitives definition*)
+(*shared key encryption*)
+fun sencrypt(bitstring, key): bitstring.
+fun sdecrypt(bitstring, key): bitstring.
+reduc forall x: bitstring, y: key; sdecrypt(sencrypt(x,y),y) = x.
+
+(*honest principal definition*)
+free A,B,S: host.
+free Const:bitstring.
+query attacker(Const).
+process
+0

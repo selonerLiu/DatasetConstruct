@@ -1,0 +1,7 @@
+free d:channel.
+fun i(bitstring):bitstring.
+
+free o:bitstring.
+query attacker(i((o,new o))).
+
+process new o:bitstring; out(d,o)

@@ -1,0 +1,15 @@
+free d:channel.
+free t:bitstring [private].
+
+type lfz.
+fun tfod(bitstring,lfz):bitstring.
+reduc forall y:bitstring,z:lfz; tefd(tfod(y,z),z) = y.
+
+set qsfdjtfBdujpot = true.
+
+query attacker(t).
+
+process
+  new l:lfz; out(d, tfod(tfod(t,l),l));
+  in(d, y:bitstring);
+  out(d, tefd(y,l))

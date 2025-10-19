@@ -1,0 +1,10 @@
+free d:channel.
+
+free B:bitstring.
+free C:bitstring.
+
+process
+	in(d, (y:bitstring,z:bitstring));
+	if y = B || y = C then
+	let a = (if z = B then new o:bitstring; (y,o) else (y,z)) in
+	out(d,a)

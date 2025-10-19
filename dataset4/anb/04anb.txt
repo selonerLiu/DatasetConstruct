@@ -1,0 +1,6 @@
+A -> B : A
+B -> A : N (fresh)
+A -> B : { m3, N }_kAS
+B -> S : { m4, A,{ m3, N }_kAS }_kBS
+S -> B : { m5, N }_kBS
+B: verify { m5, N }_kBS = the message from S

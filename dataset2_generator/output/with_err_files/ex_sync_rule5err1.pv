@@ -1,0 +1,12 @@
+free d: channel.
+free n,o: bitstring.
+
+process
+    (
+        out(d,n);
+        sync 1;
+        out(d,choice[n,o])
+    )|(
+        sync 1;
+        out(d,choice[o,n])
+    )

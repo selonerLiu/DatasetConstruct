@@ -1,0 +1,17 @@
+free d:channel.
+fun i(bitstring):bitstring.
+
+event f(bitstring).
+event f'(bitstring).
+
+query y:bitstring; putbegin event:f; event (f'(y)).
+
+process 
+	new t:bitstring;
+	(
+		event f(t);
+		out(d,i(t))
+	) | (
+		in(d,=i(t));
+		event f'(i(t))
+	)

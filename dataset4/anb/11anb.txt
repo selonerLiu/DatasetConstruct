@@ -1,0 +1,5 @@
+1. A->B: {hostA, exp(g, RA)}h(P)
+2. B->A: ({exp(g, RB)}h(P), {challengeB}K)
+3. A->B: {challengeA, challengeB}K
+4. B->A: {challengeA}K
+5. A->B: {F(P, K)}K

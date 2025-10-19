@@ -1,0 +1,8 @@
+? -> A : pkB
+Message 1: A -> S : (A, B)
+Message 2: S -> A : { B, pkB }_skS
+Message 3: A -> B : { N_A, A }_pkB
+Message 4: B -> S : (B, A)
+Message 5: S -> B : { A, pkA }_skS
+Message 6: B -> A : { N_A, N_B, B }_pkA
+Message 7: A -> B : { N_B }_pkB

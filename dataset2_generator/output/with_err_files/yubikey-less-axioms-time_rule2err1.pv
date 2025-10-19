@@ -1,0 +1,107 @@
+
+
+
+
+
+
+free c:channel.
+
+
+fun senc(bitstring,bitstring):bitstring.
+event Login(bitstring,bitstring,nat,nat).
+event YubiPress(bitstring,bitstring,bitstring,nat).
+
+
+
+
+
+
+type stamp.
+free id:stamp [private].
+free id1:stamp [private].
+
+event Counter(channel,stamp,stamp,nat).
+event VCell_bitstring(channel,bitstring).
+
+set inductionLemmas = true.
+
+axiom d:channel, st1:stamp, st2:stamp, st3:stamp, x:bitstring, x1:bitstring, x2:bitstring, x3:bitstring, i1:nat, i2:nat, i3:nat, i4:nat;
+  event(VCell_bitstring(d,(i2,(x3,x,i1)))) && event(VCell_bitstring(d,(i2,(x1,x2,i3)))) ==> (x3,x,i1) = (x1,x2,i3);
+  event(Counter(d,st1,st2,i1)) && event(Counter(d,st1,st2,i2)) ==> i2 = i1;
+  event(Counter(d,st1,st2,i1)) && event(Counter(d,st1,st3,i1)) ==> st2 = st3.
+
+
+
+
+
+
+
+
+
+let P_Server(d:channel,pid:bitstring,secretid:bitstring,k:bitstring) =
+  !
+  in(c, (=pid,nonce:bitstring,otp:bitstring));
+  in(d, (i:nat,(=secretid,=k,otc:nat)));
+  event VCell_bitstring(d,(i,(secretid,k,otc)));
+  let (=secretid,tc:nat,npr:bitstring) = sdec(otp,k) in
+    if otc < tc then
+      new st1[]:stamp;
+      event Counter(d,id1,st1,otc);
+      event Counter(d,id,st1,i);
+      event VCell_bitstring(d,(i + 1,(secretid,k,tc)));
+      event Login(pid,k,i+1,tc);
+      out(d, (i+1,(secretid,k,tc)))
+    else out(d, (i,(secretid,k,otc)))
+  else out(d, (i,(secretid,k,otc))).
+
+
+
+
+
+let P_ButtonPress(cell:channel,pid:bitstring,secretid:bitstring,k:bitstring) =
+  in(cell, tc:nat);
+  new st[]:stamp;
+  event Counter(cell,id,st,tc);
+  new nonce:bitstring; new npr:bitstring;
+  event YubiPress(pid,secretid,k,tc);
+  out(c, (pid,nonce,senc((secretid,tc,npr),k)));
+  out(cell, tc+1).
+
+
+
+
+
+
+let P_Yubikey =
+  new k:bitstring;
+  new pid:bitstring;
+  new secretid:bitstring;
+  new d_usr:channel;
+  new d_srv:channel;
+    out(d_srv, (0,(secretid,k,0))) 
+  | out(d_usr, 1) 
+  | (! in(d_srv, x:bitstring); out(d_srv,x))
+  | (! in(d_usr, x:nat); out(d_usr, x))
+  | out(c,pid)
+  | P_Server(d_srv,pid,secretid,k)
+  | ! P_ButtonPress(d_usr,pid,secretid,k).
+
+
+
+
+query pid:bitstring, secretid:bitstring, k:bitstring, tc:nat, i:nat;
+  event(Login(pid,k,i,tc)) ==> event(YubiPress(pid,secretid,k,tc)).
+
+
+
+set preciseActions = true.
+
+lemma pid:bitstring, k:bitstring, i:nat, i':nat, x:nat, x':nat;
+ event(Login(pid,k,i,x)) && event(Login(pid,k,i',x')) ==> (i = i' && x = x') || (i < i' && x < x') || (i > i' && x > x').
+
+query t:time, t':time, pid:bitstring, k:bitstring, i:nat, i':nat, x:nat, x':nat;
+  event(Login(pid,k,i,x))@t && event(Login(pid,k,i',x))@t' ==> t = t'.
+
+process !P_Yubikey
+
+

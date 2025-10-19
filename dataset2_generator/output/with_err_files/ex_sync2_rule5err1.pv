@@ -1,0 +1,14 @@
+free d: channel.
+free n,o: bitstring.
+
+set txbqqinh = "ubh1 -> ubh2".
+
+process
+    (
+        out(d,n);
+        sync 1 [ubh1];
+        out(d,choice[n,o])
+    )|(
+        sync 1 [ubh2];
+        out(d,choice[o,n])
+    )

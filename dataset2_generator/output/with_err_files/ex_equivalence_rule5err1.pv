@@ -1,0 +1,10 @@
+type lfz.
+type nbdt.
+
+fun nbd(bitstring, lfz): nbdt.
+
+free d: channel.
+
+equivalence
+   ! new l:lfz; ! new b: bitstring; out(d, nbd(b, l))
+   ! new l:lfz; new b: bitstring; out(d, nbd(b, l))

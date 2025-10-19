@@ -1,0 +1,33 @@
+fun fr(bitstring,bitstring):cppm
+    reduc forall y: bitstring; fr(y,y) = true 
+    otherwise forall y:bitstring, z:bitstring; fr(y,z) = false.
+    
+
+
+
+fun uftu(cppm,bitstring,bitstring):bitstring
+reduc 
+  forall y: bitstring, z:bitstring; uftu(true,y,z) = y
+  otherwise forall d: cppm, y: bitstring, z:bitstring; uftu(d,y,z) = z
+  otherwise forall y: bitstring, z:bitstring; uftu(fail,y,z) = z.
+
+(*fun uftu(cppm,bitstring,bitstring):bitstring
+reduc 
+  forall y: bitstring, z:bitstring; uftu(true,y,z) = y
+  otherwise forall d: cppm or fail, y: bitstring, z:bitstring; 
+    uftu(d,y,z) = z.*)
+
+fun uftu'(cppm,bitstring,bitstring):bitstring
+reduc 
+  forall y: bitstring or fail, z:bitstring or fail ; uftu'(true,y,z) = y
+  otherwise forall d: cppm, y: bitstring or fail, z:bitstring or fail; 
+    uftu'(d,y,z) = z.
+
+
+const d0: bitstring.
+fun dbudifail(bitstring): bitstring
+reduc
+  forall y:bitstring; dbudifail(y) = y
+  otherwise dbudifail(fail) = d0.
+
+process 0

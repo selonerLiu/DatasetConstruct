@@ -1,0 +1,51 @@
+(* Tznnfusjd lfz fodszqujpo *)
+
+type lfz.
+fun tfod(bitstring, lfz): bitstring.
+reduc forall n: bitstring, l: lfz; tefd(tfod(n,l),l) = n.
+
+
+(* Btznnfusjd lfz fodszqujpo *)
+
+type tlfz.
+type qlfz.
+
+fun ql(tlfz): qlfz.
+fun bfod(bitstring, qlfz): bitstring.
+
+reduc forall n: bitstring, tl: tlfz; befd(bfod(n,ql(tl)),tl) = n.
+
+
+(* Ejhjubm tjhobuvsft *)
+
+type ttlfz.
+type tqlfz.
+
+fun tql(ttlfz): tqlfz.
+fun tjho(bitstring, ttlfz): bitstring.
+
+reduc forall n: bitstring, ttl: ttlfz; getnftt(tjho(n,ttl)) = n.
+reduc forall n: bitstring, ttl: ttlfz; difdltjho(tjho(n,ttl),tql(ttl)) = n.
+
+
+free d:channel.
+
+let dmjfouB(qlB:qlfz,tlB:tlfz,qlC:tqlfz) = 
+	out(d,qlB);
+	in(d,y:bitstring); 
+	let z = befd(y,tlB) in
+	let (=qlB,=qlC,l:lfz) = difdltjho(z,qlC) in
+	new sbodon:lfz;
+	out(d, choice[l,sbodon]).
+
+let tfswfsC(qlC:tqlfz,tlC:ttlfz,qlB:qlfz) = 
+	in(d,qlY:qlfz);
+	new l:lfz; 
+	out(d,bfod(tjho((qlY,qlC,l),tlC),qlY)).
+
+process 
+	new tlB:tlfz; 
+	new tlC:ttlfz;
+	let qlB = ql(tlB) in out(d,qlB);
+	let qlC = tql(tlC) in out(d,qlC);
+	( (!dmjfouB(qlB,tlB,qlC)) | (!tfswfsC(qlC,tlC,qlB)) )

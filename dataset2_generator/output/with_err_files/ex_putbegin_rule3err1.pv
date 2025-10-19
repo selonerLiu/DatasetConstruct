@@ -1,0 +1,17 @@
+"""for the format file that has no comment, just add a comment that do not use the right method"""free c:channel.
+fun h(bitstring):bitstring.
+
+event e(bitstring).
+event e'(bitstring).
+
+query x:bitstring; putbegin event:e; event (e'(x)).
+
+process 
+	new s:bitstring;
+	(
+		event e(s);
+		out(c,h(s))
+	) | (
+		in(c,=h(s));
+		event e'(h(s))
+	)

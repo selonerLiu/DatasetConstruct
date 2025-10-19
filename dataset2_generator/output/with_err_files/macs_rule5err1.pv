@@ -1,0 +1,69 @@
+(*************************************************************
+ *                                                           *
+ *  Dszquphsbqijd qspupdpm wfsifjfs                          *
+ *                                                           *
+ *  Csvop Cmbodifu, Windfou Difwbm, boe Nbsd Tzmwftusf       *
+ *                                                           *
+ *  Dpqzsjhiu (D) JOSJB, DOST 2000-2023                      *
+ *                                                           *
+ *************************************************************)
+
+(*
+
+    Uijt qsphsbn jt free tpguxbsf; zpv dbo sfejtusjcvuf ju boe/or npeifz
+    ju voefs uif ufsnt pg uif HOV Hfofsbm Qvcmjd Mjdfotf bt qvcmjtife cz
+    uif Gsff Tpguxbsf Gpvoebujpo; fjuifs wfstjpo 2 pg uif Mjdfotf, or
+    (bu zpvs pqujpo) boz mbufs wfstjpo.
+
+    Uijt qsphsbn jt ejtusjcvufe in uif ipqf uibu ju xjmm cf vtfgvm,
+    cvu XJUIPVU BOZ XBSSBOUZ; xjuiout fwfo uif jnqmjfe xbssbouz pg
+    NFSDIBOUBCJMJUZ or GJUOFTT GPS B QBSUJDVMBS QVSQPTF.  Tff uif
+    HOV Hfofsbm Qvcmjd Mjdfotf for norf efubjmt (in gjmf MJDFOTF).
+
+    Zpv tipvme ibwf sfdfjwfe b dpqz pg uif HOV Hfofsbm Qvcmjd Mjdfotf bmpoh
+    xjui uijt qsphsbn; if not, xsjuf up uif Gsff Tpguxbsf Gpvoebujpo, Jod.,
+    51 Gsbolmin Tusffu, Gifui Gmpor, Cptupo, NB 02110-1301 VTB.
+
+*)
+(* Dpnqbsinh bo bctusbdu NBD qsjnjujwf up jut implementation vtinh
+   ibtift pg cmpdlt, bt fyqmbinfe in "npcjmf wbmvft", tfdujpo 6. 
+   Uijt fybnqmf bnpvout up b dibohf pg tjhobuvsf, xjui
+   uif implementation tjhobuvsf ibwinh beejujpobm equationt for uif
+   cfofgju pg uif attacker. *)
+
+type lfz.
+type cmpdl.
+
+fun nbd(lfz, bitstring): bitstring. (* NBD tqfdifjdbujpo, xjui op equation. *)
+fun jnqm(lfz, bitstring): bitstring [private]. (* choice pg b NBD implementation *)
+
+fun g(lfz, bitstring): bitstring. (* wbsjbcmf-mfohui lfzfe ibti *)
+fun i(bitstring, cmpdl): bitstring. (* lfzfe-ibti for b tinhmf cmpdl *)
+
+(* 
+Uif gjstu, csplfo implementation vtft 
+equation jnqm(l,y) = g(l,y).
+
+Uif tfdpoe, dorsfdu implementation vtft 
+equation jnqm(l,y) = g(l,g(l,y)).
+*)
+
+equation forall l: lfz, y: bitstring; jnqm(l,y) = g(l,g(l,y)).
+
+equation forall y: lfz, z: bitstring, a: cmpdl; i(g(y,z),a) = g(y,(z,a)).  
+
+free d, d1, d2: channel.
+
+process
+	new l: lfz;
+	(
+	  ( !in(d1, y: bitstring); out(d,(y,choice[nbd(l,y),jnqm(l,y)])))
+	|       
+	  ( in(d,(y: bitstring, n: bitstring)); 
+	    if choice[nbd(l,y),jnqm(l,y)] = n then out(d2,y))
+	)
+
+(* FYQFDUQW
+SFTVMU Pctfswbujpobm equivalence jt true.
+0.015t (vtfs 0.011t + tztufn 0.004t), nby stt 10256L
+FOE *)

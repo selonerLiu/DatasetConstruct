@@ -1,0 +1,1762 @@
+[
+  {
+    "id": "topic1_1",
+    "question": "What is the primary relationship between ProVerif's input language and the applied pi calculus?",
+    "options": {
+      "A": "ProVerif's input language is identical to the applied pi calculus without any modifications.",
+      "B": "ProVerif's input language is a dialect of the applied pi calculus, as introduced by Abadi and Fournet (2001) and updated by Abadi et al. (2016).",
+      "C": "ProVerif's input language replaces the applied pi calculus entirely with its own custom extensions.",
+      "D": "ProVerif's input language is based on the applied pi calculus but only for basic pi calculus processes, excluding cryptography."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic1_2",
+    "question": "How does the applied pi calculus extend the pi calculus?",
+    "options": {
+      "A": "It adds support for destructors and error-handling constructs only.",
+      "B": "It extends the pi calculus with function symbols defined by an equational theory.",
+      "C": "It simplifies the pi calculus by removing support for cryptographic primitives.",
+      "D": "It extends the pi calculus solely through the addition of observational equivalence properties."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic1_3",
+    "question": "What is one key difference between ProVerif and the applied pi calculus in terms of handling functions and equations?",
+    "options": {
+      "A": "ProVerif uses the same equational theories as the applied pi calculus for all functions.",
+      "B": "ProVerif uses destructors instead of the equational theories of the applied pi calculus and does not support all equational theories.",
+      "C": "ProVerif relies entirely on equational theories but adds more function symbols than the applied pi calculus.",
+      "D": "ProVerif and the applied pi calculus both use destructors, but ProVerif limits them to cryptographic contexts."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic1_4",
+    "question": "What does ProVerif take as input for modeling a protocol?",
+    "options": {
+      "A": "A basic pi calculus process without any extensions.",
+      "B": "A model of the protocol in an extension of the pi calculus with cryptography, similar to the applied pi calculus.",
+      "C": "Only security properties, without any protocol description.",
+      "D": "A full implementation of the protocol in a programming language, translated automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic1_5",
+    "question": "Which of the following security properties can ProVerif verify based on its structure?",
+    "options": {
+      "A": "Only secrecy, as it is the primary focus of the applied pi calculus.",
+      "B": "Secrecy, authentication (correspondences), and some observational equivalence properties.",
+      "C": "Authentication and secrecy, but not observational equivalence, as that is handled by Horn clauses alone.",
+      "D": "Observational equivalence properties only, excluding secrecy and authentication."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic1_6",
+    "question": "How are cryptographic primitives modeled in ProVerif?",
+    "options": {
+      "A": "They are modeled exclusively by equational theories, as in the applied pi calculus.",
+      "B": "They are modeled by rewrite rules or by equations, allowing for a wide variety of primitives.",
+      "C": "They are not modeled directly and must be added as external extensions.",
+      "D": "They are modeled only through destructors, without any use of equations."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic1_7",
+    "question": "In ProVerif, what do substitutions primarily map when dealing with terms?",
+    "options": {
+      "A": "Substitutions always map names to expressions for flexibility.",
+      "B": "Substitutions always map variables (not names) to terms, and they never substitute fail or a may-fail variable for an ordinary variable.",
+      "C": "Substitutions map both variables and names to any type of expression without restrictions.",
+      "D": "Substitutions map variables to names only, to maintain the structure of the applied pi calculus."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic1_8",
+    "question": "What is the significance of observational equivalence in the context of ProVerif and the applied pi calculus?",
+    "options": {
+      "A": "ProVerif proves diff-equivalence, which is weaker than observational equivalence, making it less useful.",
+      "B": "If two processes are equivalent in the pi calculus, the corresponding applied pi calculus processes are observationally equivalent, but ProVerif focuses on the stronger diff-equivalence.",
+      "C": "Observational equivalence is not relevant, as ProVerif only deals with secrecy properties.",
+      "D": "ProVerif requires encoding into the applied pi calculus to prove observational equivalence directly."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic1_9",
+    "question": "How does ProVerif handle errors compared to the applied pi calculus?",
+    "options": {
+      "A": "ProVerif does not handle errors, relying entirely on the applied pi calculus's equational theory.",
+      "B": "ProVerif has a built-in error-handling construct (like the else branch), whereas the applied pi calculus does not explicitly include this.",
+      "C": "Both ProVerif and the applied pi calculus use the same error-handling mechanisms based on destructors.",
+      "D": "ProVerif avoids error handling by limiting the use of functions and equations."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic1_10",
+    "question": "What role do Horn clauses play in ProVerif's structure for verifying properties?",
+    "options": {
+      "A": "Horn clauses are used to model protocols directly, without involving derivability queries.",
+      "B": "Horn clauses are part of ProVerif's structure for derivability queries, which help in resolution to determine if a property holds or if there's an attack.",
+      "C": "Horn clauses are only used in the applied pi calculus and not in ProVerif's verification process.",
+      "D": "Horn clauses replace the need for extensions to the pi calculus in ProVerif."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic2_1",
+    "question": "What is the primary goal of ProVerif in the context of cryptographic protocols?",
+    "options": {
+      "A": "To simulate network traffic and detect real-time attacks.",
+      "B": "To verify secrecy and authentication properties automatically.",
+      "C": "To generate new cryptographic keys for secure communication.",
+      "D": "To manually debug protocol implementations."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic2_2",
+    "question": "Which of the following protocols has ProVerif been used to verify, based on its applications?",
+    "options": {
+      "A": "A simple encryption algorithm like AES.",
+      "B": "An e-voting protocol for secure elections.",
+      "C": "A basic file-sharing system without security features.",
+      "D": "A hardware-based access control mechanism."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic2_3",
+    "question": "What types of security properties can ProVerif prove for protocols?",
+    "options": {
+      "A": "Only computational security under specific hardware constraints.",
+      "B": "Secrecy, authentication, and observational equivalences.",
+      "C": "Performance metrics like speed and efficiency of encryption.",
+      "D": "User interface usability in protocol implementations."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic2_4",
+    "question": "How does ProVerif model protocols for verification?",
+    "options": {
+      "A": "Using a simple flowchart diagram of message exchanges.",
+      "B": "Through an extension of the Pi calculus with cryptography.",
+      "C": "By directly implementing the protocol in a programming language.",
+      "D": "With tree-automata to represent message structures only."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic2_5",
+    "question": "In ProVerif's verification process, what attacker model is assumed?",
+    "options": {
+      "A": "An attacker with limited capabilities, restricted to basic eavesdropping.",
+      "B": "A powerful attacker with Dolev-Yao capabilities controlling public channels.",
+      "C": "An attacker that only targets specific cryptographic primitives.",
+      "D": "A collaborative attacker working with the protocol participants."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic2_6",
+    "question": "ProVerif has been applied to analyze which of the following major deployed protocols?",
+    "options": {
+      "A": "A proprietary corporate intranet protocol.",
+      "B": "The TLS protocol for secure web communications.",
+      "C": "A legacy analog communication system.",
+      "D": "A social media data-sharing protocol without encryption."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic2_7",
+    "question": "How does ProVerif handle cryptographic primitives during verification?",
+    "options": {
+      "A": "By ignoring them and focusing only on message exchanges.",
+      "B": "Through definitions via rewrite rules or equations.",
+      "C": "By requiring physical hardware simulations for accuracy.",
+      "D": "By automatically generating new primitives for each session."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic2_8",
+    "question": "What does ProVerif output if it identifies a potential attack during verification?",
+    "options": {
+      "A": "A detailed report on how to fix the attack in code.",
+      "B": "Information about the potential attack based on resolution with selection.",
+      "C": "Recommendations for alternative protocols only.",
+      "D": "Nothing, as it focuses solely on proving properties."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic2_9",
+    "question": "In what way has ProVerif been utilized beyond direct protocol verification?",
+    "options": {
+      "A": "As a front-end for user interface design in security tools.",
+      "B": "As a back-end for building other verification tools.",
+      "C": "For training AI models on cryptographic patterns.",
+      "D": "For real-time monitoring of network security."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic2_10",
+    "question": "What key feature allows ProVerif to verify protocols for an unbounded number of sessions?",
+    "options": {
+      "A": "It limits the message space to ensure quick processing.",
+      "B": "It supports an unbounded number of sessions and message space.",
+      "C": "It requires manual configuration for each session limit.",
+      "D": "It only works with bounded sessions to guarantee termination."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic3_1",
+    "question": "According to the specifications, what characters can be included in an identifier after the first character?",
+    "options": {
+      "A": "Only letters (a-z, A-Z) and digits (0-9).",
+      "B": "Letters (a-z, A-Z), digits (0-9), underscores (_), single-quotes ('), and accented letters from the ISO Latin 1 character set.",
+      "C": "Any printable characters, as long as the identifier is not a reserved word.",
+      "D": "Letters and digits only, with no special characters like underscores."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic3_2",
+    "question": "What rule applies to the first character of an identifier in the language?",
+    "options": {
+      "A": "It must be a digit or a letter.",
+      "B": "It must be a letter, which can include accented letters from the ISO Latin 1 character set.",
+      "C": "It can be any character, including underscores or digits, as long as the rest is valid.",
+      "D": "It must be an uppercase letter to distinguish it from reserved words."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic3_3",
+    "question": "Are there any length restrictions specified for identifiers in the language?",
+    "options": {
+      "A": "Identifiers must be at most 32 characters long.",
+      "B": "There are no explicit length restrictions; they can be an unlimited sequence of allowed characters.",
+      "C": "Identifiers must be at least 1 character but no more than 64 characters.",
+      "D": "The length is limited to the number of characters in reserved words."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic3_4",
+    "question": "How does the language handle keyword reservation policies for identifiers?",
+    "options": {
+      "A": "Identifiers can reuse reserved words as long as they are prefixed with an underscore.",
+      "B": "Identifiers must be distinct from reserved words, such as \"channel\" or \"if\".",
+      "C": "Reserved words can be used as identifiers in certain contexts, like comments.",
+      "D": "Only built-in types like \"bool\" are reserved, but other keywords can be reused."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic3_5",
+    "question": "In what way are identifiers case sensitive according to the specifications?",
+    "options": {
+      "A": "They are not case sensitive, so \"Variable\" and \"variable\" are considered the same.",
+      "B": "They are case sensitive, meaning \"Variable\" and \"variable\" are distinct identifiers.",
+      "C": "Case sensitivity applies only to the first character of the identifier.",
+      "D": "Identifiers become case insensitive when used in declarations."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic3_6",
+    "question": "What must be considered when declaring names or variables as identifiers?",
+    "options": {
+      "A": "They can be declared without specifying a type, as long as they are not reserved words.",
+      "B": "They must be declared with their type, such as in a \"new a : t;\" statement.",
+      "C": "Types are optional for variables but required for names.",
+      "D": "Declaration is only needed if the identifier is used in a function symbol."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic3_7",
+    "question": "In noninterf declarations, what restriction applies to identifiers used as function symbols?",
+    "options": {
+      "A": "Only constructors can be used as identifiers, and names are not allowed.",
+      "B": "Any identifiers can be used, including reserved words for convenience.",
+      "C": "Only names are allowed as identifiers, but not constructors.",
+      "D": "Identifiers must include digits in noninterf declarations."
+    },
+    "answer": "A"
+  },
+  {
+    "id": "topic3_8",
+    "question": "What is recommended regarding the reuse of built-in identifiers like \"bool\" or \"nat\" as user-defined identifiers?",
+    "options": {
+      "A": "It is encouraged to reuse them to save space in the code.",
+      "B": "It is strongly discouraged, as it can lead to confusion in the language.",
+      "C": "Built-in identifiers can be reused freely in comments or nested structures.",
+      "D": "They must be reused with a prefix, such as \"user_bool\"."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic3_9",
+    "question": "How do comments interact with identifier rules in the language?",
+    "options": {
+      "A": "Comments can include reserved words, which then become valid identifiers.",
+      "B": "Comments are surrounded by (* and *), and they do not affect identifier validity, but identifiers inside comments are still checked.",
+      "C": "Any identifier used in a comment is automatically reserved and cannot be used elsewhere.",
+      "D": "Nested comments allow identifiers to bypass first-character rules."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic3_10",
+    "question": "In the context of identifiers for variables, what additional rule applies to their usage in rewrite rules?",
+    "options": {
+      "A": "Variables as identifiers can include names without any restrictions.",
+      "B": "Variables must not contain names, and their types must match the arguments they substitute.",
+      "C": "Variables can be substituted by any term, regardless of type declarations.",
+      "D": "Only may-fail variables can be used as identifiers in rewrite rules."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic4_1",
+    "question": "In the given formalism, what is the key characteristic that distinguishes a keyword from a regular identifier?",
+    "options": {
+      "A": "Keywords can start with a digit, while identifiers must start with a letter.",
+      "B": "Keywords are reserved words with special syntactic meaning, like \"event\" or \"if,\" and cannot be used as identifiers.",
+      "C": "Keywords must include accented letters from the ISO Latin 1 set.",
+      "D": "Keywords are any sequence of letters and digits, as long as they are not used in processes."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic4_2",
+    "question": "Based on the content, what semantic role does the keyword \"event\" play in the language?",
+    "options": {
+      "A": "It is used to declare a new identifier for natural numbers.",
+      "B": "It introduces an event declaration, such as in \"event ev(U1, ..., Un); P,\" to log or track actions in processes.",
+      "C": "It serves as an infix operator for comparisons, like equality checks.",
+      "D": "It is only used in options for patterns and has no role in process terms."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic4_3",
+    "question": "In the grammar provided, why must keywords like \"channel\" be treated differently from user-defined identifiers?",
+    "options": {
+      "A": "Keywords can be redefined in a process declaration without restrictions.",
+      "B": "Keywords have predefined syntactic meanings and are reserved, so they cannot be used as identifiers to avoid conflicts.",
+      "C": "Keywords are only required for sequences and can be omitted in simple terms.",
+      "D": "Keywords like \"channel\" must always include digits to distinguish them."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic4_4",
+    "question": "According to the content, what happens if a programmer tries to use a keyword like \"if\" as an identifier in a process term?",
+    "options": {
+      "A": "It is allowed, as long as the identifier is prefixed with an underscore.",
+      "B": "It results in a syntax error because keywords are reserved and distinct from identifiers.",
+      "C": "It can be used freely in conditional statements but not elsewhere.",
+      "D": "It requires explicit declaration to override its reserved status."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic4_5",
+    "question": "In the context of semantic roles, what is the primary function of the keyword \"new\" in expressions like \"new ⟨ident⟩\"?",
+    "options": {
+      "A": "It is used to perform arithmetic operations, such as addition or subtraction.",
+      "B": "It declares a new identifier for fresh values, often in binding constructs, to ensure uniqueness in processes.",
+      "C": "It specifies the precedence of infix operators in the grammar.",
+      "D": "It is only used for defining types and has no role in term bindings."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic4_6",
+    "question": "From the precedence rules in the content, how do keywords like \"==>\" interact with other elements in the language?",
+    "options": {
+      "A": "They have the lowest precedence, allowing them to be used interchangeably with identifiers.",
+      "B": "They are infix symbols with specific precedence (e.g., \"==>\" has low precedence), defining implication in terms like ⟨gterm⟩ ==> ⟨gterm⟩.",
+      "C": "Keywords like \"==>\" must always be followed by a reserved word to be valid.",
+      "D": "They associate to the right, unlike standard operators like + and -."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic4_7",
+    "question": "In the grammar for ⟨lemma⟩, what role does the keyword \"for\" play when used in constructs like \"⟨gterm⟩ for { public vars seq+⟨ident⟩ }\"?",
+    "options": {
+      "A": "It is used to define new types and can be omitted if variables are private.",
+      "B": "It introduces a specification for variable visibility or secrecy, such as public or secret, in lemmas.",
+      "C": "It serves as a comparison operator for checking equality in terms.",
+      "D": "It is only applicable in event declarations and not in lemmas."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic4_8",
+    "question": "Based on the content, which of the following best describes the keyword \"let\" in expressions like \"let ⟨ident⟩ = ⟨gterm⟩ in ⟨gterm⟩\"?",
+    "options": {
+      "A": "It is used for creating sequences and has no binding role.",
+      "B": "It facilitates variable binding and substitution in terms, allowing definitions within a scope.",
+      "C": "It must be declared as an identifier before use in any context.",
+      "D": "It only applies to infix operations and not to term bindings."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic4_9",
+    "question": "In the semantics section, how are keywords like \"out\" and \"in\" utilized in process terms?",
+    "options": {
+      "A": "They are optional and can be replaced with user-defined identifiers for flexibility.",
+      "B": "They define communication actions, such as \"out(c, D); P\" for output, which are part of the process term contexts.",
+      "C": "They are restricted to arithmetic expressions and not used in processes.",
+      "D": "They require a phase number to be specified for precedence."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic4_10",
+    "question": "According to the content, what restriction applies to keywords in relation to the grammar's non-terminals, such as ⟨gterm⟩?",
+    "options": {
+      "A": "Keywords can be used freely within ⟨gterm⟩ as long as they are not reserved for types.",
+      "B": "Keywords like \"inj-event\" have specific roles in ⟨gterm⟩, such as injecting events, and must be distinct from identifiers.",
+      "C": "Keywords are only used in declarations and never in non-terminal expansions like ⟨gterm⟩.",
+      "D": "Keywords must include underscores to differentiate them in non-terminals."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic5_1",
+    "question": "In ProVerif, what is the primary meaning of the equality operator M = N when used in terms?",
+    "options": {
+      "A": "It represents a constructor for creating new tuples.",
+      "B": "It checks whether two terms are equal, often used in conditions like if statements.",
+      "C": "It defines a new variable binding for processes.",
+      "D": "It performs a disequality check between terms."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic5_2",
+    "question": "How does ProVerif recommend using destructors compared to equations for better performance, based on the heuristics?",
+    "options": {
+      "A": "Destructors should be avoided as they increase computation cost.",
+      "B": "Equations are preferred because they are more precise than destructors.",
+      "C": "Using destructors yields better performance than relying on equations.",
+      "D": "Destructors and equations should always be used interchangeably without impact."
+    },
+    "answer": "C"
+  },
+  {
+    "id": "topic5_3",
+    "question": "What is the usage method for the conjunction operator M && N in ProVerif terms?",
+    "options": {
+      "A": "It combines two processes into a parallel composition.",
+      "B": "It evaluates to true only if both M and N are true, used for logical AND in conditions.",
+      "C": "It creates a new name or variable in the process.",
+      "D": "It is used exclusively for message output operations."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic5_4",
+    "question": "In ProVerif processes, what does the 'new n: t; P' operator primarily mean and how is it used?",
+    "options": {
+      "A": "It declares a global constant for the entire protocol.",
+      "B": "It creates a fresh name or variable of type t, restricting its scope to process P.",
+      "C": "It is used to replicate a process multiple times.",
+      "D": "It performs an input operation to receive a message into variable n."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic5_5",
+    "question": "What is the meaning and typical usage of the disjunction operator M || N in ProVerif terms?",
+    "options": {
+      "A": "It sequences two processes one after the other.",
+      "B": "It evaluates to true if either M or N (or both) is true, used for logical OR in expressions.",
+      "C": "It is equivalent to parallel composition for processes.",
+      "D": "It negates the value of a single term."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic5_6",
+    "question": "How is the negation operator not(M) used in ProVerif terms?",
+    "options": {
+      "A": "It inverts the truth value of M, making it useful in conditional statements.",
+      "B": "It combines M with another term to form a tuple.",
+      "C": "It is used only for process replication.",
+      "D": "It checks for equality between M and a fresh random value."
+    },
+    "answer": "A"
+  },
+  {
+    "id": "topic5_7",
+    "question": "In ProVerif, what is the purpose of the parallel composition operator P | Q?",
+    "options": {
+      "A": "It runs processes P and Q sequentially, one after the other.",
+      "B": "It executes processes P and Q concurrently, allowing them to run in parallel.",
+      "C": "It restricts the scope of names used in P and Q.",
+      "D": "It is used for conditional branching between P and Q."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic5_8",
+    "question": "What is the correct usage method for the replication operator !P in ProVerif processes?",
+    "options": {
+      "A": "It creates a single instance of process P with a new name.",
+      "B": "It generates multiple copies of process P that can run indefinitely or in parallel.",
+      "C": "It is used to input messages into process P.",
+      "D": "It evaluates a condition before executing P."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic5_9",
+    "question": "For the conditional operator in ProVerif processes (e.g., if M then P else Q), what must the expression M be to ensure proper usage?",
+    "options": {
+      "A": "M must always be a constructor application.",
+      "B": "M should be of the form an equality like N = K, as specified for the destructor equal.",
+      "C": "M can be any arbitrary term without restrictions.",
+      "D": "M is typically a disequality operator like N <> K."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic5_10",
+    "question": "In ProVerif, how are operators like in(M, x: t); P and out(M, N); P typically used in processes?",
+    "options": {
+      "A": "They are used for internal variable declarations only.",
+      "B": "in(M, x: t); P inputs a message matching pattern M into variable x, while out(M, N); P outputs N on channel M.",
+      "C": "They define new function symbols for terms.",
+      "D": "They are equivalent to logical operators for term evaluation."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic6_1",
+    "question": "In the grammar for sequences like seq+⟨X⟩ = (⟨X⟩,)∗⟨X⟩, what is the primary semantic role of parentheses `()`?",
+    "options": {
+      "A": "To separate individual elements in a sequence.",
+      "B": "To group structural elements, such as enclosing a repeated pattern.",
+      "C": "To denote optional components in declarations.",
+      "D": "To indicate the end of a binding statement."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic6_2",
+    "question": "According to the content, how are semicolons `;` used in the ⟨gbinding⟩ grammar, such as !⟨nat⟩ = ⟨gterm⟩ [; ⟨gbinding⟩]?",
+    "options": {
+      "A": "To group multiple terms into a single block.",
+      "B": "To separate sequential bindings or statements within a declaration.",
+      "C": "To indicate repetition of elements in a sequence.",
+      "D": "To denote the start of a new identifier."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic6_3",
+    "question": "In the definition of sequences like ⟨X⟩, . . .,⟨X⟩, what is the usage rule for the dot `.` symbol?",
+    "options": {
+      "A": "It is used to concatenate strings or terms directly.",
+      "B": "It serves as an ellipsis to represent a continuation or repetition of elements in a sequence.",
+      "C": "It indicates the end of a comment block.",
+      "D": "It groups optional parameters in function symbols."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic6_4",
+    "question": "For the ⟨failtypedecl⟩ grammar, such as seq+⟨ident⟩: ⟨typeid⟩[or fail][,⟨failtypedecl⟩], what is the semantic interpretation of brackets `[]`?",
+    "options": {
+      "A": "They are used to enclose mandatory sequences of identifiers.",
+      "B": "They indicate optional components that may or may not appear.",
+      "C": "They group multiple declarations into a single block.",
+      "D": "They separate elements in a list of bindings."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic6_5",
+    "question": "In the context of process rules like E,P∪{{out(N,M); P,in(N,x); Q}},A, what role do braces `{}` play in the semantic interpretation?",
+    "options": {
+      "A": "They are used to denote sets or collections of elements, such as processes or actions.",
+      "B": "They separate individual terms in a sequence.",
+      "C": "They indicate optional parameters in declarations.",
+      "D": "They represent repetition in sequences."
+    },
+    "answer": "A"
+  },
+  {
+    "id": "topic6_6",
+    "question": "Based on the precedence rules and grammar, such as &&(true, u) → u, how are parentheses `()` typically used in function symbols?",
+    "options": {
+      "A": "To mark the beginning of a comment.",
+      "B": "To group arguments or parameters for functions and operators.",
+      "C": "To separate keywords from identifiers.",
+      "D": "To indicate a sequence of natural numbers."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic6_7",
+    "question": "In the ⟨gbinding⟩ rule like !⟨nat⟩ = ⟨gterm⟩ [; ⟨gbinding⟩], what is the key usage rule for the semicolon `;` in relation to structural elements?",
+    "options": {
+      "A": "It groups related terms into a single expression.",
+      "B": "It acts as a separator for multiple bindings, allowing chained declarations.",
+      "C": "It denotes the end of an entire sequence.",
+      "D": "It is used exclusively for optional elements."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic6_8",
+    "question": "For sequences described as (⟨X⟩,)∗⟨X⟩, what is the semantic interpretation of the dot `.` when it appears in patterns like ⟨X⟩, . . .,⟨X⟩?",
+    "options": {
+      "A": "It represents direct access to a sub-element in a term.",
+      "B": "It indicates an ellipsis for showing a series or continuation of similar elements.",
+      "C": "It separates function symbols from their arguments.",
+      "D": "It encloses optional bindings."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic6_9",
+    "question": "In declarations like ⟨options⟩ ::= [ [seq+⟨ident⟩]], how do brackets `[]` function in terms of grouping or separating elements?",
+    "options": {
+      "A": "They are used to create mandatory lists of identifiers.",
+      "B": "They enclose optional sequences, allowing for flexibility in the structure.",
+      "C": "They separate processes in parallel compositions.",
+      "D": "They indicate the precedence of operators."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic6_10",
+    "question": "Considering the overall grammar, such as in E,P∪{{P |Q}},A, what is the primary role of braces `{}` in grouping structural elements?",
+    "options": {
+      "A": "To separate individual actions or processes in a set.",
+      "B": "To group elements into sets, facilitating the representation of collections like processes.",
+      "C": "To denote repetition in sequences.",
+      "D": "To indicate optional components in bindings."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic7_1",
+    "question": "In ProVerif, what is the correct syntax for writing a comment in the code?",
+    "options": {
+      "A": "Using // at the beginning of the line, like in C++.",
+      "B": "Enclosing the text in (* and *), such as (* this is a comment *).",
+      "C": "Starting with a # symbol, like in shell scripts.",
+      "D": "Using single quotes around the text, such as 'this is a comment'."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic7_2",
+    "question": "How can comments in ProVerif span multiple lines?",
+    "options": {
+      "A": "By using // on each line separately.",
+      "B": "By enclosing the entire block in (* and *).",
+      "C": "By indenting each line with spaces or tabs.",
+      "D": "Comments cannot span multiple lines; they must be single-line only."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic7_3",
+    "question": "What is the primary role of spaces in ProVerif code, such as between keywords and identifiers?",
+    "options": {
+      "A": "Spaces are required for proper indentation and must match a specific number per line.",
+      "B": "Spaces separate tokens (e.g., keywords, variables) but do not affect the code's meaning otherwise.",
+      "C": "Spaces are ignored entirely, and code can be written without any spaces between elements.",
+      "D": "Spaces denote the start of a new process or declaration."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic7_4",
+    "question": "In ProVerif, are tabs interchangeable with spaces for separating elements in the code?",
+    "options": {
+      "A": "No, only spaces can be used; tabs will cause syntax errors.",
+      "B": "Yes, both tabs and spaces can be used as whitespace to separate tokens.",
+      "C": "Tabs must be used exclusively for readability, while spaces are for alignment.",
+      "D": "Tabs are only allowed inside comments, not in the main code."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic7_5",
+    "question": "How do newline characters function in ProVerif code, particularly in process declarations?",
+    "options": {
+      "A": "Newlines are required after every statement to indicate its end.",
+      "B": "Newlines act as whitespace and are treated similarly to spaces for token separation.",
+      "C": "Newlines must be avoided; all code should be written on a single line.",
+      "D": "Newlines only affect the execution if they are inside a comment."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic7_6",
+    "question": "What happens if extra spaces are added between elements in a ProVerif expression, such as in \"out ( N , M ) ; P\"?",
+    "options": {
+      "A": "The code will result in a syntax error due to inconsistent spacing.",
+      "B": "Extra spaces are ignored, as long as tokens (like \"out\" and \"N\") are properly separated.",
+      "C": "Spaces must be exactly one character between each element for the code to compile.",
+      "D": "Extra spaces change the meaning of the expression, altering its behavior."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic7_7",
+    "question": "In ProVerif, do comments play any role in the execution or analysis of the code?",
+    "options": {
+      "A": "Yes, comments can be used to define variables or events that affect the process.",
+      "B": "No, comments are entirely ignored by ProVerif during parsing and analysis.",
+      "C": "Comments only affect execution if they contain specific keywords like \"new\".",
+      "D": "Yes, but only if they are placed at the beginning of the file."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic7_8",
+    "question": "What is the impact of omitting whitespace (e.g., spaces or tabs) between two keywords in ProVerif, such as writing \"out(N,M);P\" without spaces?",
+    "options": {
+      "A": "ProVerif will automatically add the necessary whitespace.",
+      "B": "It will cause a syntax error because tokens must be separated.",
+      "C": "The code will execute correctly as long as the keywords are valid.",
+      "D": "Whitespace is optional and only needed for readability."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic7_9",
+    "question": "In ProVerif, how should whitespace be managed in complex structures, like function applications or process compositions?",
+    "options": {
+      "A": "Whitespace must be minimized to avoid increasing file size.",
+      "B": "Spaces or tabs should be used flexibly to separate elements, but they do not alter semantics.",
+      "C": "Only newlines can be used; spaces and tabs are prohibited in such structures.",
+      "D": "Whitespace inside structures like functions must exactly match the declared syntax."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic7_10",
+    "question": "Based on ProVerif's syntax rules, what best describes the role of tabs in improving code readability without affecting functionality?",
+    "options": {
+      "A": "Tabs cannot be used at all; only spaces are allowed for any purpose.",
+      "B": "Tabs can be used for indentation, similar to spaces, as both are forms of whitespace.",
+      "C": "Tabs must replace spaces in all cases to ensure proper parsing.",
+      "D": "Tabs are only useful inside comments and have no role in the main code."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic8_1",
+    "question": "What is the correct syntax for declaring a user-defined type in the language?",
+    "options": {
+      "A": "free t : type.",
+      "B": "type t .",
+      "C": "const t : typeid.",
+      "D": "fun t() : type."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic8_2",
+    "question": "In the system, what is the primary role of names like 'a' or 'k'?",
+    "options": {
+      "A": "They represent variables that can be substituted by terms.",
+      "B": "They act as atomic data, such as keys or nonces.",
+      "C": "They are used exclusively for function symbols.",
+      "D": "They must be declared as destructors."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic8_3",
+    "question": "How must free names be introduced in an input file according to the language rules?",
+    "options": {
+      "A": "They can be used directly without any declaration.",
+      "B": "They must be declared using the syntax \"free n : t .\".",
+      "C": "They are automatically generated as part of process declarations.",
+      "D": "They only need to be declared if they are used in destructors."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic8_4",
+    "question": "What is a key difference between variables and names in terms of their roles?",
+    "options": {
+      "A": "Variables represent atomic data, while names can be substituted by terms.",
+      "B": "Names represent atomic data, while variables can be substituted by terms.",
+      "C": "Both are interchangeable and can serve the same purpose in processes.",
+      "D": "Variables must be declared with types, but names do not require types."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic8_5",
+    "question": "Which declaration method is used to introduce constants in the language?",
+    "options": {
+      "A": "Using \"fun c() : t.\" or \"const c : t .\".",
+      "B": "Only through \"free c : t .\".",
+      "C": "Via \"reduc c : t .\".",
+      "D": "Constants are automatically introduced in processes without declaration."
+    },
+    "answer": "A"
+  },
+  {
+    "id": "topic8_6",
+    "question": "Why is the language described as strongly typed, and how does this affect declarations?",
+    "options": {
+      "A": "It allows declarations without specifying types, making them optional.",
+      "B": "It requires all free names, variables, and function symbols to be declared with their types.",
+      "C": "It only applies types to constants, ignoring names and variables.",
+      "D": "Strong typing means types can be changed dynamically during processes."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic8_7",
+    "question": "What mechanism is used to introduce function symbols, and what does their declaration specify?",
+    "options": {
+      "A": "They are declared with \"free h : t .\", specifying only the output type.",
+      "B": "They are declared as \"h(T1,...,Tn) : T\", specifying input and output types.",
+      "C": "They use \"const h(T1,...,Tn) : T\" and do not require types.",
+      "D": "Function symbols are predefined and cannot be user-declared."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic8_8",
+    "question": "In the context of modeling features, what role do constants play in processes?",
+    "options": {
+      "A": "They act as variables that change during execution.",
+      "B": "They represent fixed values, defined as functions of arity 0 or via \"const c : t .\".",
+      "C": "They are used only for destructors and not in main processes.",
+      "D": "Constants must be declared as free names to function properly."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic8_9",
+    "question": "Which of the following options correctly describes an introduction mechanism for variables in the system?",
+    "options": {
+      "A": "Variables are introduced automatically and do not need types.",
+      "B": "Variables must be declared with their type and can be substituted by terms in processes.",
+      "C": "Variables are the same as names and use the \"free\" keyword.",
+      "D": "Variables are declared using \"fun x : t .\"."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic8_10",
+    "question": "What additional options might be associated with declarations like \"free\" or \"const\", and how do they relate to their roles?",
+    "options": {
+      "A": "Options like \"private\" for free declarations enhance security by restricting access.",
+      "B": "Options are not needed, as declarations are always public.",
+      "C": "Options such as \"typeConverter\" are used only for processes, not declarations.",
+      "D": "Declarations like \"const\" use options like \"induction\" for verification."
+    },
+    "answer": "A"
+  },
+  {
+    "id": "topic9_1",
+    "question": "In the formalism described, what is the primary method for declaring a type for names or variables?",
+    "options": {
+      "A": "Using the syntax \"free n : t\" directly in the process.",
+      "B": "Using the syntax \"type t.\" to define a user-defined type.",
+      "C": "Declaring it only when using constructors in rewrite rules.",
+      "D": "It is automatically inferred from the context without explicit declaration."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic9_2",
+    "question": "What role do constructor function symbols, such as 'f', play in the system?",
+    "options": {
+      "A": "They manipulate existing terms using rewrite rules.",
+      "B": "They build new terms by applying functions to variables or names.",
+      "C": "They are used exclusively for defining destructors.",
+      "D": "They represent atomic data like keys and nonces."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic9_3",
+    "question": "How are destructors, such as 'g', introduced in the system according to the content?",
+    "options": {
+      "A": "Through a simple \"fun g(t1, ..., tk) : t\" declaration without rules.",
+      "B": "Via rewrite rules in a \"reduc\" declaration, specifying patterns like \"g(M1,1, ..., M1,k) = M1,0\".",
+      "C": "By declaring them as constants with \"const g : t\".",
+      "D": "They are built-in and do not require explicit introduction."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic9_4",
+    "question": "In terms of definition methods, what must be specified when defining a destructor using rewrite rules?",
+    "options": {
+      "A": "Only the input terms, as the output is optional.",
+      "B": "An ordered list of rules in the form \"forall x1,1 : t1,1; g(M1,1, ..., M1,k) = M1,0\".",
+      "C": "The destructor's arity without any patterns or outputs.",
+      "D": "A single rule that applies universally to all terms."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic9_5",
+    "question": "What is the role of destructors in the system when processing terms?",
+    "options": {
+      "A": "They create new terms from variables and names.",
+      "B": "They manipulate terms formed by constructors, as defined by rewrite rules, and may result in 'fail' if no rule applies.",
+      "C": "They are used only for declaring types and free names.",
+      "D": "They substitute variables without altering the structure."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic9_6",
+    "question": "According to the introduction mechanisms, how can constants be declared in the system?",
+    "options": {
+      "A": "Only as functions with arity greater than zero, like \"fun c(t1) : t\".",
+      "B": "As a function of arity zero using \"fun c() : t\" or specifically with \"const c : t\".",
+      "C": "Through rewrite rules in a \"reduc\" declaration.",
+      "D": "They must be declared as variables with types."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic9_7",
+    "question": "In the context of destructors, what happens if none of the rewrite rules in the ordered list are applicable?",
+    "options": {
+      "A": "The destructor automatically succeeds with a default output.",
+      "B": "ProVerif tries the rules in reverse order until one works.",
+      "C": "The destructor fails, as no reduction can be applied.",
+      "D": "It generates a new rule based on the input terms."
+    },
+    "answer": "C"
+  },
+  {
+    "id": "topic9_8",
+    "question": "What is a key difference in the roles of constructors and destructors based on their definition methods?",
+    "options": {
+      "A": "Constructors are defined by rewrite rules, while destructors build terms.",
+      "B": "Constructors build terms and appear in term applications, while destructors manipulate terms via ordered rewrite rules.",
+      "C": "Both are identical and can be used interchangeably in processes.",
+      "D": "Destructors are only for atomic data, and constructors handle variables."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic9_9",
+    "question": "For extended destructors as introduced in the content, what additional feature allows for more complex behaviors?",
+    "options": {
+      "A": "They can be defined without any types or arity.",
+      "B": "They support an extended way using \"fun g(t1, ..., tk) : t\" combined with \"reduc\" for behaviors beyond basic rewrite rules.",
+      "C": "They are limited to built-in operators like 'not' or 'is nat'.",
+      "D": "They must be declared as free names first."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic9_10",
+    "question": "When introducing function symbols in declarations, what must be specified for a constructor or destructor like 'h'?",
+    "options": {
+      "A": "Only its name, as the type is inferred automatically.",
+      "B": "Its arity and types, such as \"h(T1, ..., Tn) : T\", to indicate how it processes inputs and outputs.",
+      "C": "It can be used without declaration if it's a built-in symbol.",
+      "D": "A list of variables it substitutes, without types."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic10_1",
+    "question": "In the context of expressions, what are the basic building blocks for composing an evaluable unit like a function application?",
+    "options": {
+      "A": "Only variables and constants, without any operators.",
+      "B": "Variables, constants, function calls, and tuple constructions.",
+      "C": "Names and events, but not function applications.",
+      "D": "Destructors and rewrite rules only."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic10_2",
+    "question": "When composing a tuple in an expression, how is it typically constructed according to the content?",
+    "options": {
+      "A": "Using a constructor like tupleT1,...,Tn(M1,...,Mn) to group terms.",
+      "B": "Directly as a variable without any specific syntax.",
+      "C": "By applying a destructor to combine multiple terms.",
+      "D": "Through conditional statements like if-then-else."
+    },
+    "answer": "A"
+  },
+  {
+    "id": "topic10_3",
+    "question": "What must be true for an expression to be considered ground when composing operators and operands?",
+    "options": {
+      "A": "It must contain no variables, only constants and function calls.",
+      "B": "It can include variables as long as they are declared.",
+      "C": "It should always evaluate to fail for security reasons.",
+      "D": "It must include at least one destructor or rewrite rule."
+    },
+    "answer": "A"
+  },
+  {
+    "id": "topic10_4",
+    "question": "In expressions, how are function applications incorporated into the composition of operators and operands?",
+    "options": {
+      "A": "By using the syntax h(D1,...,Dn) where h is from Fd ∪ Fc, applied to subexpressions.",
+      "B": "Only through variables, without any specific function symbols.",
+      "C": "By restricting them with new a: T; D before use.",
+      "D": "Exclusively in processes, not in standalone expressions."
+    },
+    "answer": "A"
+  },
+  {
+    "id": "topic10_5",
+    "question": "When evaluating a composed expression involving a destructor like g(U1,...,Un), what happens if no rewrite rule applies?",
+    "options": {
+      "A": "The expression evaluates to the constant fail.",
+      "B": "It automatically defaults to a ground term.",
+      "C": "The evaluation continues indefinitely until a rule matches.",
+      "D": "It transforms into a conditional statement."
+    },
+    "answer": "A"
+  },
+  {
+    "id": "topic10_6",
+    "question": "How does the 'let' construct contribute to composing expressions with function applications or tuple constructions?",
+    "options": {
+      "A": "It allows binding a value to a variable, such as let x: T = D in D′ else D′′, enabling further composition.",
+      "B": "It restricts the expression to only ground terms.",
+      "C": "It is used solely for declaring new names, not for expressions.",
+      "D": "It evaluates expressions without any error handling."
+    },
+    "answer": "A"
+  },
+  {
+    "id": "topic10_7",
+    "question": "In the composition of expressions, what role do associative and commutative operators play, as mentioned in the content?",
+    "options": {
+      "A": "They allow for flexible ordering of operands in function applications, like in Diﬃe-Hellman exponentiation.",
+      "B": "They are only used in processes and not in expressions.",
+      "C": "They must be avoided to prevent evaluation failures.",
+      "D": "They convert expressions into ground terms automatically."
+    },
+    "answer": "A"
+  },
+  {
+    "id": "topic10_8",
+    "question": "When composing an expression with a conditional like if D then D′ else D′′, what is the key condition for it to succeed?",
+    "options": {
+      "A": "D must evaluate to true; otherwise, it fails or uses the else branch.",
+      "B": "D must be a ground term, regardless of its value.",
+      "C": "The expression must include a destructor for evaluation.",
+      "D": "It always succeeds as long as variables are present."
+    },
+    "answer": "A"
+  },
+  {
+    "id": "topic10_9",
+    "question": "For tuple constructions in expressions, which of the following best describes how operands like terms M1,...,Mn are combined?",
+    "options": {
+      "A": "As a constructor application, such as tupleT1,...,Tn(M1,...,Mn), to form a single evaluable unit.",
+      "B": "By using pattern-matching directly without constructors.",
+      "C": "Through replication or parallel composition in processes.",
+      "D": "Only if they are non-ground terms for flexibility."
+    },
+    "answer": "A"
+  },
+  {
+    "id": "topic10_10",
+    "question": "In the evaluation of composed expressions, what distinguishes constructors from destructors in terms of their application?",
+    "options": {
+      "A": "Constructors build terms like f(M1,...,Mk) for composition, while destructors use rewrite rules like g(U1,...,Un) → U.",
+      "B": "Constructors always fail, whereas destructors always succeed.",
+      "C": "Constructors are only for ground terms, and destructors for variables.",
+      "D": "There is no difference; both are used interchangeably."
+    },
+    "answer": "A"
+  },
+  {
+    "id": "topic11_1",
+    "question": "In ProVerif, what is the primary role of the 'new n : t; P' construct in process declarations?",
+    "options": {
+      "A": "It defines a constant that can be used globally in the process.",
+      "B": "It restricts a new name 'n' of type 't' and continues with process 'P'.",
+      "C": "It handles input operations on a channel named 'n'.",
+      "D": "It replicates the process 'P' multiple times for parallel execution."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic11_2",
+    "question": "How does the 'if M then P else Q' construct contribute to control flow in ProVerif processes?",
+    "options": {
+      "A": "It evaluates the term 'M' and executes 'P' if true, otherwise 'Q', allowing conditional branching.",
+      "B": "It always executes both 'P' and 'Q' in parallel regardless of 'M'.",
+      "C": "It restricts the scope of 'M' to only 'P' and discards 'Q'.",
+      "D": "It terminates the process immediately if 'M' is false."
+    },
+    "answer": "A"
+  },
+  {
+    "id": "topic11_3",
+    "question": "In ProVerif, what does the 'in(M, x: t); P' process construct primarily accomplish?",
+    "options": {
+      "A": "It outputs a message on channel 'M' and binds it to variable 'x' before running 'P'.",
+      "B": "It inputs a message from channel 'M', binds it to variable 'x' of type 't', and then runs 'P'.",
+      "C": "It declares a new name 'x' of type 't' and uses it in process 'P' without any input.",
+      "D": "It replicates the process 'P' based on the value received from channel 'M'."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic11_4",
+    "question": "What is the function of the 'out(M, N); P' construct in ProVerif processes?",
+    "options": {
+      "A": "It inputs a term from channel 'M' and compares it with 'N' before executing 'P'.",
+      "B": "It outputs the term 'N' on channel 'M' and then continues with process 'P'.",
+      "C": "It restricts access to 'M' and 'N' for security, then runs 'P'.",
+      "D": "It evaluates 'M' and 'N' as conditions for replicating 'P'."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic11_5",
+    "question": "In the context of process termination, what does the '0' (nil process) represent in ProVerif?",
+    "options": {
+      "A": "It represents a process that performs ongoing replication indefinitely.",
+      "B": "It is a null process that does nothing and signifies the end of execution.",
+      "C": "It handles conditional checks and terminates based on input values.",
+      "D": "It composes multiple processes in parallel until one finishes."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic11_6",
+    "question": "How does process composition work with the 'P | Q' construct in ProVerif?",
+    "options": {
+      "A": "It runs processes 'P' and 'Q' sequentially, waiting for 'P' to finish before starting 'Q'.",
+      "B": "It executes 'P' and 'Q' in parallel, allowing both to run simultaneously.",
+      "C": "It restricts names in 'P' and makes them unavailable in 'Q'.",
+      "D": "It replicates 'P' inside 'Q' for multiple instances."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic11_7",
+    "question": "What is the purpose of the '!P' (replication) construct in ProVerif processes?",
+    "options": {
+      "A": "It creates a single copy of process 'P' that runs once and terminates.",
+      "B": "It replicates process 'P' indefinitely, allowing multiple concurrent instances.",
+      "C": "It inputs data into 'P' and outputs it after replication.",
+      "D": "It phases the execution of 'P' based on global synchronization."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic11_8",
+    "question": "In ProVerif, how does the 'phase n; P' construct affect process execution?",
+    "options": {
+      "A": "It declares a new name for use in process 'P' without any synchronization.",
+      "B": "It acts as a global synchronization point, discarding processes not at phase 'n' and running 'P'.",
+      "C": "It evaluates conditions in 'P' and terminates if phase 'n' is not met.",
+      "D": "It outputs events related to phase 'n' before executing 'P'."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic11_9",
+    "question": "Regarding events in ProVerif processes, what is the role of the 'event(e(M1,...,Mn)); P' construct?",
+    "options": {
+      "A": "It records that a specific program point has been reached with arguments, then continues with 'P'.",
+      "B": "It inputs messages and binds them to events for parallel composition.",
+      "C": "It terminates the process 'P' after executing the event.",
+      "D": "It replicates the event multiple times without affecting 'P'."
+    },
+    "answer": "A"
+  },
+  {
+    "id": "topic11_10",
+    "question": "In ProVerif, how are expressions integrated into processes, such as with 'let x: T = D in D′ else D′′'?",
+    "options": {
+      "A": "It evaluates 'D' and binds the result to 'x', then executes 'D′' if successful, or 'D′′' otherwise, extending process capabilities.",
+      "B": "It restricts names in 'D' and discards 'D′' for security reasons.",
+      "C": "It outputs 'D' on a channel and runs 'D′' in parallel with 'D′′'.",
+      "D": "It phases the execution of 'D′' based on the value of 'D′′'."
+    },
+    "answer": "A"
+  },
+  {
+    "id": "topic12_1",
+    "question": "In ProVerif, what is the correct syntax for defining a process macro that allows sub-processes to be specified for easier development?",
+    "options": {
+      "A": "def R(x1: t1, ..., xn: tn) = P.",
+      "B": "let R(x1: t1, ..., xn: tn) = P.",
+      "C": "type R(x1: t1, ..., xn: tn) = P.",
+      "D": "free R(x1: t1, ..., xn: tn) = P."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic12_2",
+    "question": "When a macro like R(M1, ..., Mn) is used in a ProVerif process, what happens during its expansion?",
+    "options": {
+      "A": "It replaces the macro with a new declaration for free names.",
+      "B": "It substitutes the actual arguments M1, ..., Mn for the formal parameters x1, ..., xn in the defined sub-process P.",
+      "C": "It discards the sub-process P and runs only the main process.",
+      "D": "It automatically adds a phase construct to synchronize the process."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic12_3",
+    "question": "Why are process macros particularly useful in ProVerif for protocol development, according to the content?",
+    "options": {
+      "A": "They eliminate the need for declarations altogether.",
+      "B": "They allow sub-processes to be defined and reused, making the code easier to manage and organize into larger blocks.",
+      "C": "They ensure that all processes run in a single phase without synchronization.",
+      "D": "They automatically handle cryptographic primitives without user input."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic12_4",
+    "question": "In a ProVerif model, what must be done for free names before they can be used in process declarations or macros?",
+    "options": {
+      "A": "They can be used directly without any declaration.",
+      "B": "They must be declared with their type using the syntax \"free n: t.\".",
+      "C": "They only need to be declared if they appear in a macro.",
+      "D": "They require a phase construct for proper usage."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic12_5",
+    "question": "How does the phase construct in ProVerif contribute to organizing processes into larger code blocks for protocols with multiple stages?",
+    "options": {
+      "A": "It allows processes to run independently without synchronization.",
+      "B": "It acts as a global synchronization point, discarding processes not yet at the specified phase and starting new ones.",
+      "C": "It merges all sub-processes into a single macro automatically.",
+      "D": "It requires macros to be redefined for each phase."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic12_6",
+    "question": "Based on the content, how does ProVerif handle the expansion of macros when generating its output?",
+    "options": {
+      "A": "Macros are preserved in the output for readability.",
+      "B": "Macros are expanded in the main process, and the output shows the process as if the macros were directly written out.",
+      "C": "The output only includes macros if they are used in declarations.",
+      "D": "ProVerif discards macros and focuses on phases instead."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic12_7",
+    "question": "What are the main structural components of a ProVerif model for organizing protocols into larger code blocks?",
+    "options": {
+      "A": "Only declarations and the main process, with no need for macros.",
+      "B": "Declarations for cryptographic primitives, process macros for sub-processes, and the main process for the overall protocol.",
+      "C": "Phases and free names, but not constructors or destructors.",
+      "D": "Macros for security assumptions and destructors for outputs."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic12_8",
+    "question": "In ProVerif, how are variables in a process macro like let R(x1: t1, ..., xn: tn) = P handled when the macro is expanded?",
+    "options": {
+      "A": "The variables are ignored, and only the process P is executed.",
+      "B": "The free variables x1, ..., xn are substituted with the provided arguments, ensuring they match the declared types.",
+      "C": "The variables must be redeclared in the main process before expansion.",
+      "D": "The variables are automatically converted to free names during expansion."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic12_9",
+    "question": "According to the content, what role do macros play in defining security assumptions for cryptographic primitives in ProVerif?",
+    "options": {
+      "A": "Macros cannot be used for security assumptions; they are only for processes.",
+      "B": "Macros can define security assumptions by using the \"def name(i1, ..., in) { declarations }\" syntax, which expands to substitute arguments.",
+      "C": "Security assumptions are handled separately through phases, not macros.",
+      "D": "Macros for security must include a replication construct for multiple keys."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic12_10",
+    "question": "When ProVerif processes a protocol with macros and phases, how does it organize the workflow into larger code blocks in its internal representation?",
+    "options": {
+      "A": "It treats macros and phases as separate entities without merging them.",
+      "B": "It expands macros and uses phases for synchronization, merging processes into a biprocess for analysis, while annotating with identifiers for clarity.",
+      "C": "It discards phases and focuses only on macro expansions.",
+      "D": "It requires users to manually merge processes before running the model."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic13_1",
+    "question": "According to the formalism, what is required for variables in clauses like F1, ..., Fm, F before they can be used?",
+    "options": {
+      "A": "They can be used directly without any quantification if the clause is simple.",
+      "B": "They must be universally quantified using \"forall x1 : t1, ..., xn : tn\".",
+      "C": "Quantification is only needed if the variables appear in a conditional statement.",
+      "D": "They require quantification only when the types include \"or fail\"."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic13_2",
+    "question": "In the process declaration, how must free names like 'c' in \"free c : channel\" be handled before they are used?",
+    "options": {
+      "A": "They can be used without declaration as long as they are not in the scope of variables.",
+      "B": "They must be declared with their type using the \"free n : t\" syntax before use.",
+      "C": "Declaration is optional if the name is a constructor or destructor.",
+      "D": "They only need to be declared if they are part of a biprocess."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic13_3",
+    "question": "What determines the representation of a name like 'b' in the process \"in(c, (x: bitstring, y: bitstring)); new b:nonce\"?",
+    "options": {
+      "A": "It is always represented without arguments, regardless of surrounding variables.",
+      "B": "It is represented with arguments (e.g., b[x=M, y=N]) because it is in the scope of variables x and y.",
+      "C": "Its representation depends only on its type, such as \"nonce\", and not on scope.",
+      "D": "It can be represented either way, as long as it is universally quantified."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic13_4",
+    "question": "When dealing with identifiers in processes, what is recommended to prevent confusion between names and variables?",
+    "options": {
+      "A": "Using the same names for variables and functions, as long as they are in different scopes.",
+      "B": "Employing distinct naming for names and variables to avoid ambiguity.",
+      "C": "Allowing reuse of identifiers as long as they are declared with \"forall\".",
+      "D": "Only distinguishing them in elimtrue declarations."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic13_5",
+    "question": "In the context of scope determination, when can the universal quantification \"forall x1 : t1, ..., xn : tn\" be omitted for variables in clauses?",
+    "options": {
+      "A": "It can always be omitted for simplicity in the process declaration.",
+      "B": "It can be omitted only when the variables F1, ..., Fm, F contain no variables.",
+      "C": "It is optional if the types are of the form \"t or fail\".",
+      "D": "It must be included even if no variables are present for backward compatibility."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic13_6",
+    "question": "How does the scope of variables affect the internal representation of fresh names in a process?",
+    "options": {
+      "A": "Fresh names are always represented without arguments, irrespective of scope.",
+      "B": "Fresh names in the scope of variables, like x and y, must be annotated with those variables (e.g., b[x=M, y=N]).",
+      "C": "Scope only matters for destructors, not for fresh names like in \"new a:nonce\".",
+      "D": "Fresh names do not require annotation if they are universally quantified."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic13_7",
+    "question": "Regarding identifier uniqueness, why is it important to ensure that names and variables are uniquely named in declarations?",
+    "options": {
+      "A": "It helps in avoiding false attacks during proof of equivalences by ensuring matching names have the same arguments.",
+      "B": "Uniqueness is only necessary for processes and not for variables or functions.",
+      "C": "Identifiers can be reused as long as they are in different clauses or facts.",
+      "D": "It is recommended only for noninterf declarations to simplify indexing."
+    },
+    "answer": "A"
+  },
+  {
+    "id": "topic13_8",
+    "question": "In the formalism, what rule applies to the types of variables in universal quantification, such as \"forall x1 : t1, ..., xn : tn\"?",
+    "options": {
+      "A": "Types t1, ..., tn must be just type identifiers and cannot include \"or fail\".",
+      "B": "Types t1, ..., tn can be a type identifier or of the form \"t or fail\", allowing variables to take the value \"fail\".",
+      "C": "Types are irrelevant as long as the variables are in scope.",
+      "D": "Types must always include \"or fail\" for variables in processes."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic13_9",
+    "question": "For processes and their declarations, what must be ensured regarding the use of identifiers like functions and names?",
+    "options": {
+      "A": "They can be used without declaration as long as they are constructors.",
+      "B": "All identifiers, including functions and names, must be declared before use to maintain mandatory declaration-before-use constraints.",
+      "C": "Declaration is only required for variables, not for functions or processes.",
+      "D": "Identifiers in queries or lemmas do not need prior declaration."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic13_10",
+    "question": "In the context of scope determination rules, what happens if a name is not properly annotated with variables in its scope during equivalence proofs?",
+    "options": {
+      "A": "It has no impact, as session identifiers are always sufficient.",
+      "B": "It can lead to false attacks because names might have different arguments in the two components of a biprocess.",
+      "C": "Names without annotations are automatically universally quantified.",
+      "D": "It only affects destructors and not constructors."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic14_1",
+    "question": "In the context of destructor calls, what must be ensured regarding the number of arguments provided to a destructor like g?",
+    "options": {
+      "A": "The number of arguments can vary as long as they are of the correct type.",
+      "B": "The number of arguments must exactly match the arity k specified in the destructor's rewrite rules.",
+      "C": "Only one argument is required, regardless of the destructor's definition.",
+      "D": "The number of arguments can be optional if the destructor is part of a simple pattern."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic14_2",
+    "question": "When defining rewrite rules for a destructor, what type consistency requirement applies to the arguments of g across all rules?",
+    "options": {
+      "A": "Arguments in different rules can have different types as long as they are constructors.",
+      "B": "All arguments of g in every rule must have the same types as those in other rules for the same destructor.",
+      "C": "Type consistency is only needed for the return values, not the arguments.",
+      "D": "Arguments must match the types of built-in destructors like 'not' or '='."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic14_3",
+    "question": "What happens if the parameters in a destructor call, such as g(M1,1, ..., M1,k), do not meet the type consistency requirements specified in the rewrite rules?",
+    "options": {
+      "A": "The call proceeds with type conversion automatically.",
+      "B": "ProVerif attempts to apply the next rewrite rule in the sequence.",
+      "C": "The destructor fails, and the term is not reduced.",
+      "D": "The parameters are implicitly adjusted to match the required types."
+    },
+    "answer": "C"
+  },
+  {
+    "id": "topic14_4",
+    "question": "For a type converter function, what constraint ensures type consistency during pattern-matching?",
+    "options": {
+      "A": "The output must be the same as the input type, and no checking is needed.",
+      "B": "The output must differ from the input, identify the function applied, and be checked upon pattern-matching.",
+      "C": "Type consistency is only required if there are multiple converter functions.",
+      "D": "The function can produce values of any type without verification."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic14_5",
+    "question": "In the case of a simple pattern, what parameter matching requirement must be met for occurrences of =D?",
+    "options": {
+      "A": "D must be a may-fail constructor term, but parameter count can be flexible.",
+      "B": "D must be a may-fail constructor term with exact parameter count and type consistency.",
+      "C": "Only the type of D needs to match, regardless of the number of parameters.",
+      "D": "D can be any term, as long as it does not contain destructor symbols."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic14_6",
+    "question": "When using a data constructor f with associated destructors, what must be ensured for pattern matching of terms like f(M1, ..., Mn)?",
+    "options": {
+      "A": "The patterns pat1, ..., patn must match M1, ..., Mn in type but not necessarily in count.",
+      "B": "The number of patterns must match the arity n of f, and each must be consistent in type with the corresponding Mi.",
+      "C": "Pattern matching works even if f is not a data constructor, as long as types are similar.",
+      "D": "Only the first pattern needs to match for the entire term to succeed."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic14_7",
+    "question": "Regarding destructor-function constraints, what condition must be met for the return values in rewrite rules like g(M1,1, ..., M1,k) = M1,0?",
+    "options": {
+      "A": "The return values can have different types across rules for variety.",
+      "B": "All return values (e.g., M1,0, ..., Mm,0) must share the same type as specified for the destructor's output.",
+      "C": "Return values only need to match the types of the arguments, not among themselves.",
+      "D": "Type consistency is not required if the destructor is public."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic14_8",
+    "question": "In ProVerif, when encountering a term with a destructor like 'equal(M, N)', what parameter matching rule applies if the rewrite rules fail?",
+    "options": {
+      "A": "ProVerif will loop indefinitely until a match is found.",
+      "B": "The destructor fails, and the process continues as if the term evaluation failed.",
+      "C": "Parameters M and N can be of any type, as long as their count matches.",
+      "D": "ProVerif automatically adjusts the parameters for type consistency."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic14_9",
+    "question": "For function macros in ProVerif, what requirement ensures proper parameter handling when defining a symbol for repeated terms?",
+    "options": {
+      "A": "The macro can have a variable number of parameters without type checks.",
+      "B": "Parameters must maintain type consistency with the original terms, and the count must match the macro's definition.",
+      "C": "Only constructors need parameter matching; destructors in macros are exempt.",
+      "D": "Type consistency is checked only during pattern-matching, not at definition."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic14_10",
+    "question": "What key constraint differentiates destructors from constructors in terms of parameter matching and failure?",
+    "options": {
+      "A": "Destructors allow flexible parameter counts, while constructors do not.",
+      "B": "Destructors must follow rewrite rules with exact parameter count and type consistency, and they fail if no rule applies.",
+      "C": "Constructors can fail if types are inconsistent, but destructors always succeed.",
+      "D": "Parameter matching is optional for both, but only destructors require public declaration."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic15_1",
+    "question": "In ProVerif, what is the primary purpose of proving reachability properties?",
+    "options": {
+      "A": "To evaluate the computational efficiency of a protocol.",
+      "B": "To determine which terms are available to an attacker, thereby assessing syntactic secrecy.",
+      "C": "To simulate real-world network attacks on a protocol.",
+      "D": "To verify the equivalence of two different protocols."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic15_2",
+    "question": "When testing the secrecy of a term M in ProVerif, what query must be included in the input file before the main process?",
+    "options": {
+      "A": "query secret(M).",
+      "B": "query attacker(M).",
+      "C": "query reachability(M).",
+      "D": "query verify(M)."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic15_3",
+    "question": "What are the specific requirements for the term M when using it in a secrecy query in ProVerif?",
+    "options": {
+      "A": "It must be a variable term that includes destructors and public names only.",
+      "B": "It must be a ground term, without destructors, and may contain free names (possibly private).",
+      "C": "It must be a non-ground term with destructors for dynamic analysis.",
+      "D": "It must include both public and private names without any restrictions."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic15_4",
+    "question": "In the context of ProVerif, how is syntactic secrecy evaluated?",
+    "options": {
+      "A": "By directly simulating an attacker's computational power in a real environment.",
+      "B": "By investigating which terms are available to an attacker through reachability analysis.",
+      "C": "By comparing the protocol's performance metrics against predefined benchmarks.",
+      "D": "By verifying correspondences without considering attacker capabilities."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic15_5",
+    "question": "According to the content, what is the role of an adversary in verifying security properties like secrecy?",
+    "options": {
+      "A": "The adversary is ignored, as ProVerif focuses only on internal protocol logic.",
+      "B": "The adversary is formalized first to analyze how it might access or manipulate terms in the model.",
+      "C": "The adversary is modeled only for equivalences, not for secrecy properties.",
+      "D": "The adversary is limited to using destructors on ground terms exclusively."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic15_6",
+    "question": "What does strong secrecy mean in the context of ProVerif, as described in the content?",
+    "options": {
+      "A": "The adversary can distinguish between two versions of the protocol but only under certain conditions.",
+      "B": "The adversary cannot distinguish between two versions of the protocol that use different secret values.",
+      "C": "Strong secrecy applies only to protocols without an equational theory.",
+      "D": "It means the secret is partially available to the adversary for reachability testing."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic15_7",
+    "question": "Based on the content, which of the following best describes the symbolic model used in ProVerif for security protocol verification?",
+    "options": {
+      "A": "It models cryptographic primitives as imperfect functions with real-world computational limits.",
+      "B": "It treats cryptographic primitives as perfect blackboxes, represented by function symbols in an algebra of terms.",
+      "C": "It focuses exclusively on computational models without any algebraic representation.",
+      "D": "It requires equations for all terms to simulate dynamic adversary interactions."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic15_8",
+    "question": "In ProVerif, how are security properties like secrecy and correspondences primarily verified, according to the references mentioned?",
+    "options": {
+      "A": "Through manual proof techniques based on Blanchet's 2008 work on equivalences.",
+      "B": "By automatic verification tools, with main references from Blanchet (2009) for secrecy and correspondences.",
+      "C": "By focusing only on computational models as per Blanchet et al. (2012).",
+      "D": "Through empirical testing without theoretical formalization."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic15_9",
+    "question": "What limitation is mentioned in the content regarding the chapter's discussion of ProVerif?",
+    "options": {
+      "A": "It only deals with extensions of the core calculus from §2.1 for simplicity.",
+      "B": "It restricts analysis to the core calculus of §2.1, with results extendable to other features.",
+      "C": "It excludes reachability properties entirely.",
+      "D": "It requires full computational models for all verifications."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic15_10",
+    "question": "According to the definition in the content, when does a closed process P0 preserve strong secrecy?",
+    "options": {
+      "A": "When the adversary can access the secret under specific protocol conditions.",
+      "B": "When the adversary cannot distinguish two versions of the protocol using different secret values.",
+      "C": "When strong secrecy is verified only in the presence of an equational theory.",
+      "D": "When the process is open and includes free names without restrictions."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic16_1",
+    "question": "In the context of handshake protocols, what is the primary purpose of correspondence assertions for authentication?",
+    "options": {
+      "A": "To ensure that messages are encrypted securely without any verification.",
+      "B": "To confirm that if one event (e.g., e1) has been executed, another event (e.g., e2) has or will be executed.",
+      "C": "To limit the number of sessions in a protocol to prevent overload.",
+      "D": "To verify secrecy properties only, ignoring authentication entirely."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic16_2",
+    "question": "According to the content, how does ProVerif verify authentication properties like those in handshake protocols?",
+    "options": {
+      "A": "By manually checking each protocol step without any translation.",
+      "B": "By translating the protocol into Horn clauses and checking derivability queries for properties like correspondence assertions.",
+      "C": "By simulating a bounded number of sessions and ignoring unbounded scenarios.",
+      "D": "By focusing solely on observational equivalence without considering secrecy."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic16_3",
+    "question": "What role do tools like ProVerif and Tamarin play in verifying authentication properties for an unbounded number of sessions?",
+    "options": {
+      "A": "They restrict analysis to a single session to simplify verification.",
+      "B": "They allow verification of protocols for an unbounded number of sessions, often using lemmas to guide proofs.",
+      "C": "They only verify secrecy and ignore authentication in unbounded environments.",
+      "D": "They require manual intervention for all properties, making automation impossible."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic16_4",
+    "question": "In the handshake protocol example, what must be proven using correspondence assertions to ensure authentication?",
+    "options": {
+      "A": "That all messages are kept secret regardless of events.",
+      "B": "That if the client thinks they are executing the protocol with a server, that server is indeed the one involved.",
+      "C": "That the protocol works only for bounded message spaces.",
+      "D": "That encryption primitives are subterm convergent without any event checks."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic16_5",
+    "question": "How does ProVerif handle the verification of security properties, such as authentication via correspondence assertions?",
+    "options": {
+      "A": "It verifies them manually by building clauses based on user input.",
+      "B": "It automatically translates protocols into Horn clauses and uses resolution to prove properties like \"if e1 occurs, then e2 occurs.\"",
+      "C": "It relies exclusively on temporal first-order logic without any clause-based approach.",
+      "D": "It only supports bounded sessions and cannot handle equivalences."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic16_6",
+    "question": "Based on the content, what limitation does ProVerif have when verifying protocols in the computational model?",
+    "options": {
+      "A": "It can fully automate proofs for all properties without any restrictions.",
+      "B": "It cannot fully prove required properties automatically due to certain aspects not being accounted for, though it handles key parts like correspondence assertions.",
+      "C": "It is limited to verifying only secrecy and ignores authentication entirely.",
+      "D": "It requires an unbounded message space but fails in attack reconstruction."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic16_7",
+    "question": "In examples like the certified email protocol, how are correspondence assertions applied to verify authentication?",
+    "options": {
+      "A": "They are used to prove secrecy only, without linking events.",
+      "B": "They verify that specific events in the protocol correspond, ensuring authentication as shown in works like Abadi & Blanchet.",
+      "C": "They focus on privacy and traceability without any event-based checks.",
+      "D": "They are applied manually without any tool support."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic16_8",
+    "question": "What key advantage does ProVerif provide for analyzing protocols like the JFK key exchange?",
+    "options": {
+      "A": "It verifies protocols by combining manual proofs with automatic checks of correspondences and equivalences.",
+      "B": "It ignores correspondences and focuses only on computational soundness.",
+      "C": "It restricts analysis to trusted environments and avoids untrusted systems.",
+      "D": "It proves properties without translating them into any internal representation."
+    },
+    "answer": "A"
+  },
+  {
+    "id": "topic16_9",
+    "question": "According to the content, how does the use of Horn clauses contribute to verifying authentication properties?",
+    "options": {
+      "A": "They are used to manually build proofs without systematic translation.",
+      "B": "They provide a systematic translation from formal protocol models, allowing verification of properties beyond just secrecy.",
+      "C": "They are only applicable to bounded sessions and not for authentication.",
+      "D": "They focus on subterm convergent equations without addressing correspondences."
+    },
+    "answer": "B"
+  },
+  {
+    "id": "topic16_10",
+    "question": "In the context of tools like Tamarin, what is required to verify trace properties for authentication in protocols?",
+    "options": {
+      "A": "It verifies properties automatically without any user input.",
+      "B": "It often needs the user to provide lemmas to guide the proof for an unbounded number of sessions.",
+      "C": "It limits verification to secrecy and avoids authentication altogether.",
+      "D": "It relies on computational models exclusively, ignoring symbolic ones."
+    },
+    "answer": "B"
+  }
+]

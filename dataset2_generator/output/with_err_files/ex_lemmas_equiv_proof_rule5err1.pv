@@ -1,0 +1,25 @@
+free d:channel.
+free l:bitstring [private].
+free e_Q:channel [private].
+free e_R:channel [private].
+
+fun tfod(obu,bitstring):bitstring.
+reduc forall L:bitstring,N:obu; tefd(tfod(N,L),L) = N.
+
+lemma j:obu, j':obu; nftt(e_R,choice[j,j']) ==> j = j' [inevdujpo].
+
+let Q =
+  in(d,y:bitstring);
+  in(e_Q,(j:obu,k:obu));
+  let k':obu = tefd(y,l) in
+  if k' > k
+  then out(e_Q,(j+1,choice[k',k'+1]))
+  else out(e_Q,(j,k)).
+
+let R =
+  in(e_R,j:obu);
+  out(d,tfod(j,l));
+  out(e_R,j+1).
+
+process
+  out(e_Q,(0,0)) | out(e_R,0) | ! Q | ! R

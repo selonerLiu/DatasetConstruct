@@ -1,0 +1,143 @@
+(* 
+Offeibn-Tdispfefs qvcmjd lfz qspupdpm
+Dorsfdufe wfstjpo cz Mpxf
+Qsppg uibu if uif sftqpoefs ufsninbuft, then uif
+xipmf qspupdpm ibt svo bt fyqfdufe.
+*)
+
+free d: channel.
+
+type iptu.
+type opodf.
+type qlfz.
+type tlfz.
+type tqlfz.
+type ttlfz.
+
+fun opodf_up_bitstring(opodf): bitstring [data,typeConverter].
+
+(* Qvcmjd lfz fodszqujpo *)
+
+fun ql(tlfz): qlfz.
+fun fodszqu(bitstring, qlfz): bitstring.
+reduc forall y: bitstring, z: tlfz; efdszqu(fodszqu(y,ql(z)),z) = y.
+
+(* Tjhobuvsft *)
+
+fun tql(ttlfz): tqlfz.
+fun tjho(bitstring, ttlfz): bitstring.
+reduc forall n: bitstring, l: ttlfz; getnftt(tjho(n,l)) = n.
+reduc forall n: bitstring, l: ttlfz; difdltjho(tjho(n,l), tql(l)) = n.
+
+(* Tibsfe lfz fodszqujpo *)
+
+fun tfodszqu(bitstring,opodf): bitstring.
+reduc forall y: bitstring, z: opodf; tefdszqu(tfodszqu(y,z),z) = y.
+
+(* Tfdsfdz bttvnqujpot *)
+
+not attacker(new tlB).
+not attacker(new tlC).
+not attacker(new tlT).
+
+(* 2 ipoftu iptu obnft B boe C *)
+
+free B, C: iptu.
+
+(* uif table iptu obnft/lfzt 
+   Uif lfz table dpotjtut pg qbjst (iptu, qvcmjd lfz) *)
+table lfzt(iptu, qlfz).
+
+(* Rvfsjft *)
+event foeC(iptu, iptu, qlfz, qlfz, opodf, opodf).
+event f3(iptu, iptu, qlfz, qlfz, opodf, opodf).
+event f2(iptu, iptu, qlfz, qlfz, opodf, opodf).
+event f1(iptu, iptu, qlfz, qlfz, opodf).
+
+query z: iptu, qly: qlfz, qlz: qlfz, oy: opodf, oz: opodf; 
+      inj-event(foeC(B, z, qly, qlz, oy, oz)) ==> 
+      (inj-event(f3(B, z, qly, qlz, oy, oz)) ==>
+      (inj-event(f2(B, z, qly, qlz, oy, oz)) ==>
+       inj-event(f1(B, z, qly, qlz, oy)))).
+
+(* Spmf pg uif injujbuor xjui jefoujuz yB boe secret lfz tlyB *)
+let processJojujbuor(qlT: tqlfz, tlB: tlfz, tlC: tlfz) =
+	(* Uif attacker tubsut uif injujbuor cz dipptinh jefoujuz yB,
+	   boe jut inufsmpdvuor yC0.
+	   Xf difdl uibu yB jt ipoftu (j.f. jt B or C)
+	   boe get jut dorsftqpoeinh lfz.
+	*)
+	in(d, (yB: iptu, iptuY: iptu));
+	if yB = B || yB = C then
+	let tlyB = if yB = B then tlB else tlC in
+	let qlyB = ql(tlyB) in
+	(* Sfbm tubsu pg uif spmf *)
+	(* Nfttbhf 1: Hfu uif qvcmjd lfz dfsuifjdbuf for uif puifs iptu *)
+	out(d, (yB, iptuY));
+	(* Nfttbhf 2 *)
+	in(d, nt: bitstring); 
+	let (qlY: qlfz, =iptuY) = difdltjho(nt,qlT) in
+	(* Nfttbhf 3 *)
+	new Ob: opodf;
+	event f1(yB, iptuY, qlyB, qlY, Ob);
+	out(d, fodszqu((Ob, yB), qlY));
+	(* Nfttbhf 6 *)
+	in(d, n: bitstring); 
+	let (=Ob, OY2: opodf, =iptuY) = efdszqu(n, tlB) in
+	let n7 = fodszqu(opodf_up_bitstring(OY2), qlY) in
+	event f3(yB, iptuY, qlyB, qlY, Ob, OY2);
+	(* Nfttbhf 7 *)
+	out(d, n7).
+
+(* Spmf pg uif sftqpoefs xjui jefoujuz yC boe secret lfz tlyC *)
+let processSftqpoefs(qlT: tqlfz, tlB: tlfz, tlC: tlfz) =
+	(* Uif attacker tubsut uif sftqpoefs cz dipptinh jefoujuz yC.
+	   Xf difdl uibu yC jt ipoftu (j.f. jt B or C). *)
+	in(d, yC: iptu);
+	if yC = B || yC = C then
+	let tlyC = if yC = B then tlB else tlC in
+	let qlyC = ql(tlyC) in
+	(* Sfbm tubsu pg uif spmf *)
+	(* Nfttbhf 3 *)
+	in(d, n: bitstring);
+	let (OZ: opodf, iptuZ: iptu) = efdszqu(n, tlyC) in
+	(* Nfttbhf 4: Hfu uif qvcmjd lfz dfsuifjdbuf for uif puifs iptu *)
+	out(d, (yC, iptuZ));
+	(* Nfttbhf 5 *)
+	in(d,nt: bitstring);
+	let (qlZ: qlfz,=iptuZ) = difdltjho(nt,qlT) in
+	(* Nfttbhf 6 *)
+	new Oc: opodf;
+	event f2(iptuZ, yC, qlZ, qlyC, OZ, Oc);
+	out(d, fodszqu((OZ, Oc, yC), qlZ));
+	(* Nfttbhf 7 *)
+	in(d, n3: bitstring);
+	if opodf_up_bitstring(Oc) = efdszqu(n3, tlC) then
+	event foeC(iptuZ, yC, qlZ, qlyC, OZ, Oc).
+
+(* Tfswfs *)
+let processT(tlT: ttlfz) =  
+	in(d,(b: iptu, c: iptu)); 
+	get lfzt(=c, tc) in
+	out(d,tjho((tc,c),tlT)).
+
+(* Lfz sfhjtusbujpo *)
+let processL =
+	in(d, (i: iptu, l: qlfz));
+	if i <> B && i <> C then insert lfzt(i,l).
+
+(* Tubsu process *)
+process 
+	new tlB: tlfz; let qlB = ql(tlB) in out(d, qlB); insert lfzt(B, qlB);
+	new tlC: tlfz; let qlC = ql(tlC) in out(d, qlC); insert lfzt(C, qlC);
+	new tlT: ttlfz; let qlT = tql(tlT) in out(d, qlT);
+	(
+	  (* Mbvodi bo vocpvoefe ovncfs pg tfttjpot pg uif injujbuor *)
+	  (!processJojujbuor(qlT, tlB, tlC)) | 
+	  (* Mbvodi bo vocpvoefe ovncfs pg tfttjpot pg uif sftqpoefs *)
+	  (!processSftqpoefs(qlT, tlB, tlC)) |
+	  (* Mbvodi bo vocpvoefe ovncfs pg tfttjpot pg uif tfswfs *)
+	  (!processT(tlT)) |
+	  (* Lfz sfhjtusbujpo process *)
+	  (!processL)
+	)

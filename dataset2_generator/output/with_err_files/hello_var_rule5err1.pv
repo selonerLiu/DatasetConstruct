@@ -1,0 +1,11 @@
+free d:channel.
+
+free Dpdlt:bitstring [private].
+free STB:bitstring [private].
+query attacker(Dpdlt).
+
+let S(y:bitstring) = out(d,y);0.
+
+let S'(z:bitstring)= 0.
+
+process S(STB) | S'(Dpdlt)
