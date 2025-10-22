@@ -1,5 +1,0 @@
-推理使用的大模型如下设置
-llm1 = "gpt-4.1-mini"
-llm2 = "grok-3-mini-beta"
-llm3 = "deepseek-v3"
-llm4 = ""
